@@ -1,0 +1,13 @@
+# Core Deep Learning Framework
+torch
+torchvision
+
+# Numerical & Visualization Libraries
+numpy
+matplotlib
+
+# Federated Learning Framework (Flower with Simulation Engine)
+flwr[simulation]
+
+# Testing & Quality
+pytest

@@ -1,0 +1,39 @@
+# Environments & Virtual Envs
+.venv/
+venv/
+ENV/
+env/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Raw Dataset Archives (CIFAR-10 binaries)
+data/raw/cifar-10-batches-py/
+data/raw/cifar-10-python.tar.gz
+data/raw/*.tar.gz
+data/raw/*.zip
+
+# Processed Partitions & Large Binary Artifacts
+data/processed/*.pt
+data/processed/*.npy
+
+# Checkpoints & Model Weights
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
