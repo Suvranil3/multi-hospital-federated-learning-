@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-10-08T15:04:46.016168",
+  "experiment_id": "EXP-000-DATA",
+  "status": "PASSED",
+  "random_seed": 42,
+  "dataset_name": "CIFAR-10",
+  "total_samples": 60000,
+  "train_samples": 50000,
+  "test_samples": 10000,
+  "num_classes": 10,
+  "classes": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "raw_image_resolution": [
+    32,
+    32
+  ],
+  "channels": 3,
+  "tensor_shape": [
+    3,
+    32,
+    32
+  ],
+  "train_class_distribution": {
+    "airplane": 5000,
+    "automobile": 5000,
+    "bird": 5000,
+    "cat": 5000,
+    "deer": 5000,
+    "dog": 5000,
+    "frog": 5000,
+    "horse": 5000,
+    "ship": 5000,
+    "truck": 5000
+  },
+  "test_class_distribution": {
+    "airplane": 1000,
+    "automobile": 1000,
+    "bird": 1000,
+    "cat": 1000,
+    "deer": 1000,
+    "dog": 1000,
+    "frog": 1000,
+    "horse": 1000,
+    "ship": 1000,
+    "truck": 1000
+  },
+  "is_perfectly_balanced": true,
+  "channel_mean_rgb": [
+    0.4914,
+    0.48216,
+    0.44653
+  ],
+  "channel_std_rgb": [
+    0.24703,
+    0.24349,
+    0.26159
+  ],
+  "artifacts_generated": {
+    "sample_grid_figure": "results/figures/cifar10_sample_grid.png",
+    "class_distribution_figure": "results/figures/cifar10_class_distribution.png",
+    "report_file": "results/logs/cifar10_verification_report.json"
+  }
+}

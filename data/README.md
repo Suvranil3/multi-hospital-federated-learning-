@@ -53,14 +53,26 @@
 ---
 
 ## 5. Measured Dataset Verification Results (Phase 1)
-*(Populated dynamically by `data/verify_dataset.py` execution)*
-- **Status**: [Pending script execution]
+- **Status**: VERIFIED & PASSED (`EXP-000-DATA`)
+- **Execution Timestamp**: `2026-10-08T15:04:46`
+- **Deterministic Seed**: `42`
 - **Exact Sample Counts**:
-  - Train: 50,000 (Exactly 5,000 per class)
-  - Test: 10,000 (Exactly 1,000 per class)
-- **Measured Channel Means (Train Set)**: [Pending execution]
-- **Measured Channel Standard Deviations (Train Set)**: [Pending execution]
+  - Train: 50,000 (Exactly 5,000 per class across all 10 classes)
+  - Test: 10,000 (Exactly 1,000 per class across all 10 classes)
+  - Total: 60,000 images
+- **Raw Image Resolution**: $32 \times 32$ pixels, 3 color channels (RGB)
+- **Tensor Shape**: `(3, 32, 32)` in float32 normalized $[0.0, 1.0]$
+- **Class Balance**: 100% perfectly balanced across all 10 classes
+- **Measured Channel Means (Train Set)**:
+  - Red (R): `0.49140`
+  - Green (G): `0.48216`
+  - Blue (B): `0.44653`
+- **Measured Channel Standard Deviations (Train Set)**:
+  - Red (R): `0.24703`
+  - Green (G): `0.24349`
+  - Blue (B): `0.26159`
 - **Verification Artifacts Generated**:
-  - Sample Grid: `results/figures/cifar10_sample_grid.png`
-  - Class Distribution: `results/figures/cifar10_class_distribution.png`
+  - Sample Grid: `results/figures/cifar10_sample_grid.png` (10 classes $\times$ 5 samples)
+  - Class Distribution: `results/figures/cifar10_class_distribution.png` (Train vs Test bar chart)
   - JSON Summary: `results/logs/cifar10_verification_report.json`
+
