@@ -24,11 +24,17 @@ In healthcare, patient medical images are strictly confidential and governed by 
 
 **Federated Learning (FL)** solves this by allowing 10 simulated hospitals to train the same Convolutional Neural Network locally on their respective chest X-rays. Hospitals share model weight updates with an aggregation server rather than raw patient data.
 
-### Core Research Problem
-- **Benign Clinical Heterogeneity (Non-IID)**: Honest hospitals treat different patient populations (e.g., pediatric clinics vs. specialized pulmonary centers), resulting in naturally divergent model weight updates.
-- **Malicious Attacks**: A compromised hospital can mount poisoning attacks (label flipping, gradient manipulation) to degrade or backdoor the global model.
-- **Goal**: Develop a multi-factor detector that distinguishes honest clinical diversity from deliberate malicious attacks, reducing false positives against honest specialized hospitals.
-- **Blockchain Audit**: An immutable cryptographic ledger records update hashes and detector decisions for healthcare auditability and accountability.
+### Core Research Focus
+- **Active Primary Dataset**: **PneumoniaMNIST** (Pediatric Chest X-Rays from MedMNIST v3).
+- **Current Model**: Lightweight **SmallCNN** (420,802 parameters, ~1.61 MB).
+- **Current Milestone**: **Medical Centralized Baseline Complete** (81.25% test accuracy, 99.74% pneumonia sensitivity on untouched test set).
+- **Immediate Next Step**: **Phase 3 — 10-Hospital IID Federated Learning Baseline** with Flower (`flwr[simulation]`) and FedAvg.
+- **Later Research Focus**: **Phase 4 — Non-IID Hospital Data Heterogeneity** (Dirichlet case-mix skew $\alpha \in \{1.0, 0.5, 0.1\}$).
+- **Future Work**:
+  - **Phase 5**: Adversarial Attacks Simulation (label flipping, gradient scaling, backdoors).
+  - **Phase 6**: Multi-Factor Non-IID-Aware Malicious Hospital Detector.
+  - **Phase 7**: Robust Tri-State Consensus Aggregation.
+  - **Phase 8**: Blockchain Tamper-Evident Medical Audit Trail.
 
 ---
 
@@ -45,7 +51,19 @@ In healthcare, patient medical images are strictly confidential and governed by 
 
 ---
 
-## 3. Primary Medical Dataset: PneumoniaMNIST
+## 3. Detailed Documentation Index
+
+Comprehensive documentation is available in the [`docs/`](file:///home/suvranil/project/docs) directory:
+- [`docs/PROJECT_CONTEXT.md`](file:///home/suvranil/project/docs/PROJECT_CONTEXT.md) — Comprehensive overview of the hospital setting, clinical motivation, and system pillars.
+- [`docs/WHY_CNN_AND_DATASET.md`](file:///home/suvranil/project/docs/WHY_CNN_AND_DATASET.md) — Detailed rationale for PneumoniaMNIST and SmallCNN architecture with exact layer dimensions and parameter counts.
+- [`docs/HOSPITAL_SCENARIO.md`](file:///home/suvranil/project/docs/HOSPITAL_SCENARIO.md) — Multi-hospital federated training protocol, benign non-IID skew vs. malicious poisoning dilemma, and blockchain auditability.
+- [`docs/RESEARCH_ROADMAP.md`](file:///home/suvranil/project/docs/RESEARCH_ROADMAP.md) — Complete 10-phase roadmap, highlighting Phase 3 (IID FL) as the next immediate step and Phase 4 (Non-IID) as later work.
+- [`docs/RESEARCH_GAP_HOSPITAL.md`](file:///home/suvranil/project/docs/RESEARCH_GAP_HOSPITAL.md) — Critical evaluation of why standard Byzantine aggregators (Krum, Trimmed Mean) fail in healthcare networks.
+- [`docs/CURRENT_RESULTS.md`](file:///home/suvranil/project/docs/CURRENT_RESULTS.md) — Exact empirical results from verification and centralized baseline training.
+
+---
+
+## 4. Primary Medical Dataset: PneumoniaMNIST
 
 The primary project dataset is **PneumoniaMNIST** from the official MedMNIST collection (Zenodo / Yang et al.):
 - **Task**: Binary classification of pediatric chest X-rays (**0: Normal**, **1: Pneumonia**).
@@ -60,9 +78,10 @@ The primary project dataset is **PneumoniaMNIST** from the official MedMNIST col
 
 ---
 
-## 4. Current Milestone: Centralized Medical Baseline
+## 5. Current Milestone: Centralized Medical Baseline Results
 
 - **Model**: `SmallCNN` (2 Conv blocks with BatchNorm and MaxPool, Flatten, Dense 128, 2-class output, **420,802 parameters**).
+- **Compute Device**: NVIDIA GeForce RTX 3050 Laptop GPU (15 epochs, 13.35s).
 - **Centralized Test Performance** (Evaluated on untouched test split):
   - **Test Accuracy**: **81.25%** (507 / 624 correct)
   - **Pneumonia Sensitivity / Recall**: **99.74%** (389 / 390 pneumonia cases correctly detected)
@@ -74,7 +93,7 @@ The primary project dataset is **PneumoniaMNIST** from the official MedMNIST col
 
 ---
 
-## 5. Repository Structure
+## 6. Repository Structure
 ```text
 project/
 ├── README.md                 # Project overview and hospital scenario
@@ -86,6 +105,14 @@ project/
 ├── CHANGELOG.md              # Chronological change log
 ├── EXPERIMENT_LOG.md         # Empirical experiment record
 ├── requirements.txt          # Python dependencies (includes medmnist)
+│
+├── docs/                     # Specialized hospital documentation
+│   ├── PROJECT_CONTEXT.md    # Clinical setting and motivation
+│   ├── WHY_CNN_AND_DATASET.md# Detailed dataset and model rationale
+│   ├── HOSPITAL_SCENARIO.md  # Multi-hospital protocol & attack dilemmas
+│   ├── RESEARCH_ROADMAP.md   # Phased progression and next milestones
+│   ├── RESEARCH_GAP_HOSPITAL.md # Byzantine defense limits under clinical non-IID
+│   └── CURRENT_RESULTS.md    # Verified empirical scorecard
 │
 ├── data/
 │   ├── README.md             # Dataset documentation and partitioning
@@ -119,21 +146,21 @@ project/
 
 ---
 
-## 6. Development Progression
+## 7. Development Progression
 - [x] **Phase MEDICAL-01: Medical Dataset Verification (PneumoniaMNIST)**
 - [x] **Phase MEDICAL-02: Centralized Medical Small CNN Baseline**
-- [ ] **Phase 3: 10-Hospital Federated Learning Baseline (Flower + FedAvg)**
-- [ ] **Phase 4: Non-IID Hospital Data Heterogeneity Simulation**
-- [ ] **Phase 5: Malicious Hospital Attack Simulation (Poisoning, Backdoor)**
-- [ ] **Phase 6: Multi-Factor Non-IID-Aware Detector**
-- [ ] **Phase 7: Robust Aggregation Baselines**
-- [ ] **Phase 8: Blockchain Tamper-Evident Medical Audit Trail**
-- [ ] **Phase 9: Comprehensive Empirical Evaluation & Ablation**
-- [ ] **Phase 10: Publication Artifacts**
+- [ ] **Phase 3: 10-Hospital Federated Learning Baseline (Flower + FedAvg, IID)** — *NEXT STEP*
+- [ ] **Phase 4: Non-IID Hospital Data Heterogeneity Simulation (Dirichlet Skew)** — *LATER FOCUS*
+- [ ] **Phase 5: Malicious Hospital Attack Simulation (Poisoning, Backdoor)** — *FUTURE WORK*
+- [ ] **Phase 6: Multi-Factor Non-IID-Aware Malicious Hospital Detector** — *FUTURE WORK*
+- [ ] **Phase 7: Robust Aggregation Baselines & Tri-State Consensus** — *FUTURE WORK*
+- [ ] **Phase 8: Blockchain Tamper-Evident Medical Audit Trail** — *FUTURE WORK*
+- [ ] **Phase 9: Comprehensive Empirical Evaluation & Ablation** — *FUTURE WORK*
+- [ ] **Phase 10: Publication Artifacts & Final Report** — *FUTURE WORK*
 
 ---
 
-## 7. Setup & Quickstart
+## 8. Setup & Quickstart
 
 ### Prerequisites
 - Python 3.10+ (tested on Python 3.14.4)
