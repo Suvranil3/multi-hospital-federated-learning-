@@ -1,5 +1,6 @@
 """
 Demonstration Pipeline State and Data Loading Utilities.
+Supports Primary Medical Pipeline (PneumoniaMNIST) and Archived CIFAR-10 Proof-of-Concept.
 """
 
 from pathlib import Path
@@ -11,6 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 RESULTS_LOGS_DIR = PROJECT_ROOT / "results" / "logs"
 RESULTS_FIGURES_DIR = PROJECT_ROOT / "results" / "figures"
 RESULTS_MODELS_DIR = PROJECT_ROOT / "results" / "models"
+RESULTS_ARCHIVE_DIR = PROJECT_ROOT / "results" / "archive" / "cifar10"
 
 
 def init_session_state() -> None:
@@ -33,9 +35,9 @@ def reset_demo_state() -> None:
 
 
 @st.cache_data(show_spinner=False)
-def load_cifar_report() -> Optional[Dict[str, Any]]:
-    """Load Phase 1 dataset verification report safely."""
-    report_path = RESULTS_LOGS_DIR / "cifar10_verification_report.json"
+def load_medical_dataset_report() -> Optional[Dict[str, Any]]:
+    """Load Phase MEDICAL-01 dataset verification report."""
+    report_path = RESULTS_LOGS_DIR / "pneumonia_mnist_verification_report.json"
     if report_path.exists():
         with open(report_path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -43,10 +45,37 @@ def load_cifar_report() -> Optional[Dict[str, Any]]:
 
 
 @st.cache_data(show_spinner=False)
-def load_cnn_results() -> Optional[Dict[str, Any]]:
-    """Load Phase 2 centralized CNN results safely."""
-    report_path = RESULTS_LOGS_DIR / "centralized_cnn_results.json"
+def load_medical_cnn_results() -> Optional[Dict[str, Any]]:
+    """Load Phase MEDICAL-02 centralized medical CNN results."""
+    report_path = RESULTS_LOGS_DIR / "medical_centralized_results.json"
+    if not report_path.exists():
+        report_path = RESULTS_LOGS_DIR / "centralized_cnn_results.json"
     if report_path.exists():
         with open(report_path, "r", encoding="utf-8") as f:
             return json.load(f)
     return None
+
+
+@st.cache_data(show_spinner=False)
+def load_archived_cifar_report() -> Optional[Dict[str, Any]]:
+    """Load archived CIFAR-10 verification report."""
+    report_path = RESULTS_ARCHIVE_DIR / "logs" / "cifar10_verification_report.json"
+    if report_path.exists():
+        with open(report_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return None
+
+
+@st.cache_data(show_spinner=False)
+def load_archived_cifar_results() -> Optional[Dict[str, Any]]:
+    """Load archived CIFAR-10 centralized CNN results."""
+    report_path = RESULTS_ARCHIVE_DIR / "logs" / "cifar10_centralized_cnn_results.json"
+    if report_path.exists():
+        with open(report_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return None
+
+
+# Backward-compatible aliases
+load_cifar_report = load_archived_cifar_report
+load_cnn_results = load_medical_cnn_results

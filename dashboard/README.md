@@ -1,7 +1,7 @@
 # Interactive Teacher Demonstration Dashboard
 
 This interactive Streamlit dashboard provides a visual, empirical demonstration of the completed research milestones for the project:
-**"Blockchain-Assisted Non-IID-Aware Malicious Participant Detection in Federated Learning"**
+**"Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection"**
 
 ---
 
@@ -32,81 +32,64 @@ By default, the dashboard opens at:
 
 ---
 
-## 3. Two Operating Modes
+## 3. Operating Modes
 
 ### Mode A: Teacher Demo (Default)
-Optimized for presenting directly to your teacher or advisor:
-- **One-Click Presentation**: Click the large **`▶ START PROJECT DEMO`** button. The dashboard smoothly loads and displays the verified results across Phase 1 and Phase 2.
-- **Fast & Reliable**: By default, uses the existing verified experimental logs (`results/logs/`) rather than forcing a 100-second retraining delay during live presentations.
-- **Presentation Script**: Provides a clear explanation script tailored for your instructor with a single-click copy area.
-- **One-Click Reset**: Click **`↻ Reset Demo`** in the sidebar or stop the demo at any time without altering project files.
+Optimized for presenting the hospital scenario directly to your teacher or advisor:
+- **One-Click Presentation**: Click the prominent **`▶ START PROJECT DEMO`** button to view verified results across Medical Dataset Verification and Centralized Baseline.
+- **Fast & Reliable**: Loads existing verified experimental logs (`results/logs/medical_centralized_results.json`) instantaneously.
+- **Presentation Script**: Contains the professor presentation script:
+  *"We use chest X-ray images because the final project is designed around a hospital scenario. The dataset gives us a real medical-image classification problem that can later be distributed among simulated hospitals. We use a small CNN because it is lightweight, easy to train, and suitable for running the same model across multiple simulated hospitals. Each hospital can train on its own local medical images without directly sharing the raw patient images. The hospitals can contribute model updates to a shared global model."*
+- **One-Click Reset**: Click **`↻ Reset Demo`** in the sidebar at any time.
 
 ### Mode B: Technical Details
 Provides full transparency into engineering artifacts:
-- Hardware, environment specifications, and random seeds.
-- Architectural Decision Records (ADR-001 through ADR-008).
-- Raw machine-readable JSON logs for `EXP-000-DATA` and `EXP-001-CENTRAL-CNN`.
-- Future phase plug-in interfaces.
+- Hardware, environment specifications, and random seed 42.
+- Architectural Decision Records (ADR-001 through ADR-013).
+- Raw machine-readable JSON logs for `EXP-MED-000-DATA` and `EXP-MED-001-CENTRAL-CNN`.
+- Future hospital phase plug-in interfaces.
+
+### Mode C: Archived Proof-of-Concept
+Displays the complete historical CIFAR-10 exploration completed during Phase 1 and Phase 2 (76.94% accuracy), with explanation of why the project migrated to PneumoniaMNIST.
 
 ---
 
-## 4. How to Run Fresh CNN Training (Optional)
+## 4. How to Run Fresh Medical CNN Training (Optional)
 
-In **Teacher Demo** mode under **Stage 2: Centralized Small CNN Baseline**, expand the `⚙️ Optional: Run Training Again (Live Execution)` section:
+In **Teacher Demo** mode under **Stage 2: Centralized Medical Small CNN Baseline**, expand the `⚙️ Optional: Run Live Training Again` section:
 1. Review the execution confirmation checkbox.
 2. Click **`▶ Run Fresh Training`**.
-3. The dashboard executes `.venv/bin/python experiments/train_centralized.py` on your compute device (GPU/CPU) and live-streams epoch progress and loss/accuracy updates.
+3. The dashboard executes `.venv/bin/python experiments/train_medical.py` on your compute device (GPU/CPU) and live-streams epoch progress and loss/accuracy updates.
 4. When training finishes, all figures and JSON results automatically reload.
 
 ---
 
 ## 5. What the Dashboard Currently Demonstrates
 
-1. **Phase 1: Dataset Verification** (`EXP-000-DATA`):
-   - 60,000 total CIFAR-10 images (50,000 train source, 10,000 test).
-   - 10 classes with exact uniform balance (5,000 train/class, 1,000 test/class).
-   - Representative class sample grid (`cifar10_sample_grid.png`).
-   - Class distribution chart (`cifar10_class_distribution.png`).
-2. **Phase 2: Centralized Small CNN Baseline** (`EXP-001-CENTRAL-CNN`):
-   - Compact `SmallCNN` architecture (189,130 parameters).
+1. **Phase MEDICAL-01: Medical Dataset Verification** (`EXP-MED-000-DATA`):
+   - 5,856 total pediatric chest X-rays (4,708 train, 524 validation, 624 untouched test).
+   - Binary diagnosis (Normal: 0, Pneumonia: 1).
+   - Representative chest X-ray sample grid (`pneumonia_sample_grid.png`).
+   - Class distribution chart across official splits (`pneumonia_class_distribution.png`).
+2. **Phase MEDICAL-02: Centralized Medical Small CNN Baseline** (`EXP-MED-001-CENTRAL-CNN`):
+   - Compact `SmallCNN` architecture (420,802 parameters, ~1.61 MB).
    - Training hyperparameters: 15 epochs, Adam, lr=0.001, batch size 64.
-   - **Measured Test Accuracy: 76.94%**, Test Loss: 0.6578 on untouched test set.
-   - Training time: 100.97 seconds on NVIDIA RTX 3050 Laptop GPU.
-   - Loss & accuracy learning curves, plus 10-class confusion matrix.
+   - **Measured Test Accuracy: 81.25%**, Test Loss: 0.9172 on untouched test set.
+   - **Pneumonia Sensitivity / Recall: 99.74%** (389 / 390 cases correctly detected).
+   - **Pneumonia Precision: 77.03%** | **Pneumonia F1-Score: 0.8693**.
+   - Training time: 13.35 seconds on NVIDIA RTX 3050 Laptop GPU.
+   - Medical disclaimer prominently displayed.
 3. **Automated Quality & Test Suite**:
-   - Status: **13 / 13 PyTest tests passed (100%)**.
-4. **Milestone Progress**:
-   - **~67% progress** toward the initial Federated Learning baseline (Phase 1 & 2 complete, Phase 3 next).
-   - Clearly labeled as project-management milestone progress, not model accuracy.
+   - Status: **14 / 14 PyTest tests passed (100%)**.
 
 ---
 
 ## 6. Future Phases (Strictly NOT Implemented Yet)
 
 The dashboard maintains strict scientific boundaries. The following modules are marked as **`PLANNED / NOT IMPLEMENTED`**:
-- **Phase 3**: 10-Client Federated Learning with FedAvg (Flower simulation engine) — *NEXT MILESTONE*
-- **Phase 4**: Non-IID Dirichlet Partitioning ($\alpha \in \{1.0, 0.5, 0.1\}$)
-- **Phase 5**: Adversarial Attacks (Label flipping, parameter scaling, backdoors)
-- **Phase 6**: Multi-Factor Non-IID-Aware Detector (Orthogonal feature extraction)
-- **Phase 7**: Robust Tri-State Aggregation (`Normal`, `Suspicious`, `Malicious`)
-- **Phase 8**: Tamper-Evident Blockchain Audit Trail
-
----
-
-## 7. Modular Future-Proof Architecture
-
-The dashboard code is organized into decoupled plug-ins under `dashboard/`:
-```text
-dashboard/
-├── app.py                     # Main Streamlit application and layout
-├── requirements-dashboard.txt  # Dashboard dependencies (streamlit)
-├── README.md                  # Dashboard documentation
-└── demo/
-    ├── __init__.py
-    ├── pipeline_state.py      # Session state and cached log loaders
-    ├── dataset_demo.py        # Stage 1: CIFAR-10 dataset verification component
-    ├── cnn_demo.py            # Stage 2: Centralized SmallCNN component & live training
-    └── future_stubs.py        # Clean plug-in interfaces for Phases 3 through 8
-```
-As Phase 3 and subsequent phases are implemented, corresponding demo modules (`fl_demo.py`, `noniid_demo.py`, etc.) can be seamlessly plugged in without restructuring the application.
-
+- **Phase 3**: 10-Hospital Federated Learning with Flower + FedAvg — *NEXT MILESTONE*
+- **Phase 4**: Non-IID Hospital Data Heterogeneity Simulation (Dirichlet case-mix skew)
+- **Phase 5**: Malicious Hospital Attacks (Poisoned updates, backdoors)
+- **Phase 6**: Non-IID-Aware Malicious Hospital Detector
+- **Phase 7**: Robust Tri-State Consensus Aggregation
+- **Phase 8**: Tamper-Evident Blockchain Medical Audit Trail

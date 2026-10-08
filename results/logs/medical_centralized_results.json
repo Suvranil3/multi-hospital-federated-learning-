@@ -1,0 +1,208 @@
+{
+  "experiment_id": "EXP-MED-001-CENTRAL-CNN",
+  "timestamp": "2026-10-08T20:26:43.195679",
+  "status": "COMPLETED",
+  "scenario": "Hospital Chest X-Ray Classification Baseline",
+  "dataset_name": "PneumoniaMNIST",
+  "seed": 42,
+  "environment": {
+    "python_version": "3.14.4",
+    "pytorch_version": "2.14.1+cu130",
+    "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "device_type": "cuda"
+  },
+  "configuration": {
+    "epochs": 15,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "Adam",
+    "criterion": "CrossEntropyLoss",
+    "train_samples": 4708,
+    "val_samples": 524,
+    "test_samples": 624
+  },
+  "model": {
+    "name": "SmallCNN",
+    "in_channels": 1,
+    "num_classes": 2,
+    "total_parameters": 420802,
+    "trainable_parameters": 420802
+  },
+  "training_performance": {
+    "best_epoch": 14,
+    "best_val_accuracy": 97.9,
+    "final_train_loss": 0.081,
+    "final_train_accuracy": 96.77,
+    "final_val_loss": 0.0804,
+    "final_val_accuracy": 96.76,
+    "total_training_time_seconds": 13.35
+  },
+  "test_performance": {
+    "test_loss": 0.9172,
+    "test_accuracy": 81.25,
+    "test_correct": 507,
+    "total_test_samples": 624,
+    "pneumonia_metrics": {
+      "precision": 0.7703,
+      "recall_sensitivity": 0.9974,
+      "f1_score": 0.8693
+    },
+    "normal_metrics": {
+      "precision": 0.9916,
+      "recall_specificity": 0.5043,
+      "f1_score": 0.6686
+    },
+    "macro_metrics": {
+      "macro_precision": 0.8809,
+      "macro_recall": 0.7509,
+      "macro_f1": 0.7689
+    },
+    "confusion_matrix": {
+      "true_negative_normal": 118,
+      "false_positive_normal_as_pneumonia": 116,
+      "false_negative_pneumonia_as_normal": 1,
+      "true_positive_pneumonia": 389,
+      "matrix_array": [
+        [
+          118,
+          116
+        ],
+        [
+          1,
+          389
+        ]
+      ]
+    }
+  },
+  "medical_disclaimer": "Benchmark research metrics for multi-hospital federated learning simulation. Not evaluated or intended for direct clinical diagnostic use.",
+  "epoch_metrics": [
+    {
+      "epoch": 1,
+      "train_loss": 0.3236,
+      "train_accuracy": 87.6,
+      "val_loss": 0.1422,
+      "val_accuracy": 95.23,
+      "epoch_time_seconds": 4.31
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.1389,
+      "train_accuracy": 94.41,
+      "val_loss": 0.1136,
+      "val_accuracy": 95.04,
+      "epoch_time_seconds": 0.63
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.1181,
+      "train_accuracy": 95.43,
+      "val_loss": 0.1083,
+      "val_accuracy": 95.8,
+      "epoch_time_seconds": 0.6
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.1149,
+      "train_accuracy": 95.6,
+      "val_loss": 0.1037,
+      "val_accuracy": 95.8,
+      "epoch_time_seconds": 0.62
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.1079,
+      "train_accuracy": 95.71,
+      "val_loss": 0.1092,
+      "val_accuracy": 95.42,
+      "epoch_time_seconds": 0.59
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.0996,
+      "train_accuracy": 95.92,
+      "val_loss": 0.0812,
+      "val_accuracy": 96.56,
+      "epoch_time_seconds": 0.62
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0959,
+      "train_accuracy": 96.18,
+      "val_loss": 0.1019,
+      "val_accuracy": 95.8,
+      "epoch_time_seconds": 0.62
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.0907,
+      "train_accuracy": 96.52,
+      "val_loss": 0.1052,
+      "val_accuracy": 95.8,
+      "epoch_time_seconds": 0.62
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.0925,
+      "train_accuracy": 96.24,
+      "val_loss": 0.0731,
+      "val_accuracy": 97.52,
+      "epoch_time_seconds": 0.62
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.0947,
+      "train_accuracy": 96.33,
+      "val_loss": 0.0929,
+      "val_accuracy": 96.56,
+      "epoch_time_seconds": 0.61
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.0958,
+      "train_accuracy": 96.54,
+      "val_loss": 0.0815,
+      "val_accuracy": 96.37,
+      "epoch_time_seconds": 0.62
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.0879,
+      "train_accuracy": 96.52,
+      "val_loss": 0.0647,
+      "val_accuracy": 97.52,
+      "epoch_time_seconds": 0.66
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.083,
+      "train_accuracy": 96.79,
+      "val_loss": 0.0693,
+      "val_accuracy": 97.71,
+      "epoch_time_seconds": 0.63
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.0777,
+      "train_accuracy": 97.13,
+      "val_loss": 0.076,
+      "val_accuracy": 97.9,
+      "epoch_time_seconds": 0.63
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.081,
+      "train_accuracy": 96.77,
+      "val_loss": 0.0804,
+      "val_accuracy": 96.76,
+      "epoch_time_seconds": 0.61
+    }
+  ],
+  "artifacts": {
+    "loss_figure": "results/figures/medical_training_loss.png",
+    "accuracy_figure": "results/figures/medical_training_accuracy.png",
+    "confusion_matrix_figure": "results/figures/medical_confusion_matrix.png",
+    "model_checkpoint": "results/models/best_centralized_medical_cnn.pt",
+    "results_json": "results/logs/medical_centralized_results.json"
+  }
+}

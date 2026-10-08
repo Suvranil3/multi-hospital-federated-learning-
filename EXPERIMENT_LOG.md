@@ -7,10 +7,10 @@ No entries may contain simulated, guessed, or fabricated numbers. All metrics mu
 
 ## Log Format Schema
 Each experiment must record:
-- **Experiment ID**: Standardized identifier (e.g., `EXP-001-CENTRAL-CNN`, `EXP-002-FL-IID-FEDAVG`)
+- **Experiment ID**: Standardized identifier (e.g., `EXP-MED-000-DATA`, `EXP-MED-001-CENTRAL-CNN`)
 - **Date**: Execution timestamp
 - **Dataset Configuration**: Dataset name, sample counts, splits
-- **Number of Clients**: Total participating edge clients
+- **Number of Clients**: Total participating edge/hospital clients
 - **IID / Non-IID Setting**: Data distribution type
 - **Dirichlet Alpha**: Heterogeneity concentration parameter ($\alpha$) or N/A
 - **Attack Type**: Injected attack or None
@@ -20,20 +20,20 @@ Each experiment must record:
 - **Detector Version**: Detection algorithm version or None
 - **Aggregation Method**: Model update aggregation rule
 - **Random Seed**: Master seed used for run
-- **Results**: Quantitative metrics (Accuracy, Loss, FPR, FNR, ASR, etc.)
+- **Results**: Quantitative metrics (Accuracy, Loss, Precision, Recall, F1, etc.)
 - **Execution Status**: Succeeded or Failed
 - **Notes**: Key observations and reproducibility pointers
 
 ---
 
-## Experiment History
+## Active Medical Experiment History
 
-### [EXP-000-DATA] - CIFAR-10 Dataset Verification & Statistics
+### [EXP-MED-000-DATA] - PneumoniaMNIST Dataset Verification & Statistical Analysis
 - **Date**: 2026-10-08
-- **Dataset Configuration**: CIFAR-10 (raw download from torchvision official mirror to `data/raw/`)
-- **Number of Clients**: N/A (Phase 1 Central Dataset Verification)
-- **IID / Non-IID Setting**: N/A (Unpartitioned global dataset)
-- **Dirichlet Alpha**: N/A (Partitioning scheduled for Phase 4)
+- **Dataset Configuration**: PneumoniaMNIST (MedMNIST v3, downloaded from Zenodo mirror to `data/raw/`)
+- **Number of Clients / Hospitals**: N/A (Phase MEDICAL-01 Central Dataset Verification)
+- **IID / Non-IID Setting**: N/A (Official unpartitioned dataset)
+- **Dirichlet Alpha**: N/A (Multi-hospital partitioning scheduled for Phase 4)
 - **Attack Type**: None
 - **Malicious Clients**: 0 (0%)
 - **Model Architecture**: None (Data verification only)
@@ -42,36 +42,37 @@ Each experiment must record:
 - **Aggregation Method**: None
 - **Random Seed**: 42
 - **Results**:
-  - Training Samples: 50,000 (Exactly 5,000 per class across 10 classes)
-  - Test Samples: 10,000 (Exactly 1,000 per class across 10 classes)
-  - Total Samples: 60,000
-  - Classes (10): `airplane` (0), `automobile` (1), `bird` (2), `cat` (3), `deer` (4), `dog` (5), `frog` (6), `horse` (7), `ship` (8), `truck` (9)
-  - Raw Image Resolution: 32x32 pixels, 3 channels (RGB)
-  - Tensor Shape: (3, 32, 32)
-  - Class Distribution: Perfectly balanced (Train: 5,000/class, Test: 1,000/class)
-  - Channel Means (R, G, B): [0.49140, 0.48216, 0.44653]
-  - Channel Stds (R, G, B): [0.24703, 0.24349, 0.26159]
+  - Training Samples: 4,708 (Normal: 1,214, Pneumonia: 3,494)
+  - Validation Samples: 524 (Normal: 135, Pneumonia: 389)
+  - Test Samples: 624 (Normal: 234, Pneumonia: 390)
+  - Total Samples: 5,856
+  - Classes (2): `0: normal`, `1: pneumonia`
+  - Raw Image Resolution: 28x28 pixels, 1 channel (Grayscale)
+  - Tensor Shape: (1, 28, 28)
+  - Pixel Value Range: Min = 0, Max = 255
+  - Grayscale Empirical Mean [0, 1]: 0.57192
+  - Grayscale Empirical Std [0, 1]: 0.16835
   - Visual Artifacts:
-    - Sample Grid: `results/figures/cifar10_sample_grid.png`
-    - Class Distribution: `results/figures/cifar10_class_distribution.png`
-  - Report File: `results/logs/cifar10_verification_report.json`
-- **Execution Status**: SUCCEEDED (Phase 1)
-- **Notes**: Dataset verification pipeline script `data/verify_dataset.py` passed all assertions. Unit test suite `tests/test_data_loading.py` passed (3/3 tests). Environment verified with Python 3.14.4, PyTorch 2.14.1+cu130, Torchvision 0.29.1+cu130, NumPy 2.5.3, Matplotlib 3.11.2, Flower 1.39.0.
+    - Sample Grid: `results/figures/pneumonia_sample_grid.png`
+    - Class Distribution: `results/figures/pneumonia_class_distribution.png`
+  - Report File: `results/logs/pneumonia_mnist_verification_report.json`
+- **Execution Status**: SUCCEEDED (Phase MEDICAL-01)
+- **Notes**: All split counts and dimensions match official MedMNIST specification. Verified class imbalance: Pneumonia represents ~74.2% of train/val and ~62.5% of test, highlighting necessity of reporting sensitivity, specificity, and F1.
 
 ---
 
-### [EXP-001-CENTRAL-CNN] - Centralized Small CNN Baseline Training on CIFAR-10
+### [EXP-MED-001-CENTRAL-CNN] - Centralized Medical Small CNN Baseline Training on PneumoniaMNIST
 - **Date**: 2026-10-08
-- **Dataset Configuration**: CIFAR-10
-  - Training Split: 40,000 samples (4,000 per class, 80% stratified split)
-  - Validation Split: 10,000 samples (1,000 per class, 20% stratified split)
-  - Test Split: 10,000 samples (official untouched test set)
-- **Number of Clients**: N/A (Centralized ML baseline)
-- **IID / Non-IID Setting**: N/A (Centralized single-node training)
-- **Dirichlet Alpha**: N/A (Partitioning scheduled for Phase 4)
+- **Dataset Configuration**: PneumoniaMNIST
+  - Training Split: 4,708 samples (official train split)
+  - Validation Split: 524 samples (official val split, used for checkpointing)
+  - Test Split: 624 samples (official untouched test split)
+- **Number of Clients / Hospitals**: N/A (Centralized single-node medical baseline)
+- **IID / Non-IID Setting**: N/A
+- **Dirichlet Alpha**: N/A
 - **Attack Type**: None
 - **Malicious Clients**: 0 (0%)
-- **Model Architecture**: SmallCNN (3 Conv-BN-ReLU-MaxPool blocks + Dropout + 2-layer FC head; 189,130 parameters)
+- **Model Architecture**: `SmallCNN` (2 Conv-BN-ReLU-MaxPool blocks, Flatten, Dense 128, Dropout 0.2, 2-class output; **420,802 parameters**)
 - **FL Algorithm**: None (Centralized PyTorch benchmark)
 - **Detector Version**: None
 - **Aggregation Method**: None
@@ -83,24 +84,42 @@ Each experiment must record:
   - Learning Rate: 0.001
   - Weight Decay: 0.0001
   - Loss Criterion: CrossEntropyLoss
-  - Augmentation: RandomCrop(32, padding=4), RandomHorizontalFlip()
-  - Normalization: Mean=(0.4914, 0.4822, 0.4465), Std=(0.2470, 0.2435, 0.2616)
+  - Augmentation: RandomHorizontalFlip, RandomRotation(10)
+  - Normalization: Mean=(0.5719,), Std=(0.1684,)
 - **Compute Device**: CUDA (NVIDIA GeForce RTX 3050 Laptop GPU)
 - **Results**:
-  - Total Training Time: 100.97 seconds (~6.7 seconds/epoch)
-  - Final Training Loss: 0.7310
-  - Final Training Accuracy: 74.50%
-  - Best Validation Loss: 0.6400 (Epoch 15)
-  - Best Validation Accuracy: 77.34% (Epoch 15)
-  - Untouched Test Set Loss: 0.6578
-  - Untouched Test Set Accuracy: 76.94% (7,694 / 10,000 correct)
+  - Total Training Time: 13.35 seconds (~0.89 seconds/epoch)
+  - Final Training Loss: 0.0810 | Final Training Accuracy: 96.77%
+  - Best Validation Loss: 0.0760 | Best Validation Accuracy: 97.90% (Epoch 14)
+  - Untouched Test Set Loss: 0.9172
+  - Untouched Test Set Accuracy: **81.25%** (507 / 624 correct)
+  - Pneumonia Sensitivity / Recall: **99.74%** (389 / 390 pneumonia cases correctly detected)
+  - Pneumonia Precision: **77.03%**
+  - Pneumonia F1-Score: **0.8693**
+  - Normal Specificity / Recall: **50.43%** (118 / 234 normal cases correctly identified)
+  - Normal Precision: **99.16%** (118 / 119)
+  - Normal F1-Score: **0.6686**
+  - Macro F1-Score: **0.7689**
+  - Confusion Matrix: TN=118, FP=116, FN=1, TP=389
   - Visual Artifacts:
-    - Loss Curve: `results/figures/centralized_training_loss.png`
-    - Accuracy Curve: `results/figures/centralized_training_accuracy.png`
-    - Confusion Matrix: `results/figures/confusion_matrix.png`
-  - Model Checkpoint: `results/models/best_centralized_cnn.pt`
-  - Report File: `results/logs/centralized_cnn_results.json`
-- **Execution Status**: SUCCEEDED (Phase 2)
-- **Notes**: Established solid centralized baseline (~76.94% test accuracy) for subsequent FL benchmarking. Untouched test set evaluated strictly once after training completion. Unit tests in `tests/test_model.py` and `tests/test_training.py` all passed.
+    - Loss Curve: `results/figures/medical_training_loss.png`
+    - Accuracy Curve: `results/figures/medical_training_accuracy.png`
+    - Confusion Matrix: `results/figures/medical_confusion_matrix.png`
+  - Model Checkpoint: `results/models/best_centralized_medical_cnn.pt`
+  - Report File: `results/logs/medical_centralized_results.json`
+- **Execution Status**: SUCCEEDED (Phase MEDICAL-02)
+- **Notes**: Model demonstrates near-perfect pneumonia sensitivity (99.74%, missing only 1 single pneumonia case in test set), crucial for medical triage. High pneumonia recall results in some false positives (116 normal predicted as pneumonia), typical for models optimizing cross-entropy under imbalanced clinical data without class weighting. Established clear benchmark before introducing federated learning.
 
+---
 
+## Archived Proof-of-Concept History (CIFAR-10)
+
+### [EXP-000-DATA] - CIFAR-10 Dataset Verification & Statistics *(Archived)*
+- **Date**: 2026-10-08
+- **Status**: ARCHIVED PROOF-OF-CONCEPT (Preserved in `results/archive/cifar10/`)
+- **Key Results**: 60,000 images, 10 balanced classes (5,000 train/class, 1,000 test/class), 32x32 RGB. Report: `results/archive/cifar10/logs/cifar10_verification_report.json`.
+
+### [EXP-001-CENTRAL-CNN] - Centralized Small CNN Baseline on CIFAR-10 *(Archived)*
+- **Date**: 2026-10-08
+- **Status**: ARCHIVED PROOF-OF-CONCEPT (Preserved in `results/archive/cifar10/`)
+- **Key Results**: SmallCNN (189,130 params), 15 epochs, RTX 3050 GPU, 100.97s, 76.94% Test Accuracy (7,694/10,000). Report: `results/archive/cifar10/logs/cifar10_centralized_cnn_results.json`.

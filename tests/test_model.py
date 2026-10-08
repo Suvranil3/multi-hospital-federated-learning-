@@ -1,8 +1,9 @@
 """
-Unit Tests for SmallCNN Model (Phase 2 Centralized Baseline).
+Unit Tests for SmallCNN Model (Phase MEDICAL-02 Centralized Baseline).
+Primary Task: 1x28x28 Grayscale Chest X-Rays -> 2-Class Logits (Normal vs Pneumonia).
 Verifies:
 1. Model construction and parameter configuration
-2. Forward pass output dimensions and value validity
+2. Forward pass output dimensions [batch_size, 2] and value validity
 3. Loss calculation with CrossEntropyLoss
 4. Single backward pass and parameter update (one small training step)
 """
@@ -18,7 +19,7 @@ import torch.optim as optim
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from experiments.config import SEED, set_seed, CIFAR10_IMAGE_SHAPE, CIFAR10_NUM_CLASSES
+from experiments.config import SEED, set_seed, IMAGE_SHAPE, NUM_CLASSES
 from federated_learning.model import SmallCNN, get_model, count_parameters
 
 
@@ -30,33 +31,35 @@ def setup_seed():
 
 def test_cnn_construction():
     """Verify SmallCNN initializes correctly with expected parameter counts."""
-    model = get_model(num_classes=CIFAR10_NUM_CLASSES)
+    model = get_model(in_channels=1, num_classes=NUM_CLASSES)
     assert isinstance(model, SmallCNN)
-    assert model.num_classes == CIFAR10_NUM_CLASSES
+    assert model.in_channels == 1
+    assert model.num_classes == NUM_CLASSES
 
     params = count_parameters(model)
-    assert params["total"] > 100_000, f"Model too small: {params['total']}"
-    assert params["total"] < 500_000, f"Model exceeds lightweight budget: {params['total']}"
+    assert params["total"] == 420_802, f"Expected 420,802 parameters, got {params['total']}"
     assert params["trainable"] == params["total"]
     assert params["non_trainable"] == 0
 
 
 @pytest.mark.parametrize("batch_size", [1, 4, 16, 32])
 def test_cnn_output_shape(batch_size):
-    """Verify output shape is strictly [batch_size, 10] across varying batch sizes."""
-    model = get_model()
+    """Verify output shape is strictly [batch_size, 2] across varying batch sizes."""
+    model = get_model(in_channels=1, num_classes=2)
     model.eval()
-    dummy_input = torch.randn(batch_size, *CIFAR10_IMAGE_SHAPE)
+    dummy_input = torch.randn(batch_size, *IMAGE_SHAPE)
     with torch.no_grad():
         output = model(dummy_input)
 
-    assert output.shape == (batch_size, CIFAR10_NUM_CLASSES)
+    assert output.shape == (batch_size, NUM_CLASSES), (
+        f"Expected output shape ({batch_size}, {NUM_CLASSES}), got {output.shape}"
+    )
 
 
 def test_cnn_forward_pass_numerical_validity():
     """Verify forward pass does not produce NaNs or Inf values."""
-    model = get_model()
-    dummy_input = torch.randn(8, *CIFAR10_IMAGE_SHAPE)
+    model = get_model(in_channels=1, num_classes=2)
+    dummy_input = torch.randn(8, *IMAGE_SHAPE)
     output = model(dummy_input)
 
     assert not torch.isnan(output).any(), "Forward pass returned NaN"
@@ -65,10 +68,10 @@ def test_cnn_forward_pass_numerical_validity():
 
 def test_cnn_loss_calculation():
     """Verify CrossEntropyLoss computation succeeds and outputs scalar float tensor."""
-    model = get_model()
+    model = get_model(in_channels=1, num_classes=2)
     criterion = nn.CrossEntropyLoss()
-    dummy_input = torch.randn(8, *CIFAR10_IMAGE_SHAPE)
-    dummy_targets = torch.randint(0, CIFAR10_NUM_CLASSES, (8,), dtype=torch.int64)
+    dummy_input = torch.randn(8, *IMAGE_SHAPE)
+    dummy_targets = torch.randint(0, NUM_CLASSES, (8,), dtype=torch.int64)
 
     outputs = model(dummy_input)
     loss = criterion(outputs, dummy_targets)
@@ -80,15 +83,15 @@ def test_cnn_loss_calculation():
 
 def test_cnn_one_training_step():
     """Verify backpropagation computes gradients and optimizer updates model weights."""
-    model = get_model()
+    model = get_model(in_channels=1, num_classes=2)
     model.train()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     criterion = nn.CrossEntropyLoss()
 
-    dummy_input = torch.randn(4, *CIFAR10_IMAGE_SHAPE)
-    dummy_targets = torch.randint(0, CIFAR10_NUM_CLASSES, (4,), dtype=torch.int64)
+    dummy_input = torch.randn(4, *IMAGE_SHAPE)
+    dummy_targets = torch.randint(0, NUM_CLASSES, (4,), dtype=torch.int64)
 
-    # Capture initial weights of first layer
+    # Capture initial weights of first convolutional layer
     initial_weights = model.features[0].weight.clone()
 
     # Step 1: Forward pass

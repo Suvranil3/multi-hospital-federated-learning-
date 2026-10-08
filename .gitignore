@@ -13,11 +13,12 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Raw Dataset Archives (CIFAR-10 binaries)
+# Raw Dataset Archives (Binary datasets)
 data/raw/cifar-10-batches-py/
 data/raw/cifar-10-python.tar.gz
 data/raw/*.tar.gz
 data/raw/*.zip
+data/raw/*.npz
 
 # Processed Partitions & Large Binary Artifacts
 data/processed/*.pt

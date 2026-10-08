@@ -2,9 +2,14 @@
 torch
 torchvision
 
+# Medical Dataset & ML Metrics
+medmnist>=3.0.2
+scikit-learn>=1.4.0
+
 # Numerical & Visualization Libraries
 numpy
 matplotlib
+pillow
 
 # Federated Learning Framework (Flower with Simulation Engine)
 flwr[simulation]

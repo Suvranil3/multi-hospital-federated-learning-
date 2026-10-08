@@ -1,15 +1,17 @@
 """
 Interactive Teacher Demonstration Dashboard.
-Research Project: 'Blockchain-Assisted Non-IID-Aware Malicious Participant Detection in Federated Learning'
+Research Project: 'Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection'
 
 Modes:
-- Teacher Demo (Default): Visual, single-click automated presentation of Phase 1 and Phase 2.
+- Teacher Demo (Default): Visual, single-click presentation for the professor.
 - Technical Details: Comprehensive engineering metrics, configurations, file paths, and logs.
+- Archived Proof-of-Concept: Complete historical CIFAR-10 baseline results.
 """
 
 from pathlib import Path
 import sys
 import streamlit as st
+from PIL import Image
 
 # Setup Root Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -18,10 +20,11 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from dashboard.demo.pipeline_state import (
     init_session_state,
     reset_demo_state,
-    load_cifar_report,
-    load_cnn_results,
-    RESULTS_LOGS_DIR,
-    RESULTS_FIGURES_DIR,
+    load_medical_dataset_report,
+    load_medical_cnn_results,
+    load_archived_cifar_report,
+    load_archived_cifar_results,
+    RESULTS_ARCHIVE_DIR,
 )
 from dashboard.demo.dataset_demo import render_dataset_stage
 from dashboard.demo.cnn_demo import render_cnn_stage
@@ -36,8 +39,8 @@ from dashboard.demo.future_stubs import (
 
 # Page Setup
 st.set_page_config(
-    page_title="Teacher Demo | Blockchain FL Research",
-    page_icon="🎓",
+    page_title="Hospital FL Security | Teacher Demo",
+    page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -87,10 +90,12 @@ st.markdown(
         background-color: #E5E7EB;
         color: #374151;
     }
-    .big-btn {
-        display: flex;
-        justify-content: center;
-        margin: 1rem 0;
+    .archive-box {
+        background-color: #F3F4F6;
+        border-left: 5px solid #6B7280;
+        border-radius: 0.35rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
     </style>
     """,
@@ -102,9 +107,9 @@ with st.sidebar:
     st.markdown("## ⚙️ Control Panel")
     mode = st.radio(
         "Dashboard Mode",
-        ["Teacher Demo", "Technical Details"],
+        ["Teacher Demo", "Technical Details", "Archived Proof-of-Concept"],
         index=0,
-        help="Select Teacher Demo for high-level visual presentation, or Technical Details for full engineering logs.",
+        help="Select Teacher Demo for hospital presentation, Technical Details for logs, or Archived Proof-of-Concept for historical CIFAR-10 data.",
     )
 
     st.divider()
@@ -117,28 +122,31 @@ with st.sidebar:
     st.markdown("### Project Milestone Tracker")
     st.markdown(
         """
-        - **Phase 1 (Dataset)**: <span class="status-pill pill-complete">COMPLETED</span><br>
-        - **Phase 2 (Centralized CNN)**: <span class="status-pill pill-complete">COMPLETED</span><br>
-        - **Phase 3 (10-Client FL)**: <span class="status-pill pill-next">NEXT</span><br>
-        - **Phase 4 (Non-IID Skew)**: <span class="status-pill pill-planned">PLANNED</span><br>
-        - **Phase 5 (Attacks)**: <span class="status-pill pill-planned">PLANNED</span><br>
+        - **Phase MEDICAL-01 (PneumoniaMNIST)**: <span class="status-pill pill-complete">COMPLETED</span><br>
+        - **Phase MEDICAL-02 (Centralized Baseline)**: <span class="status-pill pill-complete">COMPLETED</span><br>
+        - **Phase 3 (10-Hospital FL with Flower)**: <span class="status-pill pill-next">NEXT</span><br>
+        - **Phase 4 (Non-IID Hospital Data)**: <span class="status-pill pill-planned">PLANNED</span><br>
+        - **Phase 5 (Malicious Attacks)**: <span class="status-pill pill-planned">PLANNED</span><br>
         - **Phase 6 (Detector)**: <span class="status-pill pill-planned">PLANNED</span><br>
-        - **Phase 8 (Blockchain)**: <span class="status-pill pill-planned">PLANNED</span>
+        - **Phase 8 (Blockchain Audit)**: <span class="status-pill pill-planned">PLANNED</span>
         """,
         unsafe_allow_html=True,
     )
-    st.caption("ℹ️ Progress toward initial FL baseline milestone: ~67% (project-management progress, not model accuracy).")
+    st.caption("ℹ️ Current milestone complete: Centralized medical baseline established. Federated learning not yet started.")
 
     st.divider()
-    st.markdown("### Repository Quick Info")
-    st.write("**Git Checkpoint**: `acac4f8`")
-    st.write("**Unit Tests**: `13 / 13 Passing`")
+    st.markdown("### System Quick Info")
+    st.write("**Dataset**: `PneumoniaMNIST (Chest X-Rays)`")
+    st.write("**Task**: `Normal vs Pneumonia (Binary)`")
+    st.write("**Model**: `SmallCNN (420,802 params)`")
+    st.write("**Current Stage**: `Medical Centralized Baseline`")
+    st.write("**Unit Tests**: `14 / 14 Passing`")
     st.write("**Hardware**: `RTX 3050 GPU (CUDA)`")
 
 
-# Header
-st.markdown('<div class="demo-title">Blockchain-Assisted Non-IID-Aware Malicious Participant Detection in Federated Learning</div>', unsafe_allow_html=True)
-st.markdown('<div class="demo-sub">Interactive Academic Demonstration & Empirical Research Progress</div>', unsafe_allow_html=True)
+# Header Banner
+st.markdown('<div class="demo-title">Multi-Hospital Federated Learning for Chest X-Ray Classification</div>', unsafe_allow_html=True)
+st.markdown('<div class="demo-sub">With Non-IID-Aware Malicious Participant Detection and Tamper-Evident Blockchain Audit</div>', unsafe_allow_html=True)
 
 
 # =========================================================================
@@ -153,7 +161,7 @@ if mode == "Teacher Demo":
                 st.session_state.demo_started = True
                 st.rerun()
         else:
-            st.success("✨ **Interactive Demonstration Active**: Showing verified Phase 1 & Phase 2 results.")
+            st.success("✨ **Interactive Demonstration Active**: Showing verified Medical Dataset & Centralized Baseline results.")
     with col_reset_btn:
         if st.session_state.demo_started:
             if st.button("⏹ Stop / Reset Demo", use_container_width=True):
@@ -164,13 +172,14 @@ if mode == "Teacher Demo":
 
     # Pre-demo introductory banner if not started
     if not st.session_state.demo_started:
-        st.info("👆 Click **'▶ START PROJECT DEMO'** above to begin the step-by-step presentation for your professor.")
+        st.info("👆 Click **'▶ START PROJECT DEMO'** above to present the hospital project to your professor.")
         st.markdown(
             """
             #### Demonstration Highlights:
-            1. **Dataset Integrity Verification**: 60,000 CIFAR-10 images verified across 10 balanced classes.
-            2. **SmallCNN Baseline**: 189,130-parameter model achieving **76.94% accuracy** centrally.
-            3. **Future Research Boundaries**: Clearly distinguishing completed baselines from upcoming Federated Learning and Byzantine detection.
+            1. **Hospital Scenario**: 10 simulated hospitals collaborating via Federated Learning to classify Chest X-Rays without exposing raw patient images.
+            2. **PneumoniaMNIST Dataset**: 5,856 pediatric chest X-ray images (4,708 train, 524 val, 624 untouched test).
+            3. **Centralized Baseline Model**: Lightweight SmallCNN (420,802 parameters) achieving **81.25% Test Accuracy** and **99.74% Pneumonia Recall**.
+            4. **Next Step**: 10-Hospital Federated Learning with Flower + FedAvg.
             """
         )
 
@@ -179,25 +188,53 @@ if mode == "Teacher Demo":
         # Step Progress Indicator
         step_col1, step_col2, step_col3 = st.columns(3)
         with step_col1:
-            st.markdown("#### Step 1: Dataset Verification")
+            st.markdown("#### Step 1: Medical Dataset")
             st.progress(1.0)
-            st.caption("✓ 60,000 images, 10 classes balanced")
+            st.caption("✓ 5,856 Chest X-Rays, PneumoniaMNIST verified")
         with step_col2:
-            st.markdown("#### Step 2: SmallCNN Baseline")
+            st.markdown("#### Step 2: Centralized CNN Baseline")
             st.progress(1.0)
-            st.caption("✓ 76.94% Test Accuracy achieved")
+            st.caption("✓ 81.25% Test Acc, 99.74% Pneumonia Recall")
         with step_col3:
-            st.markdown("#### Step 3: Federated Learning")
+            st.markdown("#### Step 3: 10-Hospital FL")
             st.progress(0.0)
-            st.caption("→ Next upcoming milestone")
+            st.caption("→ Upcoming next milestone")
 
         st.divider()
 
-        # STAGE 1: DATASET VERIFICATION
+        # HOSPITAL SCENARIO CONCEPT CARD
+        st.markdown("### 🏥 The Hospital Problem Scenario")
+        st.markdown(
+            """
+            ```text
+            Hospital 1  (Pediatric)   ─┐
+            Hospital 2  (General)     ─┤
+            Hospital 3  (Pulmonary)   ─┤
+            Hospital 4  (Community)   ─┤
+            Hospital 5  (Academic)    ─┤
+            ...                       ├── Federated Learning ── Global Medical Model
+            Hospital 10 (Regional)    ┘
+            ```
+            """
+        )
+        c_exp1, c_exp2, c_exp3 = st.columns(3)
+        with c_exp1:
+            st.markdown("**1. Privacy Guarantee**")
+            st.write("Hospitals keep their sensitive patient chest X-rays strictly local. Only model updates are transmitted.")
+        with c_exp2:
+            st.markdown("**2. Natural Non-IID Diversity**")
+            st.write("Honest hospitals naturally see different case mixes (e.g., pediatric vs. adult), leading to benign divergent updates.")
+        with c_exp3:
+            st.markdown("**3. Malicious Threat Detection**")
+            st.write("A compromised hospital could upload toxic poisoned weights. Our research focuses on distinguishing benign clinical skew from malicious attacks.")
+
+        st.divider()
+
+        # STAGE 1: MEDICAL DATASET VERIFICATION
         render_dataset_stage()
         st.divider()
 
-        # STAGE 2: CENTRALIZED CNN BASELINE
+        # STAGE 2: CENTRALIZED MEDICAL BASELINE
         render_cnn_stage()
         st.divider()
 
@@ -205,17 +242,17 @@ if mode == "Teacher Demo":
         st.markdown("### 🧪 Automated Quality & Test Suite")
         t_col1, t_col2 = st.columns([2, 3])
         with t_col1:
-            st.success("### ✓ 13 / 13 Tests Passed (100%)")
-            st.caption("Strict regression testing across data loading, tensor validity, and model gradient descent.")
+            st.success("### ✓ 14 / 14 Tests Passed (100%)")
+            st.caption("Regression tested across PneumoniaMNIST data loaders, SmallCNN architecture, gradient descent, and medical metrics.")
         with t_col2:
             with st.expander("🔍 Show test details"):
                 st.markdown(
                     """
                     | Test File | Test Name | Status |
                     | :--- | :--- | :---: |
-                    | `tests/test_data_loading.py` | `test_cifar10_raw_splits_exist` | **PASSED** |
-                    | `tests/test_data_loading.py` | `test_cifar10_batch_shape_and_types` | **PASSED** |
-                    | `tests/test_data_loading.py` | `test_cifar10_deterministic_shuffling` | **PASSED** |
+                    | `tests/test_data_loading.py` | `test_pneumoniamnist_official_splits_exist` | **PASSED** |
+                    | `tests/test_data_loading.py` | `test_pneumoniamnist_batch_shape_and_types` | **PASSED** |
+                    | `tests/test_data_loading.py` | `test_pneumoniamnist_deterministic_shuffling` | **PASSED** |
                     | `tests/test_model.py` | `test_cnn_construction` | **PASSED** |
                     | `tests/test_model.py` | `test_cnn_output_shape [1, 4, 16, 32]` | **PASSED** |
                     | `tests/test_model.py` | `test_cnn_forward_pass_numerical_validity` | **PASSED** |
@@ -223,6 +260,7 @@ if mode == "Teacher Demo":
                     | `tests/test_model.py` | `test_cnn_one_training_step` | **PASSED** |
                     | `tests/test_training.py` | `test_prepare_data_loaders_splits` | **PASSED** |
                     | `tests/test_training.py` | `test_prepare_data_loaders_batch_shapes` | **PASSED** |
+                    | `tests/test_training.py` | `test_compute_medical_metrics` | **PASSED** |
                     """
                 )
 
@@ -233,20 +271,20 @@ if mode == "Teacher Demo":
         st.divider()
 
         # TEACHER SCRIPT / EXPLANATION
-        st.markdown("### 🗣️ What I Can Say to My Teacher")
+        st.markdown("### 🗣️ Presentation Guide for Professor")
         teacher_speech = (
-            "We first verified the CIFAR-10 dataset and confirmed its structure and class balance. "
-            "Then we built and validated a lightweight CNN using PyTorch. "
-            "The centralized model achieved a measured test accuracy of 76.94 percent. "
-            "The next stage is to use this same model in a 10-client Federated Learning setup using Flower and FedAvg. "
-            "After that, we will study the effect of non-IID data and malicious participants."
+            "We use chest X-ray images because the final project is designed around a hospital scenario. "
+            "The dataset gives us a real medical-image classification problem that can later be distributed among simulated hospitals. "
+            "We use a small CNN because it is lightweight, easy to train, and suitable for running the same model across multiple simulated hospitals. "
+            "Each hospital can train on its own local medical images without directly sharing the raw patient images. "
+            "The hospitals can contribute model updates to a shared global model."
         )
 
         st.markdown(
             f"""
             <div class="script-box">
-                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 0.5rem; color: #1F2937;">
-                    <b>Presentation Script:</b><br>
+                <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 0.5rem; color: #1F2937;">
+                    <b>Verbatim Presentation Script:</b><br>
                     "{teacher_speech}"
                 </p>
             </div>
@@ -254,92 +292,67 @@ if mode == "Teacher Demo":
             unsafe_allow_html=True,
         )
 
-        # Copyable area
         st.text_area("📋 Copyable Script:", value=teacher_speech, height=90)
-
-        st.divider()
-
-        # CURRENT PROJECT STRUCTURE
-        st.markdown("### 📁 Current Project Structure")
-        with st.expander("📂 View repository layout and active directories", expanded=False):
-            st.markdown(
-                """
-                ```text
-                Blockchain_FL_Project/
-                ├── data/                 [ACTIVE] Raw dataset and verification script
-                ├── federated_learning/   [ACTIVE] SmallCNN PyTorch model (Reusable)
-                ├── experiments/          [ACTIVE] Central config (seed 42) & centralized training
-                ├── results/              [ACTIVE] Generated figures, tables, and JSON logs
-                ├── tests/                [ACTIVE] 13 automated unit tests
-                ├── dashboard/            [ACTIVE] Demonstration app and modules
-                ├── attacks/              [RESERVED / STUB] Phase 5 attack simulation
-                ├── detection/            [RESERVED / STUB] Phase 6 non-IID-aware detector
-                └── blockchain/           [RESERVED / STUB] Phase 8 audit trail smart contract
-                ```
-                """
-            )
 
 
 # =========================================================================
 # MODE B: TECHNICAL DETAILS
 # =========================================================================
-else:
-    st.subheader("🛠️ Technical Details & Engineering Specifications")
+elif mode == "Technical Details":
+    st.subheader("🛠️ Technical Details & Medical Engineering Specifications")
 
-    tab_t1, tab_t2, tab_t3 = st.tabs(["⚙️ Configurations & Metadata", "📄 Raw Experiment Logs", "🔮 Future Plug-in Modules"])
+    tab_t1, tab_t2, tab_t3 = st.tabs(["⚙️ Configurations & Metadata", "📄 Raw Experiment Logs", "🔮 Future Hospital Modules"])
 
     with tab_t1:
-        st.markdown("#### Reproducibility & Environment")
+        st.markdown("#### Reproducibility & Medical Environment")
         env_col1, env_col2 = st.columns(2)
         with env_col1:
+            st.write("**Primary Dataset**: `PneumoniaMNIST (MedMNIST v3)`")
+            st.write("**Task**: `Binary (0: Normal, 1: Pneumonia)`")
+            st.write("**Image Dimensions**: `1 × 28 × 28 (Grayscale)`")
             st.write("**Python Version**: `3.14.4`")
             st.write("**PyTorch Version**: `2.14.1+cu130`")
-            st.write("**Device**: `NVIDIA GeForce RTX 3050 Laptop GPU`")
-            st.write("**Master Random Seed**: `42`")
-            st.write("**Git Checkpoint**: `acac4f8`")
+            st.write("**Compute Device**: `NVIDIA GeForce RTX 3050 Laptop GPU`")
+            st.write("**Master Seed**: `42`")
         with env_col2:
-            st.write("**Dataset Source**: Official CIFAR-10 (torchvision mirror)")
-            st.write("**Train Split**: 40,000 samples (Stratified 80%)")
-            st.write("**Validation Split**: 10,000 samples (Stratified 20%)")
-            st.write("**Test Split**: 10,000 samples (Untouched)")
+            st.write("**Official Train Split**: 4,708 samples")
+            st.write("**Official Validation Split**: 524 samples")
+            st.write("**Official Test Split**: 624 samples (Untouched)")
             st.write("**Batch Size**: 64 | **Epochs**: 15 | **Optimizer**: Adam")
+            st.write("**Weight Decay**: 1e-4 | **Loss**: CrossEntropyLoss")
+            st.write("**Model Parameters**: 420,802 parameters (~1.61 MB)")
 
         st.divider()
-        st.markdown("#### Architectural Decision Records (ADRs)")
+        st.markdown("#### Architectural Decisions for Hospital Scenario")
         st.markdown(
-            r"""
-            - **ADR-001**: CIFAR-10 Dataset selection.
-            - **ADR-002**: SmallCNN architecture (~189k parameters) for lightweight simulation.
-            - **ADR-003**: Flower framework (`flwr[simulation]`) selection.
-            - **ADR-004**: Dirichlet non-IID partitioning parameterization ($\alpha \in \{1.0, 0.5, 0.1\}$).
-            - **ADR-005**: Decoupled blockchain role as tamper-evident audit trail only (zero on-chain ML/weights).
-            - **ADR-006**: Tri-state classification (`Normal`, `Suspicious`, `Malicious`).
-            - **ADR-007**: Phased modular development strategy.
-            - **ADR-008**: Centralized training protocol and stratified split.
+            """
+            - **ADR-009**: PneumoniaMNIST selected as primary medical dataset for multi-hospital federated learning.
+            - **ADR-010**: SmallCNN modified for 1-channel grayscale 28x28 chest X-rays and binary diagnosis head.
+            - **ADR-011**: Preservation of official MedMNIST train/val/test splits without artificial re-splitting.
+            - **ADR-012**: Mandatory reporting of Precision, Sensitivity/Recall, and F1-score alongside Accuracy for medical evaluation.
+            - **ADR-013**: Archival of CIFAR-10 proof-of-concept into `results/archive/cifar10/`.
             """
         )
 
-
     with tab_t2:
         st.markdown("#### Raw JSON Experiment Records")
-        cifar_raw = load_cifar_report()
-        cnn_raw = load_cnn_results()
+        med_data_raw = load_medical_dataset_report()
+        med_cnn_raw = load_medical_cnn_results()
 
-        st.markdown("##### 1. CIFAR-10 Verification Report (`EXP-000-DATA`)")
-        if cifar_raw:
-            st.json(cifar_raw)
+        st.markdown("##### 1. PneumoniaMNIST Verification Report (`EXP-MED-000-DATA`)")
+        if med_data_raw:
+            st.json(med_data_raw)
         else:
-            st.warning("CIFAR-10 report not found.")
+            st.warning("PneumoniaMNIST verification report not found.")
 
-        st.markdown("##### 2. Centralized CNN Results (`EXP-001-CENTRAL-CNN`)")
-        if cnn_raw:
-            st.json(cnn_raw)
+        st.markdown("##### 2. Centralized Medical CNN Baseline Results (`EXP-MED-001-CENTRAL-CNN`)")
+        if med_cnn_raw:
+            st.json(med_cnn_raw)
         else:
-            st.warning("Centralized CNN report not found.")
+            st.warning("Medical CNN baseline report not found.")
 
     with tab_t3:
-        st.markdown("#### Future Phase Plug-in Interfaces (Clean Stubs)")
-        st.caption("These placeholders will be activated as subsequent phases are implemented.")
+        st.markdown("#### Future Hospital Research Modules")
         render_fl_baseline_demo()
         st.divider()
         render_noniid_demo()
@@ -350,6 +363,58 @@ else:
         st.divider()
         render_blockchain_demo()
 
+
+# =========================================================================
+# MODE C: ARCHIVED PROOF-OF-CONCEPT (CIFAR-10)
+# =========================================================================
+else:
+    st.subheader("📦 Archived Previous Proof-of-Concept (CIFAR-10)")
+    st.markdown(
+        """
+        <div class="archive-box">
+            <b>Archival Notice:</b> This section contains the complete historical Phase 1 and Phase 2 proof-of-concept work conducted on the generic CIFAR-10 dataset.<br>
+            Per the professor's requirement that the entire project be presented in a medical hospital context,
+            <b>PneumoniaMNIST</b> is now the primary project dataset. CIFAR-10 is preserved here in full as historical baseline evidence.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    cifar_rep = load_archived_cifar_report()
+    cifar_res = load_archived_cifar_results()
+
+    ac_col1, ac_col2, ac_col3 = st.columns(3)
+    with ac_col1:
+        st.metric("CIFAR-10 Images", "60,000", help="50,000 train, 10,000 test")
+        st.caption("10 balanced object classes (32x32 RGB)")
+    with ac_col2:
+        st.metric("Centralized Accuracy", "76.94%", help="Evaluated on 10,000 test images")
+        st.caption("189k-parameter SmallCNN")
+    with ac_col3:
+        st.metric("Training Time", "100.97s", help="15 epochs on RTX 3050 GPU")
+        st.caption("Adam optimizer, seed 42")
+
+    st.markdown("#### Archived Visual Artifacts")
+    f_c1, f_c2 = st.columns(2)
+    cifar_grid = RESULTS_ARCHIVE_DIR / "figures" / "cifar10_sample_grid.png"
+    cifar_cm = RESULTS_ARCHIVE_DIR / "figures" / "cifar10_confusion_matrix.png"
+
+    with f_c1:
+        if cifar_grid.exists():
+            st.image(Image.open(cifar_grid), caption="Archived CIFAR-10 Sample Grid", use_container_width=True)
+    with f_c2:
+        if cifar_cm.exists():
+            st.image(Image.open(cifar_cm), caption="Archived CIFAR-10 10-Class Confusion Matrix", use_container_width=True)
+
+    with st.expander("📄 View Archived CIFAR-10 JSON Logs"):
+        st.write("**Verification Report:**")
+        if cifar_rep:
+            st.json(cifar_rep)
+        st.write("**Centralized Training Results:**")
+        if cifar_res:
+            st.json(cifar_res)
+
+
 # Footer
 st.divider()
-st.caption("Blockchain-Assisted Non-IID-Aware Malicious Participant Detection in Federated Learning | Read-Only Demonstration Dashboard | Seed: 42")
+st.caption("Multi-Hospital Federated Learning Security | Chest X-Ray Classification (PneumoniaMNIST) | Seed: 42")

@@ -1,50 +1,42 @@
 # Architectural & Technical Decision Records (ADR)
 
-## Project: Blockchain-Assisted Non-IID-Aware Malicious Participant Detection in Federated Learning
+## Project: Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection
 
 ---
 
-### ADR-001: Selection of CIFAR-10 Dataset
-- **Status**: Accepted
-- **Context**: We need a standard benchmark dataset that exhibits non-trivial visual feature complexity, has well-established classification baselines in literature, and allows controlled non-IID partitioning.
-- **Decision**: Use CIFAR-10 (10 classes, 50,000 training images, 10,000 test images, 32x32 RGB).
-- **Rationale**:
-  - Complex enough to demonstrate poisoning and non-IID divergence (unlike MNIST/Fashion-MNIST, where gradients easily converge even with skewed classes).
-  - Computationally light enough to simulate 10 clients across multiple rounds within feasible execution times on commodity hardware or Google Colab.
-  - Standard benchmark across published FL security literature (e.g., Blanchard et al., Fung et al., Cao et al.), enabling direct comparison.
+### ADR-001: Selection of CIFAR-10 Dataset *(Superseded / Archived)*
+- **Status**: Superseded by ADR-009
+- **Context**: Initial generic proof-of-concept benchmark.
+- **Decision**: Used CIFAR-10 as generic baseline in Phase 1 & Phase 2.
+- **Note**: Preserved in full under `results/archive/cifar10/`.
 
 ---
 
-### ADR-002: Selection of Small CNN Model
-- **Status**: Accepted
-- **Context**: The model must balance representation power for CIFAR-10 with training speed across 10 federated clients.
-- **Decision**: Use a compact Convolutional Neural Network (small CNN: 2-3 conv layers + max pooling + fully connected layers) with ~100k-500k parameters.
-- **Rationale**:
-  - Overly deep models (e.g., ResNet-50) incur high computational and communication latency across 20+ FL rounds on CPU/light GPU.
-  - Linear models or shallow MLPs underfit CIFAR-10.
-  - A small CNN provides sufficient capacity (~65-75% accuracy) while allowing fast simulation and reproducible gradients.
+### ADR-002: Selection of Small CNN Model Architecture
+- **Status**: Modified by ADR-010
+- **Context**: The model must balance representation power with training speed across 10 simulated federated clients.
+- **Decision**: Use a compact Convolutional Neural Network (SmallCNN) with modular blocks.
 
 ---
 
 ### ADR-003: Selection of Flower (`flwr[simulation]`) Framework
 - **Status**: Accepted
-- **Context**: We require an FL framework capable of orchestrating multi-client simulations natively in Python and PyTorch.
+- **Context**: We require an FL framework capable of orchestrating multi-hospital client simulations natively in Python and PyTorch.
 - **Decision**: Use Flower with the simulation engine (`flwr[simulation]`).
 - **Rationale**:
   - Native Python/PyTorch support with minimal boilerplate.
-  - Highly efficient resource virtualization via Ray in `flwr.simulation`, enabling 10 simulated clients on a single workstation or Colab instance.
-  - Clean separation between client compute and custom server aggregation strategies (`Strategy` interface), ideal for plugging in our custom detector and robust aggregation logic.
+  - Highly efficient resource virtualization enabling 10 simulated hospitals on a single GPU/workstation.
+  - Clean separation between client compute and custom server aggregation strategies (`Strategy` interface).
 
 ---
 
 ### ADR-004: Centrality of Dirichlet Non-IID Partitioning
 - **Status**: Accepted
-- **Context**: Real-world FL clients rarely have identical data distributions.
-- **Decision**: Parameterize client data heterogeneity using a Dirichlet distribution over label distributions with concentration parameter $\alpha \in \{1.0, 0.5, 0.1\}$.
+- **Context**: Real-world hospitals treat different patient populations, leading to natural case-mix heterogeneity.
+- **Decision**: Parameterize hospital data heterogeneity using a Dirichlet distribution over label distributions with concentration parameter $\alpha \in \{1.0, 0.5, 0.1\}$.
 - **Rationale**:
-  - Continuous tuning of non-IID severity: $\alpha = 1.0$ (mild non-IID), $\alpha = 0.5$ (moderate non-IID), $\alpha = 0.1$ (extreme non-IID).
   - Gold standard in federated learning research for simulating statistical heterogeneity.
-  - Essential for answering our primary research question regarding false positive reduction under benign distribution divergence.
+  - Models the clinical reality where specialized clinics (e.g., pediatric pulmonary centers) treat distinct proportions of conditions compared to community hospitals.
 
 ---
 
@@ -53,44 +45,87 @@
 - **Context**: Blockchain is frequently misapplied in FL research as a computational engine or storage layer.
 - **Decision**:
   - Storing complete model weights on-chain is **strictly prohibited**.
+  - Storing raw patient images or Protected Health Information (PHI) on-chain is **strictly prohibited**.
   - Executing ML detection algorithms inside smart contracts is **strictly prohibited**.
-  - Blockchain serves exclusively as an immutable, tamper-evident audit log for round metadata, SHA-256 update hashes, detector classification decisions, and actions taken.
-- **Rationale**:
-  - Smart contract gas costs and block size limits make storing neural network parameters or running floating-point tensor operations impractical.
-  - Offloading heavy ML computation to the server and logging cryptographic digests on-chain provides the required accountability, non-repudiation, and auditability without prohibitive gas overhead or transaction latency.
+  - Blockchain serves exclusively as an immutable, tamper-evident audit log for round metadata, hospital IDs, SHA-256 update hashes, detector classification decisions, and actions taken.
+- **Rationale**: Gas costs, storage bloat, and healthcare privacy compliance require keeping ML and medical data off-chain.
 
 ---
 
 ### ADR-006: Tri-State Classification Policy (Normal / Suspicious / Malicious)
 - **Status**: Accepted
-- **Context**: Binary classification (accept vs. reject) often penalizes honest clients with naturally skewed data whose updates marginally cross outlier thresholds.
+- **Context**: Binary classification (accept vs. reject) often penalizes honest hospitals with naturally specialized case mixes whose updates marginally cross outlier thresholds.
 - **Decision**: Adopt a tri-state classification:
   - `Normal`: Fully accepted (weight = 1.0).
   - `Suspicious`: Down-weighted proportionally to anomaly severity ($0 < \lambda < 1$).
   - `Malicious`: Completely rejected (weight = 0.0).
-- **Rationale**:
-  - Prevents total information loss from honest specialized clients while safeguarding the global model against catastrophic corruption.
-  - Provides a soft margin that naturally accommodates statistical noise from non-IID distributions.
 
 ---
 
 ### ADR-007: Phased Modular Development Strategy
 - **Status**: Accepted
 - **Context**: Complex multi-component systems (FL + attacks + detector + blockchain) fail easily if built monolithically.
-- **Decision**: Implement the system strictly across 10 sequential phases, starting from Phase 1 (dataset verification) to Phase 10 (scientific analysis), requiring explicit verification at each step.
-- **Rationale**: Ensures each subsystem is verified and unit-tested in isolation before integration, preventing hard-to-debug cross-cutting bugs.
+- **Decision**: Implement the system strictly across sequential verified phases.
 
 ---
 
-### ADR-008: Centralized Small CNN Architecture, Stratified Data Split, and Baseline Hyperparameters
-- **Status**: Accepted
-- **Context**: Before introducing Federated Learning (Phase 3) or non-IID partitioning (Phase 4), a sound, reproducible centralized baseline must be established to benchmark subsequent distributed performance.
-- **Decision**:
-  - **Architecture**: `SmallCNN` composed of 3 convolutional blocks (Conv2d 3->32, 32->64, 64->64 with kernel size 3, padding 1, BatchNorm2d, ReLU, and 2x2 MaxPool2d) followed by a 2-layer classifier (Linear 1024->128, ReLU, Dropout 0.3, Linear 128->10). Total parameter count: 189,130 parameters.
-  - **Data Split**: Deterministic stratified split of the 50,000 CIFAR-10 training images into 40,000 training samples (4,000 per class, 80%) and 10,000 validation samples (1,000 per class, 20%) using master seed 42.
-  - **Untouched Test Set**: The official 10,000 CIFAR-10 test set remains untouched during training and model selection, evaluated exclusively once after training completion.
-  - **Training Protocol**: 15 epochs, batch size 64, Adam optimizer ($\text{lr} = 0.001$, weight decay $10^{-4}$), CrossEntropyLoss, data augmentation (RandomCrop 32 with padding 4, RandomHorizontalFlip).
-- **Rationale**:
-  - The 189k parameter budget balances representation capacity on CIFAR-10 (~75-78% accuracy) with computational and network efficiency for subsequent Flower FL client simulations.
-  - Stratified 80/20 partitioning ensures unbiased class representation across train and validation sets while preserving the official test set for strictly independent final evaluation.
+### ADR-008: Centralized Small CNN Architecture on CIFAR-10 *(Archived)*
+- **Status**: Archived
+- **Context**: Completed Phase 1 and Phase 2 generic baseline (76.94% accuracy). Results archived in `results/archive/cifar10/`.
 
+---
+
+### ADR-009: Migration to Hospital Scenario and PneumoniaMNIST Dataset
+- **Status**: Accepted
+- **Context**: The professor clarified that the complete project must be developed and presented in a hospital/medical scenario.
+- **Decision**: Replace CIFAR-10 with **PneumoniaMNIST** (from MedMNIST v3, 5,856 pediatric chest X-rays, 28x28 grayscale, Normal vs. Pneumonia) as the primary project dataset.
+- **Rationale**:
+  - Provides a clinically meaningful problem (Chest X-Ray pneumonia classification) well-suited for multi-hospital federated learning.
+  - Enables studying how non-IID hospital case mixes interact with Byzantine poisoning attacks.
+  - Directly fulfills the academic requirement for a hospital/medical scenario.
+
+---
+
+### ADR-010: Adaptation of SmallCNN for 1x28x28 Grayscale Chest X-Rays
+- **Status**: Accepted
+- **Context**: PneumoniaMNIST consists of 1-channel grayscale 28x28 images with a 2-class diagnosis head (0: Normal, 1: Pneumonia).
+- **Decision**:
+  - Update `SmallCNN` in `federated_learning/model.py`:
+    - Input: `1 x 28 x 28`
+    - Conv Block 1: `Conv2d(1 -> 32, 3x3)`, `BatchNorm2d(32)`, `ReLU`, `MaxPool2d(2x2)` -> `32 x 14 x 14`
+    - Conv Block 2: `Conv2d(32 -> 64, 3x3)`, `BatchNorm2d(64)`, `ReLU`, `MaxPool2d(2x2)` -> `64 x 7 x 7`
+    - Flatten: `3,136` features
+    - Dense Head: `Linear(3136 -> 128)`, `ReLU`, `Dropout(0.2)`, `Linear(128 -> 2)`
+    - Total parameter count: **420,802 parameters** (~1.61 MB).
+- **Rationale**: Modular, fast to train (~13s on GPU), lightweight for 10-hospital simulation, with excellent feature capacity for chest X-ray textures.
+
+---
+
+### ADR-011: Preservation of Official MedMNIST Splits (No Artificial Re-Splitting)
+- **Status**: Accepted
+- **Context**: Unlike CIFAR-10, PneumoniaMNIST provides an official, clinically designed benchmark split: 4,708 train, 524 validation, and 624 test images.
+- **Decision**: Use the official train split for training, the official validation split for model checkpoint selection, and keep the official test split strictly untouched until final evaluation. Do NOT create arbitrary random splits.
+- **Rationale**: Aligns with standard MedMNIST benchmarks and ensures clinical validation integrity.
+
+---
+
+### ADR-012: Comprehensive Medical Evaluation Metrics (Accuracy, Precision, Recall, F1)
+- **Status**: Accepted
+- **Context**: In medical classification (especially with class imbalance: 390 pneumonia vs. 234 normal in the test set), accuracy alone is misleading because a trivial classifier could predict pneumonia for all patients and achieve ~62.5% accuracy.
+- **Decision**: Mandatory reporting of:
+  - Accuracy
+  - Pneumonia Precision (Positive Predictive Value)
+  - Pneumonia Recall / Sensitivity (True Positive Rate)
+  - Pneumonia F1-Score
+  - Macro-averaged F1-Score
+  - 2x2 Confusion Matrix (TN, FP, FN, TP)
+  - Clear medical disclaimer noting these are research benchmark metrics.
+- **Rationale**: Ensures clinical evaluation rigor and prevents false conclusions based solely on accuracy.
+
+---
+
+### ADR-013: Archival of Historical CIFAR-10 Proof-of-Concept Work
+- **Status**: Accepted
+- **Context**: Phases 1 and 2 were previously completed on CIFAR-10. We must preserve this work without mixing it with medical data.
+- **Decision**: Archive all CIFAR-10 artifacts into `results/archive/cifar10/` (figures, logs, models, README).
+- **Rationale**: Preserves proof of progress while maintaining strict separation between generic and medical results.

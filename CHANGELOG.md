@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the **Blockchain-Assisted Non-IID-Aware Malicious Participant Detection in Federated Learning** research project will be documented in this file.
+All notable changes to the **Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection** research project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
@@ -8,72 +8,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### [0.2.0] - 2026-10-08 (Phase 2 Centralized CNN Baseline)
+### [0.3.0] - 2026-10-08 (Migration to Hospital Scenario & PneumoniaMNIST)
 #### Added
-- Implemented reusable PyTorch model `SmallCNN` (`federated_learning/model.py`, 189,130 parameters):
-  - 3 Conv2d-BatchNorm2d-ReLU-MaxPool2d blocks with Dropout regularization.
-  - Linear classification head yielding 10 logits.
-  - Parameter counting utility and forward-pass dummy batch sanity check.
-- Added centralized baseline hyperparameters to `experiments/config.py` (epochs=15, batch_size=64, lr=0.001, val_ratio=0.2, weight_decay=1e-4).
-- Implemented centralized training script `experiments/train_centralized.py`:
-  - Deterministic stratified 80/20 train/val split (40,000 train, 10,000 val).
-  - Preserved untouched 10,000 CIFAR-10 test set for final independent evaluation.
-  - Model checkpointing based on best validation accuracy (`results/models/best_centralized_cnn.pt`).
-- Trained model on CUDA (NVIDIA GeForce RTX 3050 Laptop GPU, 100.97 seconds):
-  - Final Train Loss: 0.7310, Train Accuracy: 74.50%.
-  - Best Validation Accuracy: 77.34% (Epoch 15, Val Loss: 0.6400).
-  - Untouched Test Set Accuracy: 76.94% (Test Loss: 0.6578, 7,694/10,000 correct).
-- Generated visualizations and reports:
-  - `results/figures/centralized_training_loss.png`
-  - `results/figures/centralized_training_accuracy.png`
-  - `results/figures/confusion_matrix.png`
-  - `results/logs/centralized_cnn_results.json`
-- Implemented unit tests for model forward pass, output shapes, loss calculation, optimization, and dataset splits (`tests/test_model.py`, `tests/test_training.py` — 13/13 passing tests).
-- Added `ADR-008` to `DECISIONS.md`.
-- Upgraded demonstration dashboard into an Interactive Teacher Demonstration system (`dashboard/app.py`, `dashboard/demo/pipeline_state.py`, `dashboard/demo/dataset_demo.py`, `dashboard/demo/cnn_demo.py`, `dashboard/demo/future_stubs.py`, `dashboard/README.md`, `requirements-dashboard.txt`) featuring one-click presentation flow, optional live training execution, copyable teacher speech, and extensible future-phase plug-in stubs.
-
-
+- Created Git checkpoint branch `checkpoint/pre-medical-migration` before applying changes.
+- Designated **PneumoniaMNIST** (Pediatric Chest X-Rays from MedMNIST v3) as the **Primary Medical Project Dataset**.
+- Added `medmnist>=3.0.2` and `scikit-learn>=1.4.0` to `requirements.txt` and installed in `.venv`.
+- Preserved historical CIFAR-10 Phase 1 & Phase 2 proof-of-concept results into `results/archive/cifar10/` (figures, logs, models, and archival README).
+- Implemented medical dataset verification pipeline in `data/verify_dataset.py` (Phase MEDICAL-01):
+  - Verified 4,708 train, 524 validation, and 624 test samples (5,856 total).
+  - Verified 1 × 28 × 28 grayscale dimensions and binary labels (0: Normal, 1: Pneumonia).
+  - Computed empirical statistics (min=0, max=255, mean=0.57192, std=0.16835).
+  - Generated `results/figures/pneumonia_sample_grid.png` and `results/figures/pneumonia_class_distribution.png`.
+  - Emitted `results/logs/pneumonia_mnist_verification_report.json`.
+- Adapted `SmallCNN` in `federated_learning/model.py`:
+  - 1-channel 28x28 grayscale input, 2-class output (Normal vs. Pneumonia).
+  - 2 Conv-BN-ReLU-MaxPool blocks, Flatten (3,136), Dense 128 (Dropout 0.2), Linear head.
+  - Parameter count: **420,802 parameters** (~1.61 MB).
+- Implemented centralized medical baseline training in `experiments/train_medical.py` (Phase MEDICAL-02):
+  - Trained on CUDA (NVIDIA RTX 3050 Laptop GPU, 15 epochs, 13.35s).
+  - Best Validation Accuracy: 97.90% (Epoch 14).
+  - Untouched Test Set Accuracy: **81.25%** (507 / 624).
+  - Pneumonia Sensitivity / Recall: **99.74%** (389 / 390 cases detected).
+  - Pneumonia Precision: **77.03%**.
+  - Pneumonia F1-Score: **0.8693** | Macro F1-Score: **0.7689**.
+  - Generated loss and accuracy curves and medical 2x2 confusion matrix.
+  - Saved checkpoint `results/models/best_centralized_medical_cnn.pt` and report `results/logs/medical_centralized_results.json`.
+- Updated PyTest unit test suite (`tests/test_data_loading.py`, `tests/test_model.py`, `tests/test_training.py` — **14/14 tests passing**).
+- Updated interactive teacher dashboard (`dashboard/app.py`, `dashboard/demo/` modules) with multi-hospital scenario, metrics scorecard, medical disclaimer, and an archived CIFAR-10 view.
+- Added ADR-009 through ADR-013 to `DECISIONS.md`.
 
 #### Reason
-Establish a solid, reproducible centralized machine learning benchmark before introducing federated orchestration.
+Complete project alignment with the professor's requirement that the entire project be developed and presented in a hospital/medical scenario prior to beginning Federated Learning.
 
+---
 
+### [0.2.0] - 2026-10-08 (Phase 2 Centralized CNN Baseline - Generic Proof-of-Concept)
 #### Added
-- Initialized Git version control on `main` branch.
-- Created core modular project directory structure:
-  - `data/raw/`, `data/processed/`
-  - `notebooks/`
-  - `federated_learning/`
-  - `detection/`
-  - `attacks/`
-  - `blockchain/`
-  - `experiments/`
-  - `results/figures/`, `results/tables/`, `results/logs/`
-  - `tests/`
-- Created core research governance and specification documentation:
-  - `README.md`
-  - `PROJECT_STATUS.md`
-  - `RESEARCH_OBJECTIVE.md`
-  - `RESEARCH_GAP.md`
-  - `ARCHITECTURE.md`
-  - `DECISIONS.md`
-  - `CHANGELOG.md`
-  - `EXPERIMENT_LOG.md`
-  - `data/README.md`
-- Created `.gitignore` ignoring virtual environments, caches, raw archives, and checkpoints.
-- Created `requirements.txt` specifying PyTorch, torchvision, numpy, matplotlib, `flwr[simulation]`, and pytest.
-- Created `experiments/config.py` defining central reproducibility constants, paths, and seed 42.
-- Created Python 3.14 virtual environment `.venv/` and installed required packages:
-  - Python 3.14.4, PyTorch 2.14.1+cu130, Torchvision 0.29.1+cu130, NumPy 2.5.3, Matplotlib 3.11.2, Flower 1.39.0, PyTest 9.1.1.
-- Implemented and executed CIFAR-10 verification pipeline (`data/verify_dataset.py`):
-  - Verified 50,000 train samples and 10,000 test samples.
-  - Confirmed 10 mutually exclusive classes with exact uniform balance (5,000 train/class, 1,000 test/class).
-  - Computed empirical RGB channel means `[0.49140, 0.48216, 0.44653]` and stds `[0.24703, 0.24349, 0.26159]`.
-  - Generated visual assets: `results/figures/cifar10_sample_grid.png`, `results/figures/cifar10_class_distribution.png`.
-  - Emitted machine-readable summary: `results/logs/cifar10_verification_report.json`.
-- Implemented automated data loading test suite in `tests/test_data_loading.py` (3 unit tests, all passed).
-- Confirmed zero premature implementation of downstream phases (no CNN training, FL, non-IID partitioning, attacks, detection, or blockchain).
+- Implemented initial PyTorch `SmallCNN` (189,130 parameters) on CIFAR-10.
+- Stratified 80/20 train/val split (40,000 train, 10,000 val) and 10,000 test set.
+- Centralized benchmark on GPU: 76.94% test accuracy (now archived in `results/archive/cifar10/`).
 
-#### Reason
-Initial scaffolding, research governance, and comprehensive dataset verification for Phase 1.
+---
 
+### [0.1.0] - 2026-10-08 (Phase 1 CIFAR-10 Verification & Scaffolding)
+#### Added
+- Initialized Git repository, modular directory structure, research documentation, and dependency specifications.
+- Verified CIFAR-10 dataset (now archived in `results/archive/cifar10/`).

@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-10-08T20:24:37.704442",
+  "experiment_id": "EXP-MED-000-DATA",
+  "status": "PASSED",
+  "random_seed": 42,
+  "dataset_name": "PneumoniaMNIST",
+  "task": "binary-class chest X-ray classification",
+  "official_source": "MedMNIST v3 (Zenodo / Yang et al.)",
+  "total_samples": 5856,
+  "train_samples": 4708,
+  "validation_samples": 524,
+  "test_samples": 624,
+  "num_classes": 2,
+  "classes": [
+    "normal",
+    "pneumonia"
+  ],
+  "label_mapping": {
+    "0": "normal",
+    "1": "pneumonia"
+  },
+  "image_resolution": [
+    28,
+    28
+  ],
+  "channels": 1,
+  "tensor_shape": [
+    1,
+    28,
+    28
+  ],
+  "train_class_distribution": {
+    "normal": 1214,
+    "pneumonia": 3494
+  },
+  "validation_class_distribution": {
+    "normal": 135,
+    "pneumonia": 389
+  },
+  "test_class_distribution": {
+    "normal": 234,
+    "pneumonia": 390
+  },
+  "pixel_statistics": {
+    "min_pixel_value": 0,
+    "max_pixel_value": 255,
+    "grayscale_mean": 0.57192,
+    "grayscale_std": 0.16835
+  },
+  "artifacts_generated": {
+    "sample_grid_figure": "results/figures/pneumonia_sample_grid.png",
+    "class_distribution_figure": "results/figures/pneumonia_class_distribution.png",
+    "report_file": "results/logs/pneumonia_mnist_verification_report.json"
+  }
+}
