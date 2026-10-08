@@ -79,3 +79,18 @@
 - **Context**: Complex multi-component systems (FL + attacks + detector + blockchain) fail easily if built monolithically.
 - **Decision**: Implement the system strictly across 10 sequential phases, starting from Phase 1 (dataset verification) to Phase 10 (scientific analysis), requiring explicit verification at each step.
 - **Rationale**: Ensures each subsystem is verified and unit-tested in isolation before integration, preventing hard-to-debug cross-cutting bugs.
+
+---
+
+### ADR-008: Centralized Small CNN Architecture, Stratified Data Split, and Baseline Hyperparameters
+- **Status**: Accepted
+- **Context**: Before introducing Federated Learning (Phase 3) or non-IID partitioning (Phase 4), a sound, reproducible centralized baseline must be established to benchmark subsequent distributed performance.
+- **Decision**:
+  - **Architecture**: `SmallCNN` composed of 3 convolutional blocks (Conv2d 3->32, 32->64, 64->64 with kernel size 3, padding 1, BatchNorm2d, ReLU, and 2x2 MaxPool2d) followed by a 2-layer classifier (Linear 1024->128, ReLU, Dropout 0.3, Linear 128->10). Total parameter count: 189,130 parameters.
+  - **Data Split**: Deterministic stratified split of the 50,000 CIFAR-10 training images into 40,000 training samples (4,000 per class, 80%) and 10,000 validation samples (1,000 per class, 20%) using master seed 42.
+  - **Untouched Test Set**: The official 10,000 CIFAR-10 test set remains untouched during training and model selection, evaluated exclusively once after training completion.
+  - **Training Protocol**: 15 epochs, batch size 64, Adam optimizer ($\text{lr} = 0.001$, weight decay $10^{-4}$), CrossEntropyLoss, data augmentation (RandomCrop 32 with padding 4, RandomHorizontalFlip).
+- **Rationale**:
+  - The 189k parameter budget balances representation capacity on CIFAR-10 (~75-78% accuracy) with computational and network efficiency for subsequent Flower FL client simulations.
+  - Stratified 80/20 partitioning ensures unbiased class representation across train and validation sets while preserving the official test set for strictly independent final evaluation.
+

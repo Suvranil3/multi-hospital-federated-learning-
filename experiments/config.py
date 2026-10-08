@@ -19,6 +19,7 @@ RESULTS_DIR = BASE_DIR / "results"
 RESULTS_FIGURES_DIR = RESULTS_DIR / "figures"
 RESULTS_TABLES_DIR = RESULTS_DIR / "tables"
 RESULTS_LOGS_DIR = RESULTS_DIR / "logs"
+RESULTS_MODELS_DIR = RESULTS_DIR / "models"
 
 # Ensure all result and data directories exist
 for directory in [
@@ -27,8 +28,10 @@ for directory in [
     RESULTS_FIGURES_DIR,
     RESULTS_TABLES_DIR,
     RESULTS_LOGS_DIR,
+    RESULTS_MODELS_DIR,
 ]:
     directory.mkdir(parents=True, exist_ok=True)
+
 
 # Random Seed for Strict Reproducibility
 SEED = 42
@@ -64,6 +67,14 @@ DEFAULT_BATCH_SIZE = 32
 DEFAULT_LOCAL_EPOCHS = 2
 DEFAULT_FL_ROUNDS = 20
 DEFAULT_LEARNING_RATE = 0.01
+
+# Centralized Training Baseline Settings (Phase 2)
+CENTRALIZED_EPOCHS = 15
+CENTRALIZED_BATCH_SIZE = 64
+CENTRALIZED_LEARNING_RATE = 0.001
+CENTRALIZED_VAL_RATIO = 0.2  # 40,000 train (80%), 10,000 validation (20%)
+CENTRALIZED_WEIGHT_DECAY = 1e-4
+
 
 
 def set_seed(seed: int = SEED) -> None:

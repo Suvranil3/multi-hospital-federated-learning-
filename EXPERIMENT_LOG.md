@@ -58,3 +58,49 @@ Each experiment must record:
 - **Execution Status**: SUCCEEDED (Phase 1)
 - **Notes**: Dataset verification pipeline script `data/verify_dataset.py` passed all assertions. Unit test suite `tests/test_data_loading.py` passed (3/3 tests). Environment verified with Python 3.14.4, PyTorch 2.14.1+cu130, Torchvision 0.29.1+cu130, NumPy 2.5.3, Matplotlib 3.11.2, Flower 1.39.0.
 
+---
+
+### [EXP-001-CENTRAL-CNN] - Centralized Small CNN Baseline Training on CIFAR-10
+- **Date**: 2026-10-08
+- **Dataset Configuration**: CIFAR-10
+  - Training Split: 40,000 samples (4,000 per class, 80% stratified split)
+  - Validation Split: 10,000 samples (1,000 per class, 20% stratified split)
+  - Test Split: 10,000 samples (official untouched test set)
+- **Number of Clients**: N/A (Centralized ML baseline)
+- **IID / Non-IID Setting**: N/A (Centralized single-node training)
+- **Dirichlet Alpha**: N/A (Partitioning scheduled for Phase 4)
+- **Attack Type**: None
+- **Malicious Clients**: 0 (0%)
+- **Model Architecture**: SmallCNN (3 Conv-BN-ReLU-MaxPool blocks + Dropout + 2-layer FC head; 189,130 parameters)
+- **FL Algorithm**: None (Centralized PyTorch benchmark)
+- **Detector Version**: None
+- **Aggregation Method**: None
+- **Random Seed**: 42
+- **Training Hyperparameters**:
+  - Epochs: 15
+  - Batch Size: 64
+  - Optimizer: Adam
+  - Learning Rate: 0.001
+  - Weight Decay: 0.0001
+  - Loss Criterion: CrossEntropyLoss
+  - Augmentation: RandomCrop(32, padding=4), RandomHorizontalFlip()
+  - Normalization: Mean=(0.4914, 0.4822, 0.4465), Std=(0.2470, 0.2435, 0.2616)
+- **Compute Device**: CUDA (NVIDIA GeForce RTX 3050 Laptop GPU)
+- **Results**:
+  - Total Training Time: 100.97 seconds (~6.7 seconds/epoch)
+  - Final Training Loss: 0.7310
+  - Final Training Accuracy: 74.50%
+  - Best Validation Loss: 0.6400 (Epoch 15)
+  - Best Validation Accuracy: 77.34% (Epoch 15)
+  - Untouched Test Set Loss: 0.6578
+  - Untouched Test Set Accuracy: 76.94% (7,694 / 10,000 correct)
+  - Visual Artifacts:
+    - Loss Curve: `results/figures/centralized_training_loss.png`
+    - Accuracy Curve: `results/figures/centralized_training_accuracy.png`
+    - Confusion Matrix: `results/figures/confusion_matrix.png`
+  - Model Checkpoint: `results/models/best_centralized_cnn.pt`
+  - Report File: `results/logs/centralized_cnn_results.json`
+- **Execution Status**: SUCCEEDED (Phase 2)
+- **Notes**: Established solid centralized baseline (~76.94% test accuracy) for subsequent FL benchmarking. Untouched test set evaluated strictly once after training completion. Unit tests in `tests/test_model.py` and `tests/test_training.py` all passed.
+
+

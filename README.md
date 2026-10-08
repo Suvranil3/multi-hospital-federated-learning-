@@ -68,7 +68,7 @@ Blockchain_FL_Project/
 
 ## 3. Development Phases
 - [x] **Phase 1: Dataset Verification & Repository Setup**
-- [ ] **Phase 2: Baseline Centralized CNN**
+- [x] **Phase 2: Baseline Centralized CNN**
 - [ ] **Phase 3: Basic Federated Learning (FedAvg, IID, 10 Clients)**
 - [ ] **Phase 4: Non-IID Federated Learning (Dirichlet $\alpha \in \{1.0, 0.5, 0.1\}$)**
 - [ ] **Phase 5: Attack Simulation (Label Flipping, Model Poisoning, Backdoor)**
@@ -100,11 +100,15 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Running Phase 1 Dataset Verification
+### Running Verification & Baseline Training
 ```bash
-# Run CIFAR-10 verification and generate statistics & plots
+# Phase 1: CIFAR-10 verification and statistics
 python data/verify_dataset.py
 
-# Run unit tests
-pytest tests/test_data_loading.py
+# Phase 2: Centralized Small CNN training baseline
+python experiments/train_centralized.py
+
+# Run all automated tests
+pytest tests/ -v
 ```
+

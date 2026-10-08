@@ -1,0 +1,173 @@
+{
+  "experiment_id": "EXP-001-CENTRAL-CNN",
+  "timestamp": "2026-10-08T15:17:15.746206",
+  "status": "COMPLETED",
+  "seed": 42,
+  "environment": {
+    "python_version": "3.14.4",
+    "pytorch_version": "2.14.1+cu130",
+    "device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "device_type": "cuda"
+  },
+  "configuration": {
+    "epochs": 15,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "Adam",
+    "criterion": "CrossEntropyLoss",
+    "val_ratio": 0.2,
+    "train_samples": 40000,
+    "val_samples": 10000,
+    "test_samples": 10000
+  },
+  "model": {
+    "name": "SmallCNN",
+    "total_parameters": 189130,
+    "trainable_parameters": 189130
+  },
+  "training_performance": {
+    "best_epoch": 15,
+    "best_val_accuracy": 77.34,
+    "final_train_loss": 0.731,
+    "final_train_accuracy": 74.5,
+    "final_val_loss": 0.64,
+    "final_val_accuracy": 77.34,
+    "total_training_time_seconds": 100.97
+  },
+  "test_performance": {
+    "test_loss": 0.6578,
+    "test_accuracy": 76.94,
+    "test_correct": 7694,
+    "total_test_samples": 10000
+  },
+  "epoch_metrics": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5364,
+      "train_accuracy": 43.59,
+      "val_loss": 1.1652,
+      "val_accuracy": 56.89,
+      "epoch_time_seconds": 9.48
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.2047,
+      "train_accuracy": 56.81,
+      "val_loss": 1.0355,
+      "val_accuracy": 61.91,
+      "epoch_time_seconds": 6.7
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.0895,
+      "train_accuracy": 61.21,
+      "val_loss": 1.0104,
+      "val_accuracy": 64.96,
+      "epoch_time_seconds": 6.44
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.0275,
+      "train_accuracy": 63.35,
+      "val_loss": 0.8546,
+      "val_accuracy": 69.77,
+      "epoch_time_seconds": 6.28
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.9691,
+      "train_accuracy": 65.55,
+      "val_loss": 0.7816,
+      "val_accuracy": 72.03,
+      "epoch_time_seconds": 6.31
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.9253,
+      "train_accuracy": 67.41,
+      "val_loss": 0.7842,
+      "val_accuracy": 72.51,
+      "epoch_time_seconds": 6.32
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.8891,
+      "train_accuracy": 68.62,
+      "val_loss": 0.7724,
+      "val_accuracy": 72.02,
+      "epoch_time_seconds": 6.34
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.8617,
+      "train_accuracy": 69.81,
+      "val_loss": 0.7495,
+      "val_accuracy": 73.56,
+      "epoch_time_seconds": 6.3
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.8345,
+      "train_accuracy": 70.67,
+      "val_loss": 0.7386,
+      "val_accuracy": 73.7,
+      "epoch_time_seconds": 6.55
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.8107,
+      "train_accuracy": 71.78,
+      "val_loss": 0.7163,
+      "val_accuracy": 74.81,
+      "epoch_time_seconds": 6.27
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.7941,
+      "train_accuracy": 72.46,
+      "val_loss": 0.7075,
+      "val_accuracy": 74.8,
+      "epoch_time_seconds": 6.14
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.7736,
+      "train_accuracy": 73.07,
+      "val_loss": 0.6828,
+      "val_accuracy": 76.14,
+      "epoch_time_seconds": 6.78
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.7681,
+      "train_accuracy": 73.04,
+      "val_loss": 0.6541,
+      "val_accuracy": 77.05,
+      "epoch_time_seconds": 6.67
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.7454,
+      "train_accuracy": 74.06,
+      "val_loss": 0.6869,
+      "val_accuracy": 75.43,
+      "epoch_time_seconds": 6.48
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.731,
+      "train_accuracy": 74.5,
+      "val_loss": 0.64,
+      "val_accuracy": 77.34,
+      "epoch_time_seconds": 6.4
+    }
+  ],
+  "artifacts": {
+    "loss_figure": "results/figures/centralized_training_loss.png",
+    "accuracy_figure": "results/figures/centralized_training_accuracy.png",
+    "confusion_matrix_figure": "results/figures/confusion_matrix.png",
+    "model_checkpoint": "results/models/best_centralized_cnn.pt",
+    "results_json": "results/logs/centralized_cnn_results.json"
+  }
+}

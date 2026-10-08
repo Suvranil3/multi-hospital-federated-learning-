@@ -8,7 +8,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### [0.1.0] - 2026-10-08 (Phase 1 Initialization & Verification)
+### [0.2.0] - 2026-10-08 (Phase 2 Centralized CNN Baseline)
+#### Added
+- Implemented reusable PyTorch model `SmallCNN` (`federated_learning/model.py`, 189,130 parameters):
+  - 3 Conv2d-BatchNorm2d-ReLU-MaxPool2d blocks with Dropout regularization.
+  - Linear classification head yielding 10 logits.
+  - Parameter counting utility and forward-pass dummy batch sanity check.
+- Added centralized baseline hyperparameters to `experiments/config.py` (epochs=15, batch_size=64, lr=0.001, val_ratio=0.2, weight_decay=1e-4).
+- Implemented centralized training script `experiments/train_centralized.py`:
+  - Deterministic stratified 80/20 train/val split (40,000 train, 10,000 val).
+  - Preserved untouched 10,000 CIFAR-10 test set for final independent evaluation.
+  - Model checkpointing based on best validation accuracy (`results/models/best_centralized_cnn.pt`).
+- Trained model on CUDA (NVIDIA GeForce RTX 3050 Laptop GPU, 100.97 seconds):
+  - Final Train Loss: 0.7310, Train Accuracy: 74.50%.
+  - Best Validation Accuracy: 77.34% (Epoch 15, Val Loss: 0.6400).
+  - Untouched Test Set Accuracy: 76.94% (Test Loss: 0.6578, 7,694/10,000 correct).
+- Generated visualizations and reports:
+  - `results/figures/centralized_training_loss.png`
+  - `results/figures/centralized_training_accuracy.png`
+  - `results/figures/confusion_matrix.png`
+  - `results/logs/centralized_cnn_results.json`
+- Implemented unit tests for model forward pass, output shapes, loss calculation, optimization, and dataset splits (`tests/test_model.py`, `tests/test_training.py` — 13/13 passing tests).
+- Added `ADR-008` to `DECISIONS.md`.
+
+#### Reason
+Establish a solid, reproducible centralized machine learning benchmark before introducing federated orchestration.
+
+
 #### Added
 - Initialized Git version control on `main` branch.
 - Created core modular project directory structure:
