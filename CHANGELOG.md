@@ -30,6 +30,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `results/logs/centralized_cnn_results.json`
 - Implemented unit tests for model forward pass, output shapes, loss calculation, optimization, and dataset splits (`tests/test_model.py`, `tests/test_training.py` — 13/13 passing tests).
 - Added `ADR-008` to `DECISIONS.md`.
+- Upgraded demonstration dashboard into an Interactive Teacher Demonstration system (`dashboard/app.py`, `dashboard/demo/pipeline_state.py`, `dashboard/demo/dataset_demo.py`, `dashboard/demo/cnn_demo.py`, `dashboard/demo/future_stubs.py`, `dashboard/README.md`, `requirements-dashboard.txt`) featuring one-click presentation flow, optional live training execution, copyable teacher speech, and extensible future-phase plug-in stubs.
+
+
 
 #### Reason
 Establish a solid, reproducible centralized machine learning benchmark before introducing federated orchestration.

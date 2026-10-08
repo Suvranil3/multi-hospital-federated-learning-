@@ -42,7 +42,10 @@
   - `results/figures/confusion_matrix.png`
 - [x] Emitted structured JSON experiment log: `results/logs/centralized_cnn_results.json`.
 - [x] Implemented unit tests for model forward pass, shape, loss, optimization, and data splits (`tests/test_model.py`, `tests/test_training.py` — 13/13 tests passed).
+- [x] Implemented modular Interactive Teacher Demonstration Dashboard (`dashboard/app.py`, `dashboard/demo/pipeline_state.py`, `dashboard/demo/dataset_demo.py`, `dashboard/demo/cnn_demo.py`, `dashboard/demo/future_stubs.py`, `requirements-dashboard.txt`, `dashboard/README.md`) featuring one-click presentation flow, live training execution option, teacher script, and extensible future-phase plug-in stubs.
 - [x] Maintained strict scope boundary: zero implementation of FL rounds, non-IID skew, attacks, detection, or blockchain.
+
+
 
 ---
 
