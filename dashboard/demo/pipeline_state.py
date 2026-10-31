@@ -76,6 +76,17 @@ def load_archived_cifar_results() -> Optional[Dict[str, Any]]:
     return None
 
 
+@st.cache_data(show_spinner=False)
+def load_federated_iid_results() -> Optional[Dict[str, Any]]:
+    """Load Phase 3 10-hospital IID federated learning results."""
+    report_path = RESULTS_LOGS_DIR / "federated_iid_results.json"
+    if report_path.exists():
+        with open(report_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return None
+
+
 # Backward-compatible aliases
 load_cifar_report = load_archived_cifar_report
 load_cnn_results = load_medical_cnn_results
+

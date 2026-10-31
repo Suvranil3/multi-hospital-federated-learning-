@@ -9,13 +9,12 @@
 - **Active Primary Dataset**: **PneumoniaMNIST** (Pediatric Chest X-Rays from MedMNIST v3)
 - **Problem Scenario**: **Hospital-based simulated Federated Learning** across 10 hospital clients
 - **Current Model**: **SmallCNN** (2 Conv blocks, BatchNorm, MaxPool, Dense 128, 2-class output; **420,802 parameters**)
-- **Current Milestone**: **Medical Centralized Baseline Complete** (Phase MEDICAL-01 and Phase MEDICAL-02)
-- **Immediate Next Step**: **Phase 3 — 10-Client IID Federated Learning Baseline** (Flower + FedAvg)
-- **Later Research Focus**: **Phase 4 — Non-IID Hospital Data Heterogeneity** (Dirichlet case-mix skew $\alpha \in \{1.0, 0.5, 0.1\}$)
+- **Current Milestone**: **Phase 3 Complete — 10-Hospital IID Federated Learning Baseline** (Flower + FedAvg: **85.74% Test Acc, 97.95% Sensitivity**)
+- **Immediate Next Step**: **Phase 4 — Non-IID Hospital Data Heterogeneity** (Dirichlet case-mix skew $\alpha \in \{1.0, 0.5, 0.1\}$)
 - **Future Work**: Adversarial attacks (Phase 5), multi-factor malicious detector (Phase 6), robust aggregation (Phase 7), and blockchain audit trail (Phase 8)
-- **Status Date**: October 8, 2026
+- **Status Date**: October 31, 2026
 - **Lead Developer**: AI Research Pair Programmer
-- **Strict Scope Boundary**: Medical centralized baseline complete; Federated Learning, Non-IID skew, attacks, detection, and blockchain strictly NOT started yet.
+- **Strict Scope Boundary**: Phase 3 IID FL complete; Non-IID skew (Phase 4), attacks (Phase 5), detection (Phase 6), and blockchain (Phase 8) strictly NOT started yet.
 
 ---
 
@@ -74,8 +73,34 @@ The project documentation has been fully organized under [`docs/`](file:///home/
   - [`results/figures/medical_confusion_matrix.png`](file:///home/suvranil/project/results/figures/medical_confusion_matrix.png)
 - [x] Saved best model checkpoint: [`results/models/best_centralized_medical_cnn.pt`](file:///home/suvranil/project/results/models/best_centralized_medical_cnn.pt).
 
+### Phase 3: 10-Hospital IID Federated Learning Baseline
+- [x] Implemented reproducible stratified IID partitioning across 10 hospital clients in [`federated_learning/dataset.py`](file:///home/suvranil/project/federated_learning/dataset.py) (4,708 samples: 8 hospitals with 471, 2 hospitals with 470).
+- [x] Preserved empirical class ratios across all clients (~25.8% Normal, ~74.2% Pneumonia).
+- [x] Implemented simulated hospital client node in [`federated_learning/client.py`](file:///home/suvranil/project/federated_learning/client.py) with independent model instances and local training.
+- [x] Configured Flower FedAvg strategy and server-side validation evaluation hook in [`federated_learning/strategy.py`](file:///home/suvranil/project/federated_learning/strategy.py).
+- [x] Implemented end-to-end orchestration pipeline in [`experiments/train_federated.py`](file:///home/suvranil/project/experiments/train_federated.py).
+- [x] Executed 20-round simulation with 2 local epochs/round on CPU (Ray VCE pool) in 108.29 seconds:
+  - Best Global Validation Accuracy: **96.18%** (Round 17, Val Loss: 0.0833)
+  - Untouched Test Set Accuracy: **85.74%** (535 / 624 correct; +4.49% over Centralized Baseline)
+  - Pneumonia Sensitivity / Recall: **97.95%** (382 / 390 cases identified)
+  - Pneumonia Precision: **82.51%** (382 / 463)
+  - Pneumonia F1-Score: **0.8957**
+  - Normal Specificity / Recall: **65.38%** (153 / 234 normal cases identified; +14.95% over Centralized Baseline)
+  - Macro F1-Score: **0.8352**
+  - Confusion Matrix: TN=153, FP=81, FN=8, TP=382
+- [x] Saved global checkpoints:
+  - Best Checkpoint: [`results/models/best_federated_iid_model.pt`](file:///home/suvranil/project/results/models/best_federated_iid_model.pt)
+  - Final Checkpoint: [`results/models/final_federated_iid_model.pt`](file:///home/suvranil/project/results/models/final_federated_iid_model.pt)
+- [x] Generated visual figures:
+  - [`results/figures/federated_iid_training_loss.png`](file:///home/suvranil/project/results/figures/federated_iid_training_loss.png)
+  - [`results/figures/federated_iid_training_accuracy.png`](file:///home/suvranil/project/results/figures/federated_iid_training_accuracy.png)
+  - [`results/figures/federated_iid_confusion_matrix.png`](file:///home/suvranil/project/results/figures/federated_iid_confusion_matrix.png)
+  - [`results/figures/centralized_vs_federated_comparison.png`](file:///home/suvranil/project/results/figures/centralized_vs_federated_comparison.png)
+- [x] Emitted structured JSON experiment log: [`results/logs/federated_iid_results.json`](file:///home/suvranil/project/results/logs/federated_iid_results.json).
+
 ### Quality, Tests & Dashboard
-- [x] Automated test suite in `tests/`: **14 / 14 PyTest tests passing (100%)** in 3.20 seconds.
+- [x] Automated test suite in `tests/`: **21 / 21 PyTest tests passing (100%)** in 3.91 seconds.
+  - Added 7 comprehensive tests in [`tests/test_federated.py`](file:///home/suvranil/project/tests/test_federated.py) covering partition coverage, mutual exclusivity, stratification, determinism, client isolation, fit execution, and server evaluation.
 - [x] Updated interactive teacher demonstration dashboard ([`dashboard/app.py`](file:///home/suvranil/project/dashboard/app.py)) with the multi-hospital story, presentation script, metrics scorecard, medical disclaimer, and an archived CIFAR-10 viewer.
 
 ---
@@ -83,8 +108,8 @@ The project documentation has been fully organized under [`docs/`](file:///home/
 ## 3. What Remains (Upcoming Phases)
 - [x] **Phase MEDICAL-01**: Medical Dataset Verification (PneumoniaMNIST) (COMPLETED).
 - [x] **Phase MEDICAL-02**: Centralized Medical Small CNN Baseline (COMPLETED).
-- [ ] **Phase 3**: **10-Hospital Federated Learning Implementation (Flower + FedAvg, IID baseline)** — **NEXT IMMEDIATE STEP**.
-- [ ] **Phase 4**: **Non-IID Hospital Data Heterogeneity Simulation (Dirichlet case-mix skew)** — **LATER RESEARCH FOCUS**.
+- [x] **Phase 3**: **10-Hospital Federated Learning Implementation (Flower + FedAvg, IID baseline)** (COMPLETED).
+- [ ] **Phase 4**: **Non-IID Hospital Data Heterogeneity Simulation (Dirichlet case-mix skew)** — **NEXT IMMEDIATE STEP**.
 - [ ] **Phase 5**: **Malicious Hospital Attack Simulation (Label flipping, poisoning, backdoors)** — **FUTURE WORK**.
 - [ ] **Phase 6**: **Multi-Factor Non-IID-Aware Malicious Hospital Detector** — **FUTURE WORK**.
 - [ ] **Phase 7**: **Robust Aggregation & Tri-State Consensus** — **FUTURE WORK**.
@@ -95,8 +120,7 @@ The project documentation has been fully organized under [`docs/`](file:///home/
 ---
 
 ## 4. Scope Boundary Enforcement
-- Federated Learning (Phase 3) is **NOT** started yet.
 - Non-IID partitioning (Phase 4) is **NOT** started yet.
 - Malicious attacks and detection (Phases 5-6) are **NOT** started yet.
 - Blockchain smart contracts (Phase 8) are **NOT** started yet.
-- Phase 3 will begin strictly upon explicit user instruction.
+- Phase 4 will begin strictly upon explicit user instruction.

@@ -11,10 +11,10 @@ This research project follows a strict, disciplined phased methodology. Each pha
 [✓] Phase MEDICAL-02: Centralized Medical Small CNN Baseline     (COMPLETED - 81.25% Acc, 99.74% Sens)
            │
            ▼
-[→] Phase 3: 10-Hospital Federated Learning Baseline (IID)      (NEXT IMMEDIATE STEP)
+[✓] Phase 3: 10-Hospital Federated Learning Baseline (IID)      (COMPLETED - 85.74% Acc, 97.95% Sens)
            │
            ▼
-[○] Phase 4: Non-IID Hospital Case-Mix Heterogeneity             (LATER RESEARCH FOCUS)
+[→] Phase 4: Non-IID Hospital Case-Mix Heterogeneity             (NEXT IMMEDIATE STEP)
            │
            ▼
 [○] Phase 5: Adversarial Attacks (Label Flip, Poisoning)        (FUTURE WORK)
@@ -58,21 +58,23 @@ This research project follows a strict, disciplined phased methodology. Each pha
 
 ---
 
-### Phase 3: 10-Hospital Federated Learning Baseline (IID) — NEXT STEP
-- **Status**: **NOT STARTED (Awaiting explicit instruction)**
+### Phase 3: 10-Hospital Federated Learning Baseline (IID) (COMPLETED)
+- **Status**: **COMPLETED (Recorded in `EXP-MED-002-FED-IID`)**
 - **Objective**: Distribute the verified [`SmallCNN`](file:///home/suvranil/project/federated_learning/model.py#L21-L71) across 10 simulated hospitals using the Flower framework (`flwr[simulation]`) and FedAvg under an IID data split.
-- **Why IID First?**: Establishes the ideal distributed benchmark where all hospitals draw from an identical data distribution. This provides the control baseline against which non-IID performance drops (Phase 4) and attack impacts (Phase 5) are measured.
-- **Planned Configuration**:
-  - Framework: Flower (`flwr[simulation]`) with Ray backend.
-  - Clients: 10 simulated hospitals.
-  - Partitioning: Uniform IID distribution of training data across hospitals (~470 samples/hospital).
-  - Aggregation Strategy: Standard FedAvg.
-  - Communication Rounds: 20 rounds, 2 local epochs per round.
+- **Key Deliverables**:
+  - Partitioning module: [`federated_learning/dataset.py`](file:///home/suvranil/project/federated_learning/dataset.py) (4,708 samples across 10 clients: 8x471, 2x470).
+  - Hospital client module: [`federated_learning/client.py`](file:///home/suvranil/project/federated_learning/client.py).
+  - Strategy & server eval module: [`federated_learning/strategy.py`](file:///home/suvranil/project/federated_learning/strategy.py).
+  - Training pipeline: [`experiments/train_federated.py`](file:///home/suvranil/project/experiments/train_federated.py).
+  - Empirical figures: [`results/figures/federated_iid_training_loss.png`](file:///home/suvranil/project/results/figures/federated_iid_training_loss.png), [`results/figures/federated_iid_training_accuracy.png`](file:///home/suvranil/project/results/figures/federated_iid_training_accuracy.png), [`results/figures/federated_iid_confusion_matrix.png`](file:///home/suvranil/project/results/figures/federated_iid_confusion_matrix.png), [`results/figures/centralized_vs_federated_comparison.png`](file:///home/suvranil/project/results/figures/centralized_vs_federated_comparison.png).
+  - Checkpoints: [`results/models/best_federated_iid_model.pt`](file:///home/suvranil/project/results/models/best_federated_iid_model.pt) & [`results/models/final_federated_iid_model.pt`](file:///home/suvranil/project/results/models/final_federated_iid_model.pt).
+  - Report: [`results/logs/federated_iid_results.json`](file:///home/suvranil/project/results/logs/federated_iid_results.json).
+  - Measured Performance: **85.74% test accuracy** (+4.49% over centralized), **97.95% pneumonia sensitivity**, **82.51% precision**, **65.38% normal specificity**, **0.8352 macro F1**.
 
 ---
 
-### Phase 4: Non-IID Hospital Data Heterogeneity Simulation — LATER RESEARCH FOCUS
-- **Status**: **PLANNED**
+### Phase 4: Non-IID Hospital Data Heterogeneity Simulation — NEXT IMMEDIATE STEP
+- **Status**: **READY TO BEGIN (Awaiting explicit instruction)**
 - **Objective**: Model realistic clinical case-mix divergence across hospitals using Dirichlet label partitioning.
 - **Heterogeneity Severity**:
   - $\alpha = 1.0$: Mild non-IID (moderate variation in pneumonia rates).

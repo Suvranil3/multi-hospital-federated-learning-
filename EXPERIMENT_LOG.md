@@ -112,6 +112,69 @@ Each experiment must record:
 
 ---
 
+### [EXP-MED-002-FED-IID] - 10-Hospital IID Federated Learning Baseline on PneumoniaMNIST
+- **Date**: 2026-10-31
+- **Dataset Configuration**: PneumoniaMNIST
+  - Training Split: 4,708 samples partitioned across 10 hospital clients
+  - Validation Split: 524 samples (official val split, server-side evaluation each round)
+  - Test Split: 624 samples (official untouched test split, evaluated only after training)
+- **Number of Clients / Hospitals**: 10 simulated hospital clients
+  - Sample distribution: 8 hospitals with 471 samples, 2 hospitals with 470 samples
+  - Stratified per-hospital class ratio: ~25.8% Normal (121-122 samples), ~74.2% Pneumonia (349-350 samples)
+- **IID / Non-IID Setting**: IID (Stratified uniform random partitioning)
+- **Dirichlet Alpha**: N/A (Homogeneous case-mix; scheduled for Phase 4)
+- **Attack Type**: None
+- **Malicious Clients**: 0 (0%)
+- **Model Architecture**: `SmallCNN` (2 Conv-BN-ReLU-MaxPool blocks, Dense 128, Dropout 0.2, 2 classes; **420,802 parameters**)
+- **FL Algorithm**: Federated Averaging (`FedAvg`, Flower simulation via Virtual Client Engine)
+- **Detector Version**: None (Phase 3 baseline)
+- **Aggregation Method**: Standard sample-weighted FedAvg
+- **Random Seed**: 42
+- **Training Hyperparameters**:
+  - Communication Rounds: 20
+  - Local Training Epochs: 2 epochs per round per client
+  - Local Batch Size: 32
+  - Optimizer: Adam (lr = 0.001, weight decay = 0.0001)
+  - Loss Criterion: CrossEntropyLoss
+  - Augmentation: RandomHorizontalFlip, RandomRotation(10)
+  - Normalization: Mean=(0.5719,), Std=(0.1684,)
+- **Compute Resources**: CPU (AMD Ryzen 5 5600H, Virtual Client Engine with 3 concurrent Ray actors)
+- **Results**:
+  - Total Simulation Time: **108.29 seconds** (~5.41 seconds / communication round)
+  - Initial Global Val Accuracy (Round 0): 25.95% | Initial Val Loss: 0.7122
+  - Final Training Loss (Aggregated): 0.1108 | Final Training Accuracy: 95.62%
+  - Best Server Validation Accuracy: **96.18%** — first achieved at **Round 17** (val_loss = 0.0833, saved as best checkpoint); also matched at Round 19 (val_loss = 0.0801, lower loss but same accuracy; checkpoint not overwritten)
+  - Test metrics below are evaluated from the **Round 17 best checkpoint**:
+  - Untouched Test Set Loss: **0.5306**
+  - Untouched Test Set Accuracy: **85.74%** (535 / 624 correct)
+  - Pneumonia Sensitivity / Recall: **97.95%** (382 / 390 pneumonia cases correctly detected)
+  - Pneumonia Precision: **82.51%** (382 / 463)
+  - Pneumonia F1-Score: **0.8957**
+  - Normal Specificity / Recall: **65.38%** (153 / 234 normal cases correctly identified)
+  - Normal Precision: **95.03%** (153 / 161)
+  - Normal F1-Score: **0.7747**
+  - Macro F1-Score: **0.8352**
+  - Confusion Matrix: TN=153, FP=81, FN=8, TP=382
+  - Comparison vs Centralized Baseline (Phase MEDICAL-02):
+    - Test Accuracy: **85.74% vs 81.25%** (+4.49 percentage points)
+    - Normal Specificity: **65.38% vs 50.43%** (+14.95 percentage points)
+    - Pneumonia Precision: **82.51% vs 77.03%** (+5.48 percentage points)
+    - Macro F1-Score: **0.8352 vs 0.7689** (+0.0663)
+    - Pneumonia Sensitivity: **97.95% vs 99.74%** (-1.79 percentage points, 8 missed vs 1 missed, with massively reduced false positives from 116 down to 81)
+  - Visual Artifacts:
+    - Loss Curve: `results/figures/federated_iid_training_loss.png`
+    - Accuracy Curve: `results/figures/federated_iid_training_accuracy.png`
+    - Confusion Matrix: `results/figures/federated_iid_confusion_matrix.png`
+    - Centralized vs Federated Comparison: `results/figures/centralized_vs_federated_comparison.png`
+  - Model Checkpoints:
+    - Best Model (Round 17, validation-selected): `results/models/best_federated_iid_model.pt` — test metrics above are from this checkpoint
+    - Final Model (Round 20): `results/models/final_federated_iid_model.pt` — end-of-training weights (val_acc = 95.80%, test_acc = 86.38%)
+  - Report File: `results/logs/federated_iid_results.json`
+- **Execution Status**: SUCCEEDED (Phase 3)
+- **Notes**: The federated experiment used **2.67× more total sample exposures** than the centralized baseline (20 rounds × 2 local epochs × 4,708 = 188,320 vs 15 epochs × 4,708 = 70,620), so the observed performance improvement (+4.49% test accuracy, +14.95% normal specificity) **cannot be attributed solely to FedAvg's implicit regularization effect**. The additional training compute is a confounding factor. Nonetheless, the IID federated setup demonstrates that distributed FedAvg training over 10 hospital clients produces a competitive global model, and establishes a clean IID control baseline for upcoming Non-IID heterogeneity studies (Phase 4).
+
+---
+
 ## Archived Proof-of-Concept History (CIFAR-10)
 
 ### [EXP-000-DATA] - CIFAR-10 Dataset Verification & Statistics *(Archived)*
