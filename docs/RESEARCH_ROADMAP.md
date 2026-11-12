@@ -14,10 +14,11 @@ This research project follows a strict, disciplined phased methodology. Each pha
 [✓] Phase 3: 10-Hospital Federated Learning Baseline (IID)      (COMPLETED - 85.74% Acc, 97.95% Sens)
            │
            ▼
-[→] Phase 4: Non-IID Hospital Case-Mix Heterogeneity             (NEXT IMMEDIATE STEP)
+[✓] Phase 4: Non-IID Hospital Case-Mix Heterogeneity             (COMPLETED - alpha in {1.0, 0.5, 0.1})
            │
            ▼
-[○] Phase 5: Adversarial Attacks (Label Flip, Poisoning)        (FUTURE WORK)
+[→] Phase 5: Adversarial Attacks (Label Flip, Poisoning)        (NEXT IMMEDIATE STEP)
+
            │
            ▼
 [○] Phase 6: Multi-Factor Non-IID-Aware Detector                 (FUTURE WORK)
@@ -73,41 +74,68 @@ This research project follows a strict, disciplined phased methodology. Each pha
 
 ---
 
-### Phase 4: Non-IID Hospital Data Heterogeneity Simulation — NEXT IMMEDIATE STEP
-- **Status**: **READY TO BEGIN (Awaiting explicit instruction)**
-- **Objective**: Model realistic clinical case-mix divergence across hospitals using Dirichlet label partitioning.
-- **Heterogeneity Severity**:
-  - $\alpha = 1.0$: Mild non-IID (moderate variation in pneumonia rates).
-  - $\alpha = 0.5$: Moderate non-IID (significant clinical specialization).
-  - $\alpha = 0.1$: Extreme non-IID (hospitals specialized almost entirely in one class).
-- **Core Study**: Quantify convergence slowdown and accuracy degradation in standard FedAvg caused purely by benign clinical divergence.
+### Phase 4: Non-IID Hospital Data Heterogeneity Simulation (COMPLETED)
+- **Status**: **COMPLETED (Recorded in `EXP-MED-003` to `EXP-MED-005`)**
+- **Objective**: Model realistic clinical case-mix divergence across hospitals using population-calibrated Beta/Dirichlet case-mix partitioning with controlled client capacities.
+- **Heterogeneity Configurations**:
+  - $\alpha = 1.0$: Normal Ratio Variance = 0.0709 (Test Acc: 79.81%, Sens: 98.97%, Spec: 47.86%, Macro F1: 0.7498).
+  - $\alpha = 0.5$: Normal Ratio Variance = 0.1382 (Test Acc: 80.45%, Sens: 98.46%, Spec: 50.43%, Macro F1: 0.7611).
+  - $\alpha = 0.1$: Normal Ratio Variance = 0.1482 (Test Acc: 85.10%, Sens: 91.79%, Spec: 73.93%, Macro F1: 0.8366).
+- **Key Deliverables**:
+  - Partitioning algorithm: [`federated_learning/dataset.py`](file:///home/suvranil/project/federated_learning/dataset.py).
+  - Training runner: [`experiments/train_federated_non_iid.py`](file:///home/suvranil/project/experiments/train_federated_non_iid.py).
+  - Models: [`results/models/best_federated_non_iid_alpha*.pt`](file:///home/suvranil/project/results/models).
+  - Figures: [`results/figures/iid_vs_non_iid_heterogeneity_comparison.png`](file:///home/suvranil/project/results/figures/iid_vs_non_iid_heterogeneity_comparison.png).
+  - Logs: [`results/logs/phase4_heterogeneity_comparison.json`](file:///home/suvranil/project/results/logs/phase4_heterogeneity_comparison.json).
 
 ---
 
-### Phase 5: Adversarial Attacks Simulation — FUTURE WORK
-- **Status**: **PLANNED**
-- **Objective**: Simulate compromised or malicious hospital nodes mounting healthcare-targeted attacks.
-- **Attacks Investigated**:
-  1. **Label Flipping**: Flipping pneumonia scans to normal, aiming to cause dangerous missed diagnoses.
-  2. **Gradient Scaling / Model Poisoning**: Submitting scaled, inverted, or random updates to disrupt global convergence.
-  3. **Backdoor Injection**: Embedding stealthy triggers that force misclassification only on specific scan patterns.
+### Phase 5: Adversarial Attacks Simulation (COMPLETED)
+- **Status**: **COMPLETED (Recorded in `EXP-MED-006` through `EXP-MED-014`)**
+- **Objective**: Simulate compromised or malicious hospital nodes mounting healthcare-targeted attacks under standard FedAvg.
+- **Attacks Investigated & Key Findings**:
+  1. **Targeted Label Flipping ($1 \to 0$)**:
+     - At $M=1$ (10%), False Negatives doubled from 7 to 14 ($\Delta \text{FN} = +7$).
+     - At $M=2$ (20%), False Negatives surged from 7 to 60 ($\Delta \text{FN} = +53$, $+757\%$, 8.57x jump in missed diagnoses), dropping sensitivity to 84.62%.
+     - In Non-IID $\alpha=0.5$, False Negatives increased from 4 to 11 ($\Delta \text{FN} = +7$).
+  2. **Model Update Poisoning**:
+     - Inversion ($\gamma=-1.0$) slightly degraded performance (FN=8 vs control FN=7) but was partially damped by the 9 honest clients in unweighted FedAvg.
+     - Scaling ($\gamma=+10.0$) distorted convergence, increasing FN from 7 to 9.
+  3. **Backdoor Trigger Injection ($\rho=0.50$, $3\times3$ white watermark)**:
+     - Preserved clean test accuracy (CDA: 86.06% in IID, 84.46% in Non-IID).
+     - In IID: Triggered ASR reached 7.44% vs 0.51% control ($\Delta \text{ASR} = \mathbf{+6.93\%}$, 14.6x jump).
+     - In Non-IID $\alpha=0.5$: Triggered ASR reached 8.46% vs 0.26% control ($\Delta \text{ASR} = \mathbf{+8.20\%}$, 32.5x jump).
+     - Confirmed that clinical data heterogeneity provides natural camouflage that amplifies backdoor vulnerability.
 
 ---
 
-### Phase 6: Multi-Factor Non-IID-Aware Malicious Hospital Detector — FUTURE WORK
-- **Status**: **PLANNED**
+### Phase 6: Multi-Factor Non-IID-Aware Malicious Hospital Detector — COMPLETED & VALIDATED
+- **Status**: **COMPLETED & EMPIRICALLY AUDITED (October 31, 2026)**
 - **Objective**: Implement the core research contribution—an intelligent security layer evaluating updates on multiple orthogonal criteria:
-  - $L_2$ update deviation.
-  - Directional cosine similarity.
-  - Validation impact on benchmark proxy data.
-  - Historical trajectory consistency across rounds.
-  - Hospital clinical heterogeneity context.
-- **Decision Policy**: Tri-state classification (`Normal`, `Suspicious`, `Malicious`).
+  - Global and layer-wise update magnitude ($L_2$ norm and Modified Z-Score).
+  - Directional cosine similarity against robust coordinate-wise median reference.
+  - Class-disentangled leave-one-out counterfactual proxy validation impact (Normal vs Pneumonia).
+  - Symmetrical clinical trade-off protection for specialized hospitals.
+  - Historical round-to-round trajectory consistency and EMA anomaly accumulator.
+  - Calibrated tri-state decision policy (`NORMAL`, `SUSPICIOUS`, `MALICIOUS`).
+- **Key Empirical Results**:
+  - **Calibration-Excluded Benchmark (Out-of-Sample, 9 Simulations, 1,800 Obs: 1,640 honest, 160 malicious)**:
+    - Continuous discrimination: **AUROC = 0.9814**, **AUPRC = 0.8801**
+    - Binary Malicious Decision: **TPR = 13.13%**, **FPR = 0.00%** (0 / 1,640), **Precision = 100.00%**, **F1 = 23.20%**
+    - Flagged Decision (`SUSPICIOUS` or `MALICIOUS`): **TPR = 96.25%** (154 / 160), **FPR = 10.00%** (164 / 1,640), **Precision = 48.43%**, **F1 = 64.44%**
+    - Stratified False Malicious Rate across all data heterogeneities: **0.00%** in IID (0/880), **0.00%** in $\alpha=1.0$ (0/200), **0.00%** in $\alpha=0.5$ (0/360), **0.00%** in $\alpha=0.1$ (0/200).
+  - **Independent-Seed Honest Evaluation Suite (Seeds 43, 44, 45 across IID and Non-IID; 2,400 Obs)**:
+    - Aggregate False Malicious Rate: **0.04%** (1 / 2,400 across all 12 simulations).
+  - **Forensic Non-IID Negative Cosine Audit (3,200 Honest Observations)**:
+    - 199 negative cosine events observed (up to 13.5% in $\alpha=0.1$). Symmetrical Clinical Trade-Off Protection protected **100% (199 / 199)** from false malicious classifications, designating them as `SUSPICIOUS` for weighted aggregation.
+  - **Instrumentation Parity Proof**:
+    - Bit-for-bit exact mathematical equivalence verified ($0.000$ diff across all 12 trainable tensors and 6 BatchNorm buffers).
+- **Artifacts**: Code: [`federated_learning/detection/`](file:///home/suvranil/project/federated_learning/detection), Parity Test: [`tests/test_instrumentation_parity.py`](file:///home/suvranil/project/tests/test_instrumentation_parity.py), Report: [`results/phase6_detector/evaluation/detection_results.json`](file:///home/suvranil/project/results/phase6_detector/evaluation/detection_results.json), Figure: [`results/phase6_detector/figures/phase6_detector_performance.png`](file:///home/suvranil/project/results/phase6_detector/figures/phase6_detector_performance.png)
 
 ---
 
-### Phase 7: Robust Aggregation & Tri-State Consensus — FUTURE WORK
-- **Status**: **PLANNED**
+### Phase 7: Robust Aggregation & Tri-State Consensus — NEXT IMMEDIATE STEP
+- **Status**: **READY TO BEGIN (Awaiting user review)**
 - **Objective**: Combine non-rejected hospital updates using weighted aggregation and compare performance against classical Byzantine-robust aggregators (Multi-Krum, Trimmed Mean, Coordinate Median).
 - **Primary Metric**: Reduction in False Positive Rate (FPR) on honest specialized hospitals while maintaining high Attack Detection Recall.
 

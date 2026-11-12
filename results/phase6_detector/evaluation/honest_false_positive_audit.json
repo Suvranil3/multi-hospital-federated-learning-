@@ -1,0 +1,84 @@
+{
+  "total_honest_observations": 3200,
+  "total_false_malicious": 1,
+  "false_malicious_rate": 0.0003,
+  "total_suspicious": 625,
+  "suspicious_rate": 0.1953,
+  "per_scenario_summary": {
+    "non_iid_1.0": {
+      "total_obs": 800,
+      "negative_cos_obs": 40,
+      "false_malicious": 0,
+      "suspicious": 151,
+      "protected_events": 794
+    },
+    "non_iid_0.1": {
+      "total_obs": 800,
+      "negative_cos_obs": 105,
+      "false_malicious": 1,
+      "suspicious": 264,
+      "protected_events": 770
+    },
+    "iid": {
+      "total_obs": 800,
+      "negative_cos_obs": 0,
+      "false_malicious": 0,
+      "suspicious": 5,
+      "protected_events": 778
+    },
+    "non_iid_0.5": {
+      "total_obs": 800,
+      "negative_cos_obs": 54,
+      "false_malicious": 0,
+      "suspicious": 205,
+      "protected_events": 797
+    }
+  },
+  "negative_cosine_analysis": {
+    "total_events": 199,
+    "decisions": {
+      "SUSPICIOUS": 199
+    },
+    "protected_count": 199
+  },
+  "false_malicious_audit_records": [
+    {
+      "experiment_id": "EXP-MED-HONEST-A01-S45",
+      "hospital_id": "6",
+      "round": 10,
+      "scenario": "non_iid_0.1",
+      "actual_class_distribution": {
+        "normal_count": 469,
+        "pneumonia_count": 2,
+        "total_count": 471,
+        "pneumonia_ratio": 0.0042
+      },
+      "z_mag_global": 58.46761311948378,
+      "max_layer_z_mag": 67.74570032623478,
+      "layer_z_mag": {
+        "conv_block_1": -3.884586842273783,
+        "conv_block_2": 1.5331819478167794,
+        "dense_projection": 67.74570032623478,
+        "classification_head": 0.029501439830469902
+      },
+      "cos_ref_global": 0.39738065004348755,
+      "min_layer_cos": -0.5706897377967834,
+      "layer_cos_ref": {
+        "conv_block_1": 0.14111338555812836,
+        "conv_block_2": 0.17807181179523468,
+        "dense_projection": 0.44413813948631287,
+        "classification_head": -0.5706897377967834
+      },
+      "delta_loss_total": 0.050662,
+      "delta_loss_normal": 0.004998,
+      "delta_loss_pneumonia": 0.06651,
+      "delta_rec_normal": 0.0,
+      "delta_rec_pneumonia": 0.0,
+      "ema_anomaly_accumulator": 0.9036,
+      "exact_triggered_reasons": [
+        "Corroborated layer-wise norm explosion: max_layer_Z=67.75 > 12.41 with uncompensated harm"
+      ],
+      "symmetrical_tradeoff_protected": false
+    }
+  ]
+}

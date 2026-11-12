@@ -1,0 +1,393 @@
+{
+  "experiment_id": "EXP-MED-011-ATK-MP-INV-IID-M1",
+  "timestamp": "2026-10-31T12:57:24.063395",
+  "status": "COMPLETED",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "model_poisoning",
+  "malicious_client_ids": [
+    0
+  ],
+  "compromised_percentage": 10.0,
+  "matched_control_id": "EXP-MED-006-CTRL-IID",
+  "attack_parameters": {
+    "flip_fraction": null,
+    "gamma": -1.0,
+    "poison_fraction": null,
+    "attack_start_round": 1,
+    "total_poisoned_samples": 0,
+    "client_attack_metadata": {}
+  },
+  "seeds": {
+    "partition_seed": 42,
+    "initialization_seed": 42,
+    "training_seed": 42,
+    "partition_hash_sha256": "520e8d401be069a34ca8395b752dc487b732cc7fdae9481e34159498bc38fa04"
+  },
+  "initial_model_hash_sha256": "0c411b83c2f0acef58beb5b9a968030d877e079eb2356eb3748903f8ae9bbc83",
+  "matched_control_comparison": {
+    "matched_control_id": "EXP-MED-006-CTRL-IID",
+    "control_test_accuracy": 84.62,
+    "control_fn": 7,
+    "attack_fn": 8,
+    "delta_fn_increase": 1
+  },
+  "training_performance": {
+    "duration_seconds": 103.26,
+    "total_rounds": 20,
+    "local_epochs": 2,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "best_round": 18,
+    "best_validation_accuracy": 95.8
+  },
+  "test_performance": {
+    "evaluation_split": "official_test_untouched",
+    "test_samples": 624,
+    "test_loss": 0.5147,
+    "test_accuracy": 84.94,
+    "correct_predictions": 530,
+    "pneumonia_class_1": {
+      "precision": 0.8162,
+      "recall_sensitivity": 0.9795,
+      "f1_score": 0.8904
+    },
+    "normal_class_0": {
+      "precision": 0.9487,
+      "recall_specificity": 0.6325,
+      "f1_score": 0.759
+    },
+    "macro_averaged": {
+      "macro_precision": 0.8825,
+      "macro_recall": 0.806,
+      "macro_f1": 0.8247
+    },
+    "confusion_matrix": {
+      "tn": 148,
+      "fp": 86,
+      "fn": 8,
+      "tp": 382
+    },
+    "attack_induced_pneumonia_misclassification_rate": 0.0205
+  },
+  "backdoor_performance": null,
+  "client_partitions": [
+    {
+      "client_id": 0,
+      "total_samples": 471,
+      "normal_samples": 122,
+      "pneumonia_samples": 349,
+      "normal_ratio": 0.259,
+      "pneumonia_ratio": 0.741
+    },
+    {
+      "client_id": 1,
+      "total_samples": 471,
+      "normal_samples": 122,
+      "pneumonia_samples": 349,
+      "normal_ratio": 0.259,
+      "pneumonia_ratio": 0.741
+    },
+    {
+      "client_id": 2,
+      "total_samples": 471,
+      "normal_samples": 122,
+      "pneumonia_samples": 349,
+      "normal_ratio": 0.259,
+      "pneumonia_ratio": 0.741
+    },
+    {
+      "client_id": 3,
+      "total_samples": 471,
+      "normal_samples": 122,
+      "pneumonia_samples": 349,
+      "normal_ratio": 0.259,
+      "pneumonia_ratio": 0.741
+    },
+    {
+      "client_id": 4,
+      "total_samples": 470,
+      "normal_samples": 121,
+      "pneumonia_samples": 349,
+      "normal_ratio": 0.2574,
+      "pneumonia_ratio": 0.7426
+    },
+    {
+      "client_id": 5,
+      "total_samples": 470,
+      "normal_samples": 121,
+      "pneumonia_samples": 349,
+      "normal_ratio": 0.2574,
+      "pneumonia_ratio": 0.7426
+    },
+    {
+      "client_id": 6,
+      "total_samples": 471,
+      "normal_samples": 121,
+      "pneumonia_samples": 350,
+      "normal_ratio": 0.2569,
+      "pneumonia_ratio": 0.7431
+    },
+    {
+      "client_id": 7,
+      "total_samples": 471,
+      "normal_samples": 121,
+      "pneumonia_samples": 350,
+      "normal_ratio": 0.2569,
+      "pneumonia_ratio": 0.7431
+    },
+    {
+      "client_id": 8,
+      "total_samples": 471,
+      "normal_samples": 121,
+      "pneumonia_samples": 350,
+      "normal_ratio": 0.2569,
+      "pneumonia_ratio": 0.7431
+    },
+    {
+      "client_id": 9,
+      "total_samples": 471,
+      "normal_samples": 121,
+      "pneumonia_samples": 350,
+      "normal_ratio": 0.2569,
+      "pneumonia_ratio": 0.7431
+    }
+  ],
+  "round_history": [
+    {
+      "round": 0,
+      "val_loss": 0.7122,
+      "val_accuracy": 25.95,
+      "pneumonia_recall": 0.0077,
+      "pneumonia_precision": 0.6,
+      "pneumonia_f1": 0.0152,
+      "macro_f1": 0.211
+    },
+    {
+      "round": 1,
+      "val_loss": 0.3824,
+      "val_accuracy": 87.79,
+      "pneumonia_recall": 0.9846,
+      "pneumonia_precision": 0.8685,
+      "pneumonia_f1": 0.9229,
+      "macro_f1": 0.8147,
+      "train_loss": 0.4438,
+      "train_accuracy": 81.5
+    },
+    {
+      "round": 2,
+      "val_loss": 0.1616,
+      "val_accuracy": 95.23,
+      "pneumonia_recall": 0.9717,
+      "pneumonia_precision": 0.9643,
+      "pneumonia_f1": 0.968,
+      "macro_f1": 0.9372,
+      "train_loss": 0.2326,
+      "train_accuracy": 90.27
+    },
+    {
+      "round": 3,
+      "val_loss": 0.1363,
+      "val_accuracy": 94.85,
+      "pneumonia_recall": 0.9537,
+      "pneumonia_precision": 0.9763,
+      "pneumonia_f1": 0.9649,
+      "macro_f1": 0.9341,
+      "train_loss": 0.2061,
+      "train_accuracy": 91.92
+    },
+    {
+      "round": 4,
+      "val_loss": 0.1291,
+      "val_accuracy": 94.66,
+      "pneumonia_recall": 0.946,
+      "pneumonia_precision": 0.9813,
+      "pneumonia_f1": 0.9634,
+      "macro_f1": 0.9324,
+      "train_loss": 0.191,
+      "train_accuracy": 92.6
+    },
+    {
+      "round": 5,
+      "val_loss": 0.1187,
+      "val_accuracy": 94.85,
+      "pneumonia_recall": 0.9563,
+      "pneumonia_precision": 0.9738,
+      "pneumonia_f1": 0.965,
+      "macro_f1": 0.9338,
+      "train_loss": 0.1702,
+      "train_accuracy": 93.36
+    },
+    {
+      "round": 6,
+      "val_loss": 0.1339,
+      "val_accuracy": 94.47,
+      "pneumonia_recall": 0.9383,
+      "pneumonia_precision": 0.9865,
+      "pneumonia_f1": 0.9618,
+      "macro_f1": 0.9307,
+      "train_loss": 0.1591,
+      "train_accuracy": 93.9
+    },
+    {
+      "round": 7,
+      "val_loss": 0.1487,
+      "val_accuracy": 93.7,
+      "pneumonia_recall": 0.9229,
+      "pneumonia_precision": 0.9917,
+      "pneumonia_f1": 0.9561,
+      "macro_f1": 0.9225,
+      "train_loss": 0.163,
+      "train_accuracy": 93.67
+    },
+    {
+      "round": 8,
+      "val_loss": 0.1702,
+      "val_accuracy": 92.94,
+      "pneumonia_recall": 0.91,
+      "pneumonia_precision": 0.9944,
+      "pneumonia_f1": 0.9503,
+      "macro_f1": 0.9141,
+      "train_loss": 0.1494,
+      "train_accuracy": 94.09
+    },
+    {
+      "round": 9,
+      "val_loss": 0.109,
+      "val_accuracy": 95.04,
+      "pneumonia_recall": 0.9589,
+      "pneumonia_precision": 0.9739,
+      "pneumonia_f1": 0.9663,
+      "macro_f1": 0.9361,
+      "train_loss": 0.1396,
+      "train_accuracy": 94.66
+    },
+    {
+      "round": 10,
+      "val_loss": 0.1165,
+      "val_accuracy": 95.23,
+      "pneumonia_recall": 0.9486,
+      "pneumonia_precision": 0.9866,
+      "pneumonia_f1": 0.9672,
+      "macro_f1": 0.9398,
+      "train_loss": 0.1426,
+      "train_accuracy": 94.58
+    },
+    {
+      "round": 11,
+      "val_loss": 0.1151,
+      "val_accuracy": 94.66,
+      "pneumonia_recall": 0.946,
+      "pneumonia_precision": 0.9813,
+      "pneumonia_f1": 0.9634,
+      "macro_f1": 0.9324,
+      "train_loss": 0.1377,
+      "train_accuracy": 94.64
+    },
+    {
+      "round": 12,
+      "val_loss": 0.1109,
+      "val_accuracy": 94.85,
+      "pneumonia_recall": 0.9486,
+      "pneumonia_precision": 0.9814,
+      "pneumonia_f1": 0.9647,
+      "macro_f1": 0.9346,
+      "train_loss": 0.136,
+      "train_accuracy": 94.93
+    },
+    {
+      "round": 13,
+      "val_loss": 0.109,
+      "val_accuracy": 95.61,
+      "pneumonia_recall": 0.9537,
+      "pneumonia_precision": 0.9867,
+      "pneumonia_f1": 0.9699,
+      "macro_f1": 0.9443,
+      "train_loss": 0.1349,
+      "train_accuracy": 94.86
+    },
+    {
+      "round": 14,
+      "val_loss": 0.1092,
+      "val_accuracy": 94.85,
+      "pneumonia_recall": 0.946,
+      "pneumonia_precision": 0.984,
+      "pneumonia_f1": 0.9646,
+      "macro_f1": 0.9349,
+      "train_loss": 0.1231,
+      "train_accuracy": 95.06
+    },
+    {
+      "round": 15,
+      "val_loss": 0.0954,
+      "val_accuracy": 95.42,
+      "pneumonia_recall": 0.9614,
+      "pneumonia_precision": 0.9765,
+      "pneumonia_f1": 0.9689,
+      "macro_f1": 0.941,
+      "train_loss": 0.1254,
+      "train_accuracy": 95.16
+    },
+    {
+      "round": 16,
+      "val_loss": 0.111,
+      "val_accuracy": 95.04,
+      "pneumonia_recall": 0.9409,
+      "pneumonia_precision": 0.9919,
+      "pneumonia_f1": 0.9657,
+      "macro_f1": 0.938,
+      "train_loss": 0.1213,
+      "train_accuracy": 95.48
+    },
+    {
+      "round": 17,
+      "val_loss": 0.1076,
+      "val_accuracy": 94.85,
+      "pneumonia_recall": 0.9434,
+      "pneumonia_precision": 0.9866,
+      "pneumonia_f1": 0.9645,
+      "macro_f1": 0.9352,
+      "train_loss": 0.1243,
+      "train_accuracy": 95.35
+    },
+    {
+      "round": 18,
+      "val_loss": 0.087,
+      "val_accuracy": 95.8,
+      "pneumonia_recall": 0.9666,
+      "pneumonia_precision": 0.9766,
+      "pneumonia_f1": 0.9716,
+      "macro_f1": 0.9456,
+      "train_loss": 0.1164,
+      "train_accuracy": 95.46
+    },
+    {
+      "round": 19,
+      "val_loss": 0.0845,
+      "val_accuracy": 95.61,
+      "pneumonia_recall": 0.964,
+      "pneumonia_precision": 0.9766,
+      "pneumonia_f1": 0.9702,
+      "macro_f1": 0.9433,
+      "train_loss": 0.1156,
+      "train_accuracy": 95.61
+    },
+    {
+      "round": 20,
+      "val_loss": 0.0892,
+      "val_accuracy": 95.42,
+      "pneumonia_recall": 0.9614,
+      "pneumonia_precision": 0.9765,
+      "pneumonia_f1": 0.9689,
+      "macro_f1": 0.941,
+      "train_loss": 0.1215,
+      "train_accuracy": 95.58
+    }
+  ],
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/models/best_exp_med_011_atk_mp_inv_iid_m1_model.pt",
+    "final_checkpoint": "/home/suvranil/project/results/models/final_exp_med_011_atk_mp_inv_iid_m1_model.pt",
+    "confusion_matrix_figure": "/home/suvranil/project/results/figures/exp_med_011_atk_mp_inv_iid_m1_confusion_matrix.png",
+    "training_curves_figure": "/home/suvranil/project/results/figures/exp_med_011_atk_mp_inv_iid_m1_training_curves.png"
+  }
+}

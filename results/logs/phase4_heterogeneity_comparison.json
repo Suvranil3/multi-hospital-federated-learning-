@@ -1,0 +1,114 @@
+{
+  "study": "Phase 4: Non-IID Hospital Data Heterogeneity Study",
+  "timestamp": "2026-10-31T12:06:50.643988",
+  "benchmarks": {
+    "centralized_baseline": {
+      "experiment_id": "EXP-MED-001-CENTRAL-CNN",
+      "accuracy": 81.25,
+      "pneumonia_sensitivity": 99.74,
+      "pneumonia_precision": 77.03,
+      "normal_specificity": 50.43,
+      "macro_f1": 0.7689
+    },
+    "federated_iid_baseline": {
+      "experiment_id": "EXP-MED-002-FED-IID",
+      "accuracy": 85.74,
+      "pneumonia_sensitivity": 97.95,
+      "pneumonia_precision": 82.51,
+      "normal_specificity": 65.38,
+      "macro_f1": 0.8352
+    }
+  },
+  "non_iid_experiments": {
+    "alpha_1.0": {
+      "experiment_id": "EXP-MED-003-FED-NONIID-A10",
+      "alpha": 1.0,
+      "best_round": 15,
+      "best_val_accuracy": 95.99,
+      "test_loss": 0.739,
+      "test_accuracy": 79.81,
+      "pneumonia_sensitivity": 98.97,
+      "pneumonia_precision": 75.98,
+      "pneumonia_f1": 0.8597,
+      "normal_specificity": 47.86,
+      "macro_f1": 0.7498,
+      "confusion_matrix": {
+        "true_negative_normal": 112,
+        "false_positive_normal_as_pneumonia": 122,
+        "false_negative_pneumonia_as_normal": 4,
+        "true_positive_pneumonia": 386,
+        "matrix_array": [
+          [
+            112,
+            122
+          ],
+          [
+            4,
+            386
+          ]
+        ]
+      },
+      "hospital_normal_variance": 0.0709
+    },
+    "alpha_0.5": {
+      "experiment_id": "EXP-MED-004-FED-NONIID-A05",
+      "alpha": 0.5,
+      "best_round": 18,
+      "best_val_accuracy": 95.99,
+      "test_loss": 0.693,
+      "test_accuracy": 80.45,
+      "pneumonia_sensitivity": 98.46,
+      "pneumonia_precision": 76.8,
+      "pneumonia_f1": 0.8629,
+      "normal_specificity": 50.43,
+      "macro_f1": 0.7611,
+      "confusion_matrix": {
+        "true_negative_normal": 118,
+        "false_positive_normal_as_pneumonia": 116,
+        "false_negative_pneumonia_as_normal": 6,
+        "true_positive_pneumonia": 384,
+        "matrix_array": [
+          [
+            118,
+            116
+          ],
+          [
+            6,
+            384
+          ]
+        ]
+      },
+      "hospital_normal_variance": 0.1382
+    },
+    "alpha_0.1": {
+      "experiment_id": "EXP-MED-005-FED-NONIID-A01",
+      "alpha": 0.1,
+      "best_round": 12,
+      "best_val_accuracy": 89.89,
+      "test_loss": 0.6326,
+      "test_accuracy": 85.1,
+      "pneumonia_sensitivity": 91.79,
+      "pneumonia_precision": 85.44,
+      "pneumonia_f1": 0.885,
+      "normal_specificity": 73.93,
+      "macro_f1": 0.8366,
+      "confusion_matrix": {
+        "true_negative_normal": 173,
+        "false_positive_normal_as_pneumonia": 61,
+        "false_negative_pneumonia_as_normal": 32,
+        "true_positive_pneumonia": 358,
+        "matrix_array": [
+          [
+            173,
+            61
+          ],
+          [
+            32,
+            358
+          ]
+        ]
+      },
+      "hospital_normal_variance": 0.1482
+    }
+  }
+}

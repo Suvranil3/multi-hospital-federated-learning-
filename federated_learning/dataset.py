@@ -181,3 +181,261 @@ def prepare_federated_data_loaders(
     }
 
     return client_loaders, val_loader, test_loader, metadata
+
+
+def create_controlled_non_iid_partitions(
+    train_dataset: PneumoniaMNIST,
+    num_clients: int = NUM_HOSPITALS,
+    alpha: float = 1.0,
+    seed: int = SEED,
+    tolerance: int = 40,
+    max_attempts: int = 5000,
+) -> Tuple[List[List[int]], Dict[str, Any]]:
+    """
+    Population-calibrated constrained Beta/Dirichlet case-mix allocation using
+    rejection sampling, proportional scaling, and largest-remainder rounding.
+
+    Controls client sample sizes to ~471 samples (8 clients with 471, 2 clients with 470,
+    sum = 4,708), matching the Phase 3 sample capacities while inducing label-distribution
+    heterogeneity (case-mix skew) across simulated hospital clients.
+
+    Dirichlet Parameterization:
+      The Dirichlet parameter vector is alpha multiplied by the empirical global class prior:
+        alpha_vec = alpha * [p_normal, p_pneumonia]
+      where alpha is the total concentration parameter (alpha = sum(alpha_vec)).
+      For 2 classes, this Dirichlet distribution is parameterized identically as
+      Beta(alpha * p_normal, alpha * p_pneumonia).
+
+    Allocation Procedure:
+      1. Rejection sampling: Draws candidate hospital Normal proportions until the unconstrained
+         sample sum is within `tolerance` (default: 40) of the true total Normal count (1,214).
+      2. Proportional scaling: Scales candidate counts by (N_0 / sum_ideal).
+      3. Largest-remainder rounding (Hamilton-Hare method): Allocates integer floors and distributes
+         remaining samples to clients with largest fractional residuals, strictly preserving:
+           - Global Normal count: exactly 1,214
+           - Global Pneumonia count: exactly 3,494
+           - Hospital total capacity: exactly 470 or 471 (sum = 4,708)
+           - Mutual exclusivity: each training sample is assigned exactly once.
+
+    Returns:
+        (client_indices, partition_metadata)
+    """
+    labels = train_dataset.labels.flatten()
+    total_samples = len(labels)
+    assert total_samples == TRAIN_SAMPLES, f"Expected {TRAIN_SAMPLES} train samples, got {total_samples}"
+
+    n_normal = int(np.sum(labels == 0))
+    n_pneumonia = int(np.sum(labels == 1))
+    p_normal = n_normal / total_samples
+    p_pneumonia = n_pneumonia / total_samples
+
+    # Define balanced hospital capacities (8 x 471, 2 x 470 = 4,708)
+    base_cap = total_samples // num_clients
+    rem_cap = total_samples % num_clients
+    capacities = np.array([base_cap + 1 if i < rem_cap else base_cap for i in range(num_clients)])
+
+    rng = np.random.RandomState(seed)
+
+    # 1. Rejection Sampling
+    target_proportions = None
+    acceptance_attempt = -1
+    initial_diff = 0.0
+
+    for attempt in range(max_attempts):
+        q = rng.beta(alpha * p_normal, alpha * p_pneumonia, size=num_clients)
+        ideal_counts = q * capacities
+        diff = float(ideal_counts.sum() - n_normal)
+        if abs(diff) <= tolerance:
+            scale = n_normal / ideal_counts.sum()
+            scaled = ideal_counts * scale
+            if np.all(scaled <= capacities):
+                target_proportions = q
+                acceptance_attempt = attempt
+                initial_diff = diff
+                break
+
+    if target_proportions is None:
+        raise RuntimeError(
+            f"Failed to find valid Dirichlet draw within tolerance {tolerance} "
+            f"for alpha={alpha} after {max_attempts} attempts."
+        )
+
+    # 2. Proportional Scaling
+    ideal_counts = target_proportions * capacities
+    scaled_counts = ideal_counts * (n_normal / ideal_counts.sum())
+
+    # 3. Largest-Remainder Rounding
+    floor_counts = np.floor(scaled_counts).astype(int)
+    remainder = n_normal - floor_counts.sum()
+    fractions = scaled_counts - floor_counts
+
+    eligible = np.where(floor_counts < capacities)[0]
+    ranked_order = eligible[np.argsort(-fractions[eligible])]
+    for idx in ranked_order[:remainder]:
+        floor_counts[idx] += 1
+
+    norm_counts = floor_counts
+    pneu_counts = capacities - norm_counts
+
+    assert norm_counts.sum() == n_normal, f"Normal sum {norm_counts.sum()} != {n_normal}"
+    assert pneu_counts.sum() == n_pneumonia, f"Pneumonia sum {pneu_counts.sum()} != {n_pneumonia}"
+    assert np.all(norm_counts >= 0) and np.all(norm_counts <= capacities)
+
+    # 4. Disjoint Sample Slicing
+    c0_indices = np.where(labels == 0)[0]
+    c1_indices = np.where(labels == 1)[0]
+    rng.shuffle(c0_indices)
+    rng.shuffle(c1_indices)
+
+    client_indices: List[List[int]] = [[] for _ in range(num_clients)]
+    c0_ptr = 0
+    c1_ptr = 0
+
+    client_stats: List[Dict[str, Any]] = []
+    achieved_ratios: List[float] = []
+
+    for cid in range(num_clients):
+        c0_c = norm_counts[cid]
+        c1_c = pneu_counts[cid]
+        idxs = c0_indices[c0_ptr : c0_ptr + c0_c].tolist() + c1_indices[c1_ptr : c1_ptr + c1_c].tolist()
+        c0_ptr += c0_c
+        c1_ptr += c1_c
+
+        rng.shuffle(idxs)
+        client_indices[cid] = idxs
+
+        achieved_ratio = round(c0_c / capacities[cid], 4)
+        achieved_ratios.append(achieved_ratio)
+        client_stats.append({
+            "client_id": cid,
+            "total_samples": int(capacities[cid]),
+            "normal_samples": int(c0_c),
+            "pneumonia_samples": int(c1_c),
+            "normal_ratio": achieved_ratio,
+            "pneumonia_ratio": round(1.0 - achieved_ratio, 4),
+            "target_normal_ratio": round(float(target_proportions[cid]), 4),
+            "deviation_from_target": round(float(abs(achieved_ratio - target_proportions[cid])), 4),
+        })
+
+    meta: Dict[str, Any] = {
+        "alpha": alpha,
+        "total_concentration": alpha,
+        "dirichlet_parameter_vector": [round(alpha * p_normal, 4), round(alpha * p_pneumonia, 4)],
+        "global_class_prior": {"normal": round(p_normal, 4), "pneumonia": round(p_pneumonia, 4)},
+        "tolerance": tolerance,
+        "acceptance_attempt": acceptance_attempt,
+        "initial_discrepancy": round(initial_diff, 2),
+        "min_client_size": int(np.min(capacities)),
+        "max_client_size": int(np.max(capacities)),
+        "normal_ratio_mean": round(float(np.mean(achieved_ratios)), 4),
+        "normal_ratio_std": round(float(np.std(achieved_ratios)), 4),
+        "normal_ratio_var": round(float(np.var(achieved_ratios)), 4),
+        "mean_abs_deviation": round(
+            float(np.mean(np.abs(np.array(achieved_ratios) - target_proportions))), 4
+        ),
+        "max_abs_deviation": round(
+            float(np.max(np.abs(np.array(achieved_ratios) - target_proportions))), 4
+        ),
+        "client_stats": client_stats,
+    }
+
+    return client_indices, meta
+
+
+def prepare_controlled_non_iid_data_loaders(
+    data_dir: Path = DATA_RAW_DIR,
+    num_clients: int = NUM_HOSPITALS,
+    alpha: float = 1.0,
+    batch_size: int = DEFAULT_BATCH_SIZE,
+    num_workers: int = 0,
+    seed: int = SEED,
+    tolerance: int = 40,
+) -> Tuple[List[DataLoader], DataLoader, DataLoader, Dict[str, Any]]:
+    """
+    Prepare controlled-capacity Non-IID client DataLoaders and global validation & test DataLoaders.
+
+    Returns:
+        (client_loaders, val_loader, test_loader, partition_metadata)
+    """
+    set_seed(seed)
+
+    train_transform = transforms.Compose([
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomRotation(degrees=10),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=PNEUMONIA_MEAN, std=PNEUMONIA_STD),
+    ])
+
+    eval_transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=PNEUMONIA_MEAN, std=PNEUMONIA_STD),
+    ])
+
+    # 1. Load official dataset splits
+    train_dataset = PneumoniaMNIST(split="train", root=str(data_dir), transform=train_transform, download=True)
+    val_dataset = PneumoniaMNIST(split="val", root=str(data_dir), transform=eval_transform, download=True)
+    test_dataset = PneumoniaMNIST(split="test", root=str(data_dir), transform=eval_transform, download=True)
+
+    assert len(train_dataset) == TRAIN_SAMPLES, f"Expected {TRAIN_SAMPLES} train, got {len(train_dataset)}"
+    assert len(val_dataset) == VAL_SAMPLES, f"Expected {VAL_SAMPLES} val, got {len(val_dataset)}"
+    assert len(test_dataset) == TEST_SAMPLES, f"Expected {TEST_SAMPLES} test, got {len(test_dataset)}"
+
+    # 2. Partition official train dataset
+    client_indices, meta = create_controlled_non_iid_partitions(
+        train_dataset=train_dataset,
+        num_clients=num_clients,
+        alpha=alpha,
+        seed=seed,
+        tolerance=tolerance,
+    )
+
+    # Verify partition integrity
+    all_assigned = []
+    for idxs in client_indices:
+        all_assigned.extend(idxs)
+    assert len(all_assigned) == TRAIN_SAMPLES, f"Expected {TRAIN_SAMPLES} partitioned indices, got {len(all_assigned)}"
+    assert len(set(all_assigned)) == TRAIN_SAMPLES, "Client partitions must be mutually exclusive!"
+
+    # 3. Build per-client DataLoaders
+    client_loaders: List[DataLoader] = []
+    for cid, idxs in enumerate(client_indices):
+        subset = Subset(train_dataset, idxs)
+        loader = DataLoader(
+            subset,
+            batch_size=batch_size,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=False,
+        )
+        client_loaders.append(loader)
+
+    # 4. Global validation and test loaders
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=False,
+    )
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=False,
+    )
+
+    metadata = {
+        "num_clients": num_clients,
+        "batch_size": batch_size,
+        "partition_type": "controlled_dirichlet_case_mix",
+        "alpha": alpha,
+        "seed": seed,
+        "train_samples": len(train_dataset),
+        "val_samples": len(val_dataset),
+        "test_samples": len(test_dataset),
+        "heterogeneity_metrics": {k: v for k, v in meta.items() if k != "client_stats"},
+        "client_stats": meta["client_stats"],
+    }
+
+    return client_loaders, val_loader, test_loader, metadata

@@ -1,0 +1,94 @@
+{
+  "audit_timestamp": "2026-10-31T15:30:39",
+  "overall_status": "INVESTIGATE",
+  "simulations": [
+    {
+      "experiment_id": "EXP-MED-006-CTRL-IID",
+      "original_best_val_acc": 96.37,
+      "replayed_best_val_acc": 95.99,
+      "trainable_max_diff": 0.7166235446929932,
+      "val_acc_diff": 0.38000000000000966,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-007-CTRL-NONIID-A05",
+      "original_best_val_acc": 95.61,
+      "replayed_best_val_acc": 94.66,
+      "trainable_max_diff": 0.879704475402832,
+      "val_acc_diff": 0.9500000000000028,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-003-NONIID-ALPHA10",
+      "original_best_val_acc": 95.99,
+      "replayed_best_val_acc": 95.99,
+      "trainable_max_diff": 0.6653803586959839,
+      "val_acc_diff": 0.0,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-005-NONIID-ALPHA01",
+      "original_best_val_acc": 89.89,
+      "replayed_best_val_acc": 87.6,
+      "trainable_max_diff": 0.641689658164978,
+      "val_acc_diff": 2.2900000000000063,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-008-ATK-LF-IID-M1",
+      "original_best_val_acc": 94.66,
+      "replayed_best_val_acc": 92.75,
+      "trainable_max_diff": 1.095693826675415,
+      "val_acc_diff": 1.9099999999999966,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-009-ATK-LF-IID-M2",
+      "original_best_val_acc": 86.64,
+      "replayed_best_val_acc": 87.4,
+      "trainable_max_diff": 2.362285614013672,
+      "val_acc_diff": 0.7600000000000051,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-010-ATK-LF-NONIID-M1",
+      "original_best_val_acc": 95.99,
+      "replayed_best_val_acc": 95.8,
+      "trainable_max_diff": 1.2996987104415894,
+      "val_acc_diff": 0.18999999999999773,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-011-ATK-MP-INV-IID-M1",
+      "original_best_val_acc": 95.8,
+      "replayed_best_val_acc": 95.99,
+      "trainable_max_diff": 0.8330084681510925,
+      "val_acc_diff": 0.18999999999999773,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-012-ATK-MP-SCALE-IID-M1",
+      "original_best_val_acc": 96.56,
+      "replayed_best_val_acc": 96.56,
+      "trainable_max_diff": 2.592212200164795,
+      "val_acc_diff": 0.0,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-013-ATK-BD-IID-M1",
+      "original_best_val_acc": 95.99,
+      "replayed_best_val_acc": 95.8,
+      "trainable_max_diff": 1.1640385389328003,
+      "val_acc_diff": 0.18999999999999773,
+      "status": "DEVIATION"
+    },
+    {
+      "experiment_id": "EXP-MED-014-ATK-BD-NONIID-M1",
+      "original_best_val_acc": 95.99,
+      "replayed_best_val_acc": 95.99,
+      "trainable_max_diff": 0.7760619521141052,
+      "val_acc_diff": 0.0,
+      "status": "DEVIATION"
+    }
+  ]
+}

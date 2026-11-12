@@ -1,0 +1,20 @@
+{
+  "clean_test_loss": 0.415,
+  "clean_test_accuracy": 86.86,
+  "pneumonia_recall": 0.9769,
+  "pneumonia_precision": 0.8392,
+  "pneumonia_f1": 0.9028,
+  "normal_recall": 0.688,
+  "normal_precision": 0.9471,
+  "normal_f1": 0.797,
+  "macro_f1": 0.8499,
+  "false_negatives": 9,
+  "false_positives": 73,
+  "backdoor_asr": {
+    "total_triggered_test_samples": 390,
+    "successful_backdoor_attacks": 34,
+    "attack_success_rate_percent": 8.72,
+    "target_class": 0,
+    "source_class": 1
+  }
+}

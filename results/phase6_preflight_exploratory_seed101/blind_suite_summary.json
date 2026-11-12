@@ -1,0 +1,169 @@
+{
+  "total_simulations": 33,
+  "seeds": [
+    101,
+    102,
+    103
+  ],
+  "frozen_detector_hashes": {
+    "detector.py": "6576468da037927fda3283a1e2d8402f3b2739d6c45b6fe8ad517900e94a7f07",
+    "feature_extractor.py": "66de939c5c0432bb8570fa5d0de82f7701a07a699f4e3d3c6aa528316122c906",
+    "calibrated_thresholds.json": "737c4819df70a8cadc93d9ff9a2db82bc36040403e11ee1240031c9b0cf34507"
+  },
+  "overall_hard_metrics": {
+    "true_positives": 0,
+    "false_positives": 0,
+    "true_negatives": 0,
+    "false_negatives": 0,
+    "tpr_recall": 0.0,
+    "fpr": 0.0,
+    "precision": 0.0,
+    "f1_score": 0.0
+  },
+  "overall_flagged_metrics": {
+    "true_positives": 0,
+    "false_positives": 0,
+    "true_negatives": 0,
+    "false_negatives": 0,
+    "tpr_recall": 0.0,
+    "fpr": 0.0,
+    "precision": 0.0,
+    "f1_score": 0.0
+  },
+  "tri_state_confusion_matrix": {
+    "NORMAL": {
+      "honest": 0,
+      "malicious": 0
+    },
+    "SUSPICIOUS": {
+      "honest": 0,
+      "malicious": 0
+    },
+    "MALICIOUS": {
+      "honest": 0,
+      "malicious": 0
+    }
+  },
+  "heterogeneity_stratified_honest_rates": {
+    "iid": {
+      "total": 0,
+      "malicious": 0,
+      "suspicious": 0,
+      "normal": 0
+    },
+    "non_iid_1.0": {
+      "total": 0,
+      "malicious": 0,
+      "suspicious": 0,
+      "normal": 0
+    },
+    "non_iid_0.5": {
+      "total": 0,
+      "malicious": 0,
+      "suspicious": 0,
+      "normal": 0
+    },
+    "non_iid_0.1": {
+      "total": 0,
+      "malicious": 0,
+      "suspicious": 0,
+      "normal": 0
+    }
+  },
+  "per_seed_summary": {
+    "101": {
+      "total_obs": 0,
+      "honest_obs": 0,
+      "malicious_obs": 0,
+      "malicious_decisions": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      },
+      "flagged_decisions": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      },
+      "tri_state": {
+        "NORMAL": {
+          "honest": 0,
+          "malicious": 0
+        },
+        "SUSPICIOUS": {
+          "honest": 0,
+          "malicious": 0
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 0
+        }
+      }
+    },
+    "102": {
+      "total_obs": 0,
+      "honest_obs": 0,
+      "malicious_obs": 0,
+      "malicious_decisions": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      },
+      "flagged_decisions": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      },
+      "tri_state": {
+        "NORMAL": {
+          "honest": 0,
+          "malicious": 0
+        },
+        "SUSPICIOUS": {
+          "honest": 0,
+          "malicious": 0
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 0
+        }
+      }
+    },
+    "103": {
+      "total_obs": 0,
+      "honest_obs": 0,
+      "malicious_obs": 0,
+      "malicious_decisions": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      },
+      "flagged_decisions": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      },
+      "tri_state": {
+        "NORMAL": {
+          "honest": 0,
+          "malicious": 0
+        },
+        "SUSPICIOUS": {
+          "honest": 0,
+          "malicious": 0
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 0
+        }
+      }
+    }
+  },
+  "per_attack_summary": {}
+}

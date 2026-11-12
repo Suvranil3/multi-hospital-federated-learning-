@@ -1,0 +1,398 @@
+{
+  "condition_12_iid": {
+    "scenario": "iid",
+    "alpha": null,
+    "seed": 211,
+    "detector_audit": {
+      "client_id": "0",
+      "decision": "NORMAL",
+      "anomaly_score": 0.1171,
+      "flagged_reasons": [],
+      "symmetrical_tradeoff_protected": true,
+      "features": {
+        "norm_global": 3.1615958213806152,
+        "z_mag_global": 1.1339339070227497,
+        "max_layer_z_mag": 1.0028844672956947,
+        "cos_ref_global": 0.7842311263084412,
+        "delta_loss_total": 0.208147,
+        "delta_loss_normal": 0.006592,
+        "delta_loss_pneumonia": 0.278095,
+        "delta_rec_normal": 0.37037,
+        "delta_rec_pneumonia": -0.974293,
+        "ema_anomaly_accumulator": 0.0
+      },
+      "are_bn_buffers_in_features": false
+    },
+    "strategy_evaluations": {
+      "fedavg": {
+        "strategy": "fedavg",
+        "client_0_included": true,
+        "client_0_weight": 0.100042,
+        "bn_running_mean": 100042.47,
+        "bn_running_var": 100042.97,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "coordinate_median": {
+        "strategy": "coordinate_median",
+        "client_0_included": true,
+        "client_0_weight": 0.1,
+        "bn_running_mean": 0.0,
+        "bn_running_var": 0.54,
+        "bn_counter": 15,
+        "test_accuracy": 84.29,
+        "sensitivity": 92.56,
+        "specificity": 70.51,
+        "macro_f1": 82.58,
+        "confusion_matrix": {
+          "tn": 165,
+          "fp": 69,
+          "fn": 29,
+          "tp": 361
+        },
+        "detector_decision": "NORMAL"
+      },
+      "trimmed_mean_beta1": {
+        "strategy": "trimmed_mean_beta1",
+        "client_0_included": true,
+        "client_0_weight": 0.125,
+        "bn_running_mean": 0.0,
+        "bn_running_var": 0.54,
+        "bn_counter": 15,
+        "test_accuracy": 82.21,
+        "sensitivity": 96.92,
+        "specificity": 57.69,
+        "macro_f1": 79.03,
+        "confusion_matrix": {
+          "tn": 135,
+          "fp": 99,
+          "fn": 12,
+          "tp": 378
+        },
+        "detector_decision": "NORMAL"
+      },
+      "trimmed_mean_beta2": {
+        "strategy": "trimmed_mean_beta2",
+        "client_0_included": true,
+        "client_0_weight": 0.166667,
+        "bn_running_mean": 0.0,
+        "bn_running_var": 0.54,
+        "bn_counter": 15,
+        "test_accuracy": 83.01,
+        "sensitivity": 95.64,
+        "specificity": 61.97,
+        "macro_f1": 80.4,
+        "confusion_matrix": {
+          "tn": 145,
+          "fp": 89,
+          "fn": 17,
+          "tp": 373
+        },
+        "detector_decision": "NORMAL"
+      },
+      "multi_krum_f1": {
+        "strategy": "multi_krum_f1",
+        "client_0_included": true,
+        "client_0_weight": 0.111111,
+        "bn_running_mean": 111111.11,
+        "bn_running_var": 111111.59,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "multi_krum_f2": {
+        "strategy": "multi_krum_f2",
+        "client_0_included": true,
+        "client_0_weight": 0.125,
+        "bn_running_mean": 125000.0,
+        "bn_running_var": 125000.48,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "tri_state_monitor": {
+        "strategy": "tri_state_monitor",
+        "client_0_included": true,
+        "client_0_weight": 0.100042,
+        "bn_running_mean": 100042.47,
+        "bn_running_var": 100042.97,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "tri_state_discount_050": {
+        "strategy": "tri_state_discount_050",
+        "client_0_included": true,
+        "client_0_weight": 0.100042,
+        "bn_running_mean": 100042.47,
+        "bn_running_var": 100042.97,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "tri_state_discount_025": {
+        "strategy": "tri_state_discount_025",
+        "client_0_included": true,
+        "client_0_weight": 0.100042,
+        "bn_running_mean": 100042.47,
+        "bn_running_var": 100042.97,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      }
+    }
+  },
+  "condition_13_noniid": {
+    "scenario": "non_iid",
+    "alpha": 0.5,
+    "seed": 211,
+    "detector_audit": {
+      "client_id": "0",
+      "decision": "NORMAL",
+      "anomaly_score": 0.0342,
+      "flagged_reasons": [],
+      "symmetrical_tradeoff_protected": true,
+      "features": {
+        "norm_global": 3.493722677230835,
+        "z_mag_global": 0.06538496559358337,
+        "max_layer_z_mag": 0.07766668922605005,
+        "cos_ref_global": 0.8309711813926697,
+        "delta_loss_total": 0.046864,
+        "delta_loss_normal": -1.644353,
+        "delta_loss_pneumonia": 0.63379,
+        "delta_rec_normal": 1.0,
+        "delta_rec_pneumonia": -1.0,
+        "ema_anomaly_accumulator": 0.0
+      },
+      "are_bn_buffers_in_features": false
+    },
+    "strategy_evaluations": {
+      "fedavg": {
+        "strategy": "fedavg",
+        "client_0_included": true,
+        "client_0_weight": 0.100042,
+        "bn_running_mean": 100042.48,
+        "bn_running_var": 100042.97,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "coordinate_median": {
+        "strategy": "coordinate_median",
+        "client_0_included": true,
+        "client_0_weight": 0.1,
+        "bn_running_mean": 0.0,
+        "bn_running_var": 0.54,
+        "bn_counter": 15,
+        "test_accuracy": 62.5,
+        "sensitivity": 100.0,
+        "specificity": 0.0,
+        "macro_f1": 38.46,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 234,
+          "fn": 0,
+          "tp": 390
+        },
+        "detector_decision": "NORMAL"
+      },
+      "trimmed_mean_beta1": {
+        "strategy": "trimmed_mean_beta1",
+        "client_0_included": true,
+        "client_0_weight": 0.125,
+        "bn_running_mean": 0.0,
+        "bn_running_var": 0.54,
+        "bn_counter": 15,
+        "test_accuracy": 62.5,
+        "sensitivity": 100.0,
+        "specificity": 0.0,
+        "macro_f1": 38.46,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 234,
+          "fn": 0,
+          "tp": 390
+        },
+        "detector_decision": "NORMAL"
+      },
+      "trimmed_mean_beta2": {
+        "strategy": "trimmed_mean_beta2",
+        "client_0_included": true,
+        "client_0_weight": 0.166667,
+        "bn_running_mean": 0.0,
+        "bn_running_var": 0.54,
+        "bn_counter": 15,
+        "test_accuracy": 62.5,
+        "sensitivity": 100.0,
+        "specificity": 0.0,
+        "macro_f1": 38.46,
+        "confusion_matrix": {
+          "tn": 0,
+          "fp": 234,
+          "fn": 0,
+          "tp": 390
+        },
+        "detector_decision": "NORMAL"
+      },
+      "multi_krum_f1": {
+        "strategy": "multi_krum_f1",
+        "client_0_included": true,
+        "client_0_weight": 0.111111,
+        "bn_running_mean": 111111.11,
+        "bn_running_var": 111111.58,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "multi_krum_f2": {
+        "strategy": "multi_krum_f2",
+        "client_0_included": true,
+        "client_0_weight": 0.125,
+        "bn_running_mean": 125000.0,
+        "bn_running_var": 125000.47,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "tri_state_monitor": {
+        "strategy": "tri_state_monitor",
+        "client_0_included": true,
+        "client_0_weight": 0.100042,
+        "bn_running_mean": 100042.48,
+        "bn_running_var": 100042.97,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "tri_state_discount_050": {
+        "strategy": "tri_state_discount_050",
+        "client_0_included": true,
+        "client_0_weight": 0.117706,
+        "bn_running_mean": 117705.86,
+        "bn_running_var": 117706.34,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      },
+      "tri_state_discount_025": {
+        "strategy": "tri_state_discount_025",
+        "client_0_included": true,
+        "client_0_weight": 0.129103,
+        "bn_running_mean": 129102.99,
+        "bn_running_var": 129103.46,
+        "bn_counter": 15,
+        "test_accuracy": 37.5,
+        "sensitivity": 0.0,
+        "specificity": 100.0,
+        "macro_f1": 27.27,
+        "confusion_matrix": {
+          "tn": 234,
+          "fp": 0,
+          "fn": 390,
+          "tp": 0
+        },
+        "detector_decision": "NORMAL"
+      }
+    }
+  }
+}

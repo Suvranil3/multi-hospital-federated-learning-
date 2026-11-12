@@ -1,0 +1,395 @@
+{
+  "calibrated_thresholds": {
+    "z_mag_suspicious": 4.38,
+    "z_mag_malicious": 9.1,
+    "max_layer_z_suspicious": 9.1,
+    "max_layer_z_malicious": 12.41,
+    "cos_suspicious": 0.1465,
+    "cos_strong_negative": -0.75,
+    "cos_malicious_negative": 0.0,
+    "delta_loss_suspicious": 0.017,
+    "delta_loss_malicious": 0.0274,
+    "ema_accumulator_suspicious": 0.4768,
+    "ema_accumulator_malicious": 0.8023
+  },
+  "calibration_excluded_evaluation": {
+    "description": "Strict out-of-sample evaluation on 9 simulations (1,800 records: 1,640 honest, 160 malicious)",
+    "metrics": {
+      "total_observations": 1800,
+      "total_malicious": 160,
+      "total_honest": 1640,
+      "malicious_decision_metrics": {
+        "true_positives": 21,
+        "false_positives": 0,
+        "true_negatives": 1640,
+        "false_negatives": 139,
+        "tpr_recall": 0.1313,
+        "fpr": 0.0,
+        "precision": 1.0,
+        "f1_score": 0.232
+      },
+      "flagged_decision_metrics": {
+        "description": "Treating SUSPICIOUS or MALICIOUS as positive",
+        "true_positives": 154,
+        "false_positives": 164,
+        "true_negatives": 1476,
+        "false_negatives": 6,
+        "tpr_recall": 0.9625,
+        "fpr": 0.1,
+        "precision": 0.4843,
+        "f1_score": 0.6444
+      },
+      "continuous_score_metrics": {
+        "auroc": 0.9814,
+        "auprc": 0.8801
+      },
+      "tri_state_distribution": {
+        "NORMAL": {
+          "honest": 1476,
+          "malicious": 6
+        },
+        "SUSPICIOUS": {
+          "honest": 164,
+          "malicious": 133
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 21
+        }
+      }
+    },
+    "stratified_fpr": {
+      "iid": {
+        "total_honest_observations": 880,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 1,
+        "suspicious_rate": 0.0011,
+        "normal_count": 879,
+        "normal_rate": 0.9989
+      },
+      "non_iid_alpha0.1": {
+        "total_honest_observations": 200,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 46,
+        "suspicious_rate": 0.23,
+        "normal_count": 154,
+        "normal_rate": 0.77
+      },
+      "non_iid_alpha0.5": {
+        "total_honest_observations": 360,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 79,
+        "suspicious_rate": 0.2194,
+        "normal_count": 281,
+        "normal_rate": 0.7806
+      },
+      "non_iid_alpha1.0": {
+        "total_honest_observations": 200,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 38,
+        "suspicious_rate": 0.19,
+        "normal_count": 162,
+        "normal_rate": 0.81
+      }
+    },
+    "per_attack": {
+      "exp-med-008-atk-lf-iid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 20,
+        "detected_normal": 0,
+        "recall": 0.0,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": 1,
+          "first_malicious": null
+        }
+      },
+      "exp-med-009-atk-lf-iid-m2": {
+        "total": 40,
+        "detected_malicious": 0,
+        "detected_suspicious": 38,
+        "detected_normal": 2,
+        "recall": 0.0,
+        "flagged_recall": 0.95,
+        "latency": {
+          "first_suspicious": 2,
+          "first_malicious": null
+        }
+      },
+      "exp-med-010-atk-lf-noniid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 20,
+        "detected_normal": 0,
+        "recall": 0.0,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": 1,
+          "first_malicious": null
+        }
+      },
+      "exp-med-011-atk-mp-inv-iid-m1": {
+        "total": 20,
+        "detected_malicious": 1,
+        "detected_suspicious": 19,
+        "detected_normal": 0,
+        "recall": 0.05,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": 1,
+          "first_malicious": 10
+        }
+      },
+      "exp-med-012-atk-mp-scale-iid-m1": {
+        "total": 20,
+        "detected_malicious": 20,
+        "detected_suspicious": 0,
+        "detected_normal": 0,
+        "recall": 1.0,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": null,
+          "first_malicious": 1
+        }
+      },
+      "exp-med-013-atk-bd-iid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 19,
+        "detected_normal": 1,
+        "recall": 0.0,
+        "flagged_recall": 0.95,
+        "latency": {
+          "first_suspicious": 2,
+          "first_malicious": null
+        }
+      },
+      "exp-med-014-atk-bd-noniid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 17,
+        "detected_normal": 3,
+        "recall": 0.0,
+        "flagged_recall": 0.85,
+        "latency": {
+          "first_suspicious": 2,
+          "first_malicious": null
+        }
+      }
+    }
+  },
+  "in_sample_reference_evaluation": {
+    "description": "Full 11-simulation cohort including the 2 calibration runs (2,200 records: 2,040 honest, 160 malicious)",
+    "metrics": {
+      "total_observations": 2200,
+      "total_malicious": 160,
+      "total_honest": 2040,
+      "malicious_decision_metrics": {
+        "true_positives": 21,
+        "false_positives": 0,
+        "true_negatives": 2040,
+        "false_negatives": 139,
+        "tpr_recall": 0.1313,
+        "fpr": 0.0,
+        "precision": 1.0,
+        "f1_score": 0.232
+      },
+      "flagged_decision_metrics": {
+        "description": "Treating SUSPICIOUS or MALICIOUS as positive",
+        "true_positives": 154,
+        "false_positives": 203,
+        "true_negatives": 1837,
+        "false_negatives": 6,
+        "tpr_recall": 0.9625,
+        "fpr": 0.0995,
+        "precision": 0.4314,
+        "f1_score": 0.5957
+      },
+      "continuous_score_metrics": {
+        "auroc": 0.9761,
+        "auprc": 0.8026
+      },
+      "tri_state_distribution": {
+        "NORMAL": {
+          "honest": 1837,
+          "malicious": 6
+        },
+        "SUSPICIOUS": {
+          "honest": 203,
+          "malicious": 133
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 21
+        }
+      }
+    },
+    "stratified_fpr": {
+      "iid": {
+        "total_honest_observations": 1080,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 3,
+        "suspicious_rate": 0.0028,
+        "normal_count": 1077,
+        "normal_rate": 0.9972
+      },
+      "non_iid_alpha0.1": {
+        "total_honest_observations": 200,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 46,
+        "suspicious_rate": 0.23,
+        "normal_count": 154,
+        "normal_rate": 0.77
+      },
+      "non_iid_alpha0.5": {
+        "total_honest_observations": 560,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 116,
+        "suspicious_rate": 0.2071,
+        "normal_count": 444,
+        "normal_rate": 0.7929
+      },
+      "non_iid_alpha1.0": {
+        "total_honest_observations": 200,
+        "false_malicious_count": 0,
+        "false_malicious_rate": 0.0,
+        "suspicious_count": 38,
+        "suspicious_rate": 0.19,
+        "normal_count": 162,
+        "normal_rate": 0.81
+      }
+    },
+    "per_attack": {
+      "exp-med-008-atk-lf-iid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 20,
+        "detected_normal": 0,
+        "recall": 0.0,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": 1,
+          "first_malicious": null
+        }
+      },
+      "exp-med-009-atk-lf-iid-m2": {
+        "total": 40,
+        "detected_malicious": 0,
+        "detected_suspicious": 38,
+        "detected_normal": 2,
+        "recall": 0.0,
+        "flagged_recall": 0.95,
+        "latency": {
+          "first_suspicious": 2,
+          "first_malicious": null
+        }
+      },
+      "exp-med-010-atk-lf-noniid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 20,
+        "detected_normal": 0,
+        "recall": 0.0,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": 1,
+          "first_malicious": null
+        }
+      },
+      "exp-med-011-atk-mp-inv-iid-m1": {
+        "total": 20,
+        "detected_malicious": 1,
+        "detected_suspicious": 19,
+        "detected_normal": 0,
+        "recall": 0.05,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": 1,
+          "first_malicious": 10
+        }
+      },
+      "exp-med-012-atk-mp-scale-iid-m1": {
+        "total": 20,
+        "detected_malicious": 20,
+        "detected_suspicious": 0,
+        "detected_normal": 0,
+        "recall": 1.0,
+        "flagged_recall": 1.0,
+        "latency": {
+          "first_suspicious": null,
+          "first_malicious": 1
+        }
+      },
+      "exp-med-013-atk-bd-iid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 19,
+        "detected_normal": 1,
+        "recall": 0.0,
+        "flagged_recall": 0.95,
+        "latency": {
+          "first_suspicious": 2,
+          "first_malicious": null
+        }
+      },
+      "exp-med-014-atk-bd-noniid-m1": {
+        "total": 20,
+        "detected_malicious": 0,
+        "detected_suspicious": 17,
+        "detected_normal": 3,
+        "recall": 0.0,
+        "flagged_recall": 0.85,
+        "latency": {
+          "first_suspicious": 2,
+          "first_malicious": null
+        }
+      }
+    }
+  },
+  "independent_multi_seed_honest_evaluation": {
+    "iid": {
+      "total_honest_observations": 600,
+      "false_malicious_count": 0,
+      "false_malicious_rate": 0.0,
+      "suspicious_count": 3,
+      "suspicious_rate": 0.005,
+      "normal_count": 597,
+      "normal_rate": 0.995
+    },
+    "non_iid_alpha0.1": {
+      "total_honest_observations": 600,
+      "false_malicious_count": 1,
+      "false_malicious_rate": 0.0017,
+      "suspicious_count": 218,
+      "suspicious_rate": 0.3633,
+      "normal_count": 381,
+      "normal_rate": 0.635
+    },
+    "non_iid_alpha0.5": {
+      "total_honest_observations": 600,
+      "false_malicious_count": 0,
+      "false_malicious_rate": 0.0,
+      "suspicious_count": 168,
+      "suspicious_rate": 0.28,
+      "normal_count": 432,
+      "normal_rate": 0.72
+    },
+    "non_iid_alpha1.0": {
+      "total_honest_observations": 600,
+      "false_malicious_count": 0,
+      "false_malicious_rate": 0.0,
+      "suspicious_count": 113,
+      "suspicious_rate": 0.1883,
+      "normal_count": 487,
+      "normal_rate": 0.8117
+    }
+  }
+}

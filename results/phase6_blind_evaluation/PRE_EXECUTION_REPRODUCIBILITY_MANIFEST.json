@@ -1,0 +1,624 @@
+{
+  "manifest_version": "phase6_seed_integrity_correction_v1",
+  "created_at": "2026-11-01T12:13:30+05:30",
+  "seed_integrity_declaration": "Seeds 111, 112, and 113 constitute a genuinely fresh seed cohort with zero prior simulation, smoke testing, detector calibration, debugging, or threshold selection exposure. The frozen detector and evaluation script are set to read-only (-r--r--r--) and verified cryptographically.",
+  "fresh_seed_cohort": [
+    111,
+    112,
+    113
+  ],
+  "environment": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+    "torch": "2.14.1+cu130",
+    "torchvision": "0.29.1+cu130",
+    "flower": "1.39.0",
+    "ray": "2.55.1",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1"
+  },
+  "dataset_splits": {
+    "name": "PneumoniaMNIST (MedMNIST v3)",
+    "task": "binary-class (normal: 0, pneumonia: 1)",
+    "image_shape": [
+      1,
+      28,
+      28
+    ],
+    "train_samples": 4708,
+    "train_distribution": {
+      "normal_0": 1214,
+      "pneumonia_1": 3494
+    },
+    "val_samples": 524,
+    "val_distribution": {
+      "normal_0": 135,
+      "pneumonia_1": 389
+    },
+    "test_samples": 624,
+    "test_distribution": {
+      "normal_0": 234,
+      "pneumonia_1": 390
+    },
+    "zenodo_url": "https://zenodo.org/records/10519652/files/pneumoniamnist.npz?download=1"
+  },
+  "cryptographic_hashes": {
+    "federated_learning/detection/frozen_v1/detector.py": {
+      "sha256": "6576468da037927fda3283a1e2d8402f3b2739d6c45b6fe8ad517900e94a7f07",
+      "size_bytes": 14659
+    },
+    "federated_learning/detection/frozen_v1/feature_extractor.py": {
+      "sha256": "66de939c5c0432bb8570fa5d0de82f7701a07a699f4e3d3c6aa528316122c906",
+      "size_bytes": 15891
+    },
+    "federated_learning/detection/frozen_v1/calibrated_thresholds.json": {
+      "sha256": "737c4819df70a8cadc93d9ff9a2db82bc36040403e11ee1240031c9b0cf34507",
+      "size_bytes": 363
+    },
+    "federated_learning/detection/frozen_v1/FREEZE_MANIFEST.json": {
+      "sha256": "f029889e4c5952d2c601d7a3166dc2eb1648ed5ce6a1a087c0c35617ae7a193c",
+      "size_bytes": 871
+    },
+    "experiments/run_phase6_blind_evaluation.py": {
+      "sha256": "de5fd065f384a8f6de4feac9232d95a3e85fec1dafa7d10fd10293c93b07f1f6",
+      "size_bytes": 38340
+    },
+    "experiments/config.py": {
+      "sha256": "7fffc75c0f9c30fe47d2c58af5388fe1a849a03e755e8a2002364e1291528993",
+      "size_bytes": 4441
+    },
+    "federated_learning/model.py": {
+      "sha256": "35360b2f96d79ccc53ea3c05bf05b1fcd03cfa3df432ea8f1a34049535483653",
+      "size_bytes": 4909
+    },
+    "federated_learning/client.py": {
+      "sha256": "4209788c7368a4929b86d140256e4bd4093dd5518aac54283fe1b5da221eb392",
+      "size_bytes": 5825
+    },
+    "federated_learning/dataset.py": {
+      "sha256": "ee7f26857af3adcb91aa863545246fa5964df61cae860096ad6253ec5255b596",
+      "size_bytes": 16738
+    },
+    "federated_learning/strategy.py": {
+      "sha256": "21eb5af04c91541987b0d9a3c85238b92b2509bfe4729761128ce64e2a9c48ab",
+      "size_bytes": 3099
+    },
+    "federated_learning/strategy_instrumented.py": {
+      "sha256": "cc42250e8202841103e6ad8b59f8fbacdf9f404340e05be03f9ce9ee3c2939e4",
+      "size_bytes": 4695
+    },
+    "federated_learning/attacks/label_flipping.py": {
+      "sha256": "e7c1424914af5adc2bb070c79e47a15afeb82a6defa5d341a71bee989d15b048",
+      "size_bytes": 4716
+    },
+    "federated_learning/attacks/model_poisoning.py": {
+      "sha256": "ae4ffd7b9e15ed13e47dd6154ab97933e39995e294682cd8fd9b48f88da9e629",
+      "size_bytes": 5990
+    },
+    "federated_learning/attacks/backdoor.py": {
+      "sha256": "833f4267b3fe2a52b1141d46a718874b4680dbd2cf176418b2bd7d03bea2ff92",
+      "size_bytes": 8961
+    },
+    "experiments/train_medical.py": {
+      "sha256": "5f6e0ab300b1ab8cac0ce1591ac7a2950ee92356bfa967e041fc513134312c47",
+      "size_bytes": 23643
+    },
+    "results/models/initial_federated_model.pt": {
+      "sha256": "80a2f4d2ca2e8b00a305852cdcf494889ed32a14ace98621f70d823d60438b68",
+      "size_bytes": 1691309
+    },
+    "data/raw/pneumoniamnist.npz": {
+      "sha256": "e1792d3f03751cb101e99f19a63b3c1941436c988665f47853417b05be250cd8",
+      "size_bytes": 4170669
+    }
+  },
+  "experiment_matrix_33": [
+    {
+      "index": 1,
+      "experiment_id": "EXP-BLIND-HONEST-IID-S111",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 2,
+      "experiment_id": "EXP-BLIND-HONEST-A10-S111",
+      "scenario": "non_iid",
+      "alpha": 1.0,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 3,
+      "experiment_id": "EXP-BLIND-HONEST-A05-S111",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 4,
+      "experiment_id": "EXP-BLIND-HONEST-A01-S111",
+      "scenario": "non_iid",
+      "alpha": 0.1,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 5,
+      "experiment_id": "EXP-BLIND-ATK-LF-IID-M1-S111",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 6,
+      "experiment_id": "EXP-BLIND-ATK-LF-IID-M2-S111",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0,
+        1
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 7,
+      "experiment_id": "EXP-BLIND-ATK-LF-NONIID-M1-S111",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 8,
+      "experiment_id": "EXP-BLIND-ATK-MP-INV-IID-M1-S111",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "model_poisoning",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": -1.0,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 9,
+      "experiment_id": "EXP-BLIND-ATK-MP-SCALE-IID-M1-S111",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "model_poisoning",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": 10.0,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 10,
+      "experiment_id": "EXP-BLIND-ATK-BD-IID-M1-S111",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "backdoor",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": 0.5
+    },
+    {
+      "index": 11,
+      "experiment_id": "EXP-BLIND-ATK-BD-NONIID-M1-S111",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "backdoor",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 111,
+      "training_seed": 111,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": 0.5
+    },
+    {
+      "index": 12,
+      "experiment_id": "EXP-BLIND-HONEST-IID-S112",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 13,
+      "experiment_id": "EXP-BLIND-HONEST-A10-S112",
+      "scenario": "non_iid",
+      "alpha": 1.0,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 14,
+      "experiment_id": "EXP-BLIND-HONEST-A05-S112",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 15,
+      "experiment_id": "EXP-BLIND-HONEST-A01-S112",
+      "scenario": "non_iid",
+      "alpha": 0.1,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 16,
+      "experiment_id": "EXP-BLIND-ATK-LF-IID-M1-S112",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 17,
+      "experiment_id": "EXP-BLIND-ATK-LF-IID-M2-S112",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0,
+        1
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 18,
+      "experiment_id": "EXP-BLIND-ATK-LF-NONIID-M1-S112",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 19,
+      "experiment_id": "EXP-BLIND-ATK-MP-INV-IID-M1-S112",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "model_poisoning",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": -1.0,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 20,
+      "experiment_id": "EXP-BLIND-ATK-MP-SCALE-IID-M1-S112",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "model_poisoning",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": 10.0,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 21,
+      "experiment_id": "EXP-BLIND-ATK-BD-IID-M1-S112",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "backdoor",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": 0.5
+    },
+    {
+      "index": 22,
+      "experiment_id": "EXP-BLIND-ATK-BD-NONIID-M1-S112",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "backdoor",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 112,
+      "training_seed": 112,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": 0.5
+    },
+    {
+      "index": 23,
+      "experiment_id": "EXP-BLIND-HONEST-IID-S113",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 24,
+      "experiment_id": "EXP-BLIND-HONEST-A10-S113",
+      "scenario": "non_iid",
+      "alpha": 1.0,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 25,
+      "experiment_id": "EXP-BLIND-HONEST-A05-S113",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 26,
+      "experiment_id": "EXP-BLIND-HONEST-A01-S113",
+      "scenario": "non_iid",
+      "alpha": 0.1,
+      "attack_type": "none",
+      "malicious_clients": [],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 27,
+      "experiment_id": "EXP-BLIND-ATK-LF-IID-M1-S113",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 28,
+      "experiment_id": "EXP-BLIND-ATK-LF-IID-M2-S113",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0,
+        1
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 29,
+      "experiment_id": "EXP-BLIND-ATK-LF-NONIID-M1-S113",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "label_flipping",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": 1.0,
+      "poison_fraction": null
+    },
+    {
+      "index": 30,
+      "experiment_id": "EXP-BLIND-ATK-MP-INV-IID-M1-S113",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "model_poisoning",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": -1.0,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 31,
+      "experiment_id": "EXP-BLIND-ATK-MP-SCALE-IID-M1-S113",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "model_poisoning",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": 10.0,
+      "flip_fraction": null,
+      "poison_fraction": null
+    },
+    {
+      "index": 32,
+      "experiment_id": "EXP-BLIND-ATK-BD-IID-M1-S113",
+      "scenario": "iid",
+      "alpha": null,
+      "attack_type": "backdoor",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": 0.5
+    },
+    {
+      "index": 33,
+      "experiment_id": "EXP-BLIND-ATK-BD-NONIID-M1-S113",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "attack_type": "backdoor",
+      "malicious_clients": [
+        0
+      ],
+      "partition_seed": 113,
+      "training_seed": 113,
+      "initialization_seed": 42,
+      "gamma": null,
+      "flip_fraction": null,
+      "poison_fraction": 0.5
+    }
+  ]
+}

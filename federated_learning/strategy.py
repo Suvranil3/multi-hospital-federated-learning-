@@ -74,7 +74,7 @@ def get_server_eval_fn(
             "val_loss": round(val_loss, 4),
             "val_accuracy": round(val_acc, 2),
             "pneumonia_recall": round(p_metrics["recall_sensitivity"], 4),
-            "pneumonia_precision": round(p_metrics["precision"], 4),
+            "pneumonia_precision": round(p_metrics["precision"], 4), 
             "pneumonia_f1": round(p_metrics["f1_score"], 4),
             "macro_f1": round(m_metrics["macro_f1"], 4),
         }

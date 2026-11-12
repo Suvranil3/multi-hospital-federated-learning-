@@ -1,0 +1,442 @@
+{
+  "experiment_id": "EXP-MED-005-FED-NONIID-A01",
+  "timestamp": "2026-10-31T12:06:50.210099",
+  "status": "COMPLETED",
+  "scenario": "10-Hospital Federated Learning Simulation (Controlled Non-IID, alpha=0.1)",
+  "dataset_name": "PneumoniaMNIST",
+  "seeds": {
+    "partition_seed": 42,
+    "initialization_seed": 42,
+    "training_seed": 42
+  },
+  "initial_model_hash_sha256": "0c411b83c2f0acef58beb5b9a968030d877e079eb2356eb3748903f8ae9bbc83",
+  "batch_norm_buffers_aggregated": true,
+  "batch_norm_buffers_tracked": [
+    "features.1.running_mean",
+    "features.1.running_var",
+    "features.1.num_batches_tracked",
+    "features.5.running_mean",
+    "features.5.running_var",
+    "features.5.num_batches_tracked"
+  ],
+  "configuration": {
+    "alpha": 0.1,
+    "total_concentration_parameter": 0.1,
+    "dirichlet_parameter_vector": [
+      0.0258,
+      0.0742
+    ],
+    "global_class_prior": {
+      "normal": 0.2579,
+      "pneumonia": 0.7421
+    },
+    "num_clients": 10,
+    "num_rounds": 20,
+    "local_epochs": 2,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "aggregation_strategy": "FedAvg",
+    "distribution_type": "Controlled-Capacity Dirichlet Case-Mix (alpha=0.1)",
+    "train_samples": 4708,
+    "val_samples": 524,
+    "test_samples": 624,
+    "min_client_size": 470,
+    "max_client_size": 471
+  },
+  "heterogeneity_characterization": {
+    "rejection_acceptance_attempt": 132,
+    "initial_unconstrained_discrepancy": 20.17,
+    "normal_ratio_mean": 0.258,
+    "normal_ratio_std": 0.3849,
+    "normal_ratio_var": 0.1482,
+    "mean_absolute_deviation_from_target": 0.0043,
+    "max_absolute_deviation_from_target": 0.0162
+  },
+  "training_performance": {
+    "best_round": 12,
+    "best_val_accuracy": 89.89,
+    "final_round_val_accuracy": 74.24,
+    "simulation_duration_seconds": 95.34,
+    "total_pipeline_time_seconds": 96.95
+  },
+  "test_performance": {
+    "test_loss": 0.6326,
+    "test_accuracy": 85.1,
+    "test_correct": 531,
+    "total_test_samples": 624,
+    "pneumonia_metrics": {
+      "precision": 0.8544,
+      "recall_sensitivity": 0.9179,
+      "f1_score": 0.885
+    },
+    "normal_metrics": {
+      "precision": 0.8439,
+      "recall_specificity": 0.7393,
+      "f1_score": 0.7882
+    },
+    "macro_metrics": {
+      "macro_precision": 0.8492,
+      "macro_recall": 0.8286,
+      "macro_f1": 0.8366
+    },
+    "confusion_matrix": {
+      "true_negative_normal": 173,
+      "false_positive_normal_as_pneumonia": 61,
+      "false_negative_pneumonia_as_normal": 32,
+      "true_positive_pneumonia": 358,
+      "matrix_array": [
+        [
+          173,
+          61
+        ],
+        [
+          32,
+          358
+        ]
+      ]
+    }
+  },
+  "client_partitions": [
+    {
+      "client_id": 0,
+      "total_samples": 471,
+      "normal_samples": 0,
+      "pneumonia_samples": 471,
+      "normal_ratio": 0.0,
+      "pneumonia_ratio": 1.0,
+      "target_normal_ratio": 0.0,
+      "deviation_from_target": 0.0
+    },
+    {
+      "client_id": 1,
+      "total_samples": 471,
+      "normal_samples": 353,
+      "pneumonia_samples": 118,
+      "normal_ratio": 0.7495,
+      "pneumonia_ratio": 0.2505,
+      "target_normal_ratio": 0.7628,
+      "deviation_from_target": 0.0133
+    },
+    {
+      "client_id": 2,
+      "total_samples": 471,
+      "normal_samples": 382,
+      "pneumonia_samples": 89,
+      "normal_ratio": 0.811,
+      "pneumonia_ratio": 0.189,
+      "target_normal_ratio": 0.8239,
+      "deviation_from_target": 0.0129
+    },
+    {
+      "client_id": 3,
+      "total_samples": 471,
+      "normal_samples": 2,
+      "pneumonia_samples": 469,
+      "normal_ratio": 0.0042,
+      "pneumonia_ratio": 0.9958,
+      "target_normal_ratio": 0.0045,
+      "deviation_from_target": 0.0003
+    },
+    {
+      "client_id": 4,
+      "total_samples": 471,
+      "normal_samples": 0,
+      "pneumonia_samples": 471,
+      "normal_ratio": 0.0,
+      "pneumonia_ratio": 1.0,
+      "target_normal_ratio": 0.0,
+      "deviation_from_target": 0.0
+    },
+    {
+      "client_id": 5,
+      "total_samples": 471,
+      "normal_samples": 0,
+      "pneumonia_samples": 471,
+      "normal_ratio": 0.0,
+      "pneumonia_ratio": 1.0,
+      "target_normal_ratio": 0.0,
+      "deviation_from_target": 0.0
+    },
+    {
+      "client_id": 6,
+      "total_samples": 471,
+      "normal_samples": 0,
+      "pneumonia_samples": 471,
+      "normal_ratio": 0.0,
+      "pneumonia_ratio": 1.0,
+      "target_normal_ratio": 0.0,
+      "deviation_from_target": 0.0
+    },
+    {
+      "client_id": 7,
+      "total_samples": 471,
+      "normal_samples": 25,
+      "pneumonia_samples": 446,
+      "normal_ratio": 0.0531,
+      "pneumonia_ratio": 0.9469,
+      "target_normal_ratio": 0.0533,
+      "deviation_from_target": 0.0002
+    },
+    {
+      "client_id": 8,
+      "total_samples": 470,
+      "normal_samples": 0,
+      "pneumonia_samples": 470,
+      "normal_ratio": 0.0,
+      "pneumonia_ratio": 1.0,
+      "target_normal_ratio": 0.0,
+      "deviation_from_target": 0.0
+    },
+    {
+      "client_id": 9,
+      "total_samples": 470,
+      "normal_samples": 452,
+      "pneumonia_samples": 18,
+      "normal_ratio": 0.9617,
+      "pneumonia_ratio": 0.0383,
+      "target_normal_ratio": 0.9779,
+      "deviation_from_target": 0.0162
+    }
+  ],
+  "round_history": [
+    {
+      "round": 0,
+      "val_loss": 0.7122,
+      "val_accuracy": 25.95,
+      "pneumonia_recall": 0.0077,
+      "pneumonia_precision": 0.6,
+      "pneumonia_f1": 0.0152,
+      "macro_f1": 0.211
+    },
+    {
+      "round": 1,
+      "val_loss": 2.216,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1559,
+      "train_accuracy": 95.03
+    },
+    {
+      "round": 2,
+      "val_loss": 0.7058,
+      "val_accuracy": 27.67,
+      "pneumonia_recall": 0.0257,
+      "pneumonia_precision": 1.0,
+      "pneumonia_f1": 0.0501,
+      "macro_f1": 0.2331,
+      "train_loss": 0.3186,
+      "train_accuracy": 92.82
+    },
+    {
+      "round": 3,
+      "val_loss": 2.3775,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1534,
+      "train_accuracy": 94.38
+    },
+    {
+      "round": 4,
+      "val_loss": 0.6683,
+      "val_accuracy": 72.52,
+      "pneumonia_recall": 0.6427,
+      "pneumonia_precision": 0.9804,
+      "pneumonia_f1": 0.7764,
+      "macro_f1": 0.71,
+      "train_loss": 0.4051,
+      "train_accuracy": 90.8
+    },
+    {
+      "round": 5,
+      "val_loss": 2.7462,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1317,
+      "train_accuracy": 95.85
+    },
+    {
+      "round": 6,
+      "val_loss": 0.674,
+      "val_accuracy": 65.27,
+      "pneumonia_recall": 0.5373,
+      "pneumonia_precision": 0.9905,
+      "pneumonia_f1": 0.6967,
+      "macro_f1": 0.6452,
+      "train_loss": 0.3566,
+      "train_accuracy": 91.37
+    },
+    {
+      "round": 7,
+      "val_loss": 2.3137,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1294,
+      "train_accuracy": 95.92
+    },
+    {
+      "round": 8,
+      "val_loss": 0.6405,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.3541,
+      "train_accuracy": 90.82
+    },
+    {
+      "round": 9,
+      "val_loss": 2.104,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1424,
+      "train_accuracy": 95.03
+    },
+    {
+      "round": 10,
+      "val_loss": 0.6514,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.3081,
+      "train_accuracy": 92.43
+    },
+    {
+      "round": 11,
+      "val_loss": 2.0335,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1444,
+      "train_accuracy": 94.9
+    },
+    {
+      "round": 12,
+      "val_loss": 0.6137,
+      "val_accuracy": 89.89,
+      "pneumonia_recall": 0.91,
+      "pneumonia_precision": 0.9516,
+      "pneumonia_f1": 0.9304,
+      "macro_f1": 0.8728,
+      "train_loss": 0.3055,
+      "train_accuracy": 92.42
+    },
+    {
+      "round": 13,
+      "val_loss": 2.2961,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1274,
+      "train_accuracy": 95.49
+    },
+    {
+      "round": 14,
+      "val_loss": 0.6565,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.3315,
+      "train_accuracy": 91.36
+    },
+    {
+      "round": 15,
+      "val_loss": 1.8856,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1483,
+      "train_accuracy": 94.74
+    },
+    {
+      "round": 16,
+      "val_loss": 0.5255,
+      "val_accuracy": 83.59,
+      "pneumonia_recall": 0.9846,
+      "pneumonia_precision": 0.8272,
+      "pneumonia_f1": 0.8991,
+      "macro_f1": 0.7301,
+      "train_loss": 0.2918,
+      "train_accuracy": 92.9
+    },
+    {
+      "round": 17,
+      "val_loss": 1.9532,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1184,
+      "train_accuracy": 96.05
+    },
+    {
+      "round": 18,
+      "val_loss": 0.6124,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.3206,
+      "train_accuracy": 91.82
+    },
+    {
+      "round": 19,
+      "val_loss": 1.7826,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.1426,
+      "train_accuracy": 94.76
+    },
+    {
+      "round": 20,
+      "val_loss": 0.6105,
+      "val_accuracy": 74.24,
+      "pneumonia_recall": 1.0,
+      "pneumonia_precision": 0.7424,
+      "pneumonia_f1": 0.8521,
+      "macro_f1": 0.4261,
+      "train_loss": 0.2914,
+      "train_accuracy": 92.18
+    }
+  ],
+  "medical_disclaimer": "Benchmark research metrics for multi-hospital federated learning simulation. Not evaluated or intended for direct clinical diagnostic use.",
+  "artifacts": {
+    "hospital_distribution_figure": "results/figures/hospital_distribution_alpha01.png",
+    "loss_figure": "results/figures/federated_non_iid_alpha01_training_loss.png",
+    "accuracy_figure": "results/figures/federated_non_iid_alpha01_training_accuracy.png",
+    "confusion_matrix_figure": "results/figures/federated_non_iid_alpha01_confusion_matrix.png",
+    "best_checkpoint": "results/models/best_federated_non_iid_alpha01_model.pt",
+    "final_checkpoint": "results/models/final_federated_non_iid_alpha01_model.pt",
+    "results_json": "results/logs/federated_non_iid_alpha01_results.json"
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "total_simulations": 33,
+  "seeds": [
+    111,
+    112,
+    113
+  ],
+  "frozen_detector_hashes": {
+    "detector.py": "6576468da037927fda3283a1e2d8402f3b2739d6c45b6fe8ad517900e94a7f07",
+    "feature_extractor.py": "66de939c5c0432bb8570fa5d0de82f7701a07a699f4e3d3c6aa528316122c906",
+    "calibrated_thresholds.json": "737c4819df70a8cadc93d9ff9a2db82bc36040403e11ee1240031c9b0cf34507"
+  },
+  "overall_hard_metrics": {
+    "true_positives": 62,
+    "false_positives": 0,
+    "true_negatives": 6120,
+    "false_negatives": 418,
+    "tpr_recall": 0.1292,
+    "fpr": 0.0,
+    "precision": 1.0,
+    "f1_score": 0.2288
+  },
+  "overall_flagged_metrics": {
+    "true_positives": 450,
+    "false_positives": 805,
+    "true_negatives": 5315,
+    "false_negatives": 30,
+    "tpr_recall": 0.9375,
+    "fpr": 0.1315,
+    "precision": 0.3586,
+    "f1_score": 0.5188
+  },
+  "tri_state_confusion_matrix": {
+    "NORMAL": {
+      "honest": 5315,
+      "malicious": 30
+    },
+    "SUSPICIOUS": {
+      "honest": 805,
+      "malicious": 388
+    },
+    "MALICIOUS": {
+      "honest": 0,
+      "malicious": 62
+    }
+  },
+  "heterogeneity_stratified_honest_rates": {
+    "iid": {
+      "total": 3240,
+      "malicious": 0,
+      "suspicious": 14,
+      "normal": 3226
+    },
+    "non_iid_1.0": {
+      "total": 600,
+      "malicious": 0,
+      "suspicious": 103,
+      "normal": 497
+    },
+    "non_iid_0.5": {
+      "total": 1680,
+      "malicious": 0,
+      "suspicious": 467,
+      "normal": 1213
+    },
+    "non_iid_0.1": {
+      "total": 600,
+      "malicious": 0,
+      "suspicious": 221,
+      "normal": 379
+    }
+  },
+  "per_seed_summary": {
+    "111": {
+      "total_obs": 2200,
+      "honest_obs": 2040,
+      "malicious_obs": 160,
+      "malicious_decisions": {
+        "tp": 21,
+        "fp": 0,
+        "tn": 2040,
+        "fn": 139
+      },
+      "flagged_decisions": {
+        "tp": 147,
+        "fp": 334,
+        "tn": 1706,
+        "fn": 13
+      },
+      "tri_state": {
+        "NORMAL": {
+          "honest": 1706,
+          "malicious": 13
+        },
+        "SUSPICIOUS": {
+          "honest": 334,
+          "malicious": 126
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 21
+        }
+      }
+    },
+    "112": {
+      "total_obs": 2200,
+      "honest_obs": 2040,
+      "malicious_obs": 160,
+      "malicious_decisions": {
+        "tp": 21,
+        "fp": 0,
+        "tn": 2040,
+        "fn": 139
+      },
+      "flagged_decisions": {
+        "tp": 153,
+        "fp": 228,
+        "tn": 1812,
+        "fn": 7
+      },
+      "tri_state": {
+        "NORMAL": {
+          "honest": 1812,
+          "malicious": 7
+        },
+        "SUSPICIOUS": {
+          "honest": 228,
+          "malicious": 132
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 21
+        }
+      }
+    },
+    "113": {
+      "total_obs": 2200,
+      "honest_obs": 2040,
+      "malicious_obs": 160,
+      "malicious_decisions": {
+        "tp": 20,
+        "fp": 0,
+        "tn": 2040,
+        "fn": 140
+      },
+      "flagged_decisions": {
+        "tp": 150,
+        "fp": 243,
+        "tn": 1797,
+        "fn": 10
+      },
+      "tri_state": {
+        "NORMAL": {
+          "honest": 1797,
+          "malicious": 10
+        },
+        "SUSPICIOUS": {
+          "honest": 243,
+          "malicious": 130
+        },
+        "MALICIOUS": {
+          "honest": 0,
+          "malicious": 20
+        }
+      }
+    }
+  },
+  "per_attack_summary": {
+    "label_flipping_iid_None_m1": {
+      "attack_type": "label_flipping",
+      "scenario": "iid",
+      "alpha": null,
+      "m": 1,
+      "total_malicious_obs": 60,
+      "detected_malicious": 0,
+      "detected_suspicious": 59,
+      "detected_normal": 1
+    },
+    "label_flipping_iid_None_m2": {
+      "attack_type": "label_flipping",
+      "scenario": "iid",
+      "alpha": null,
+      "m": 2,
+      "total_malicious_obs": 120,
+      "detected_malicious": 0,
+      "detected_suspicious": 120,
+      "detected_normal": 0
+    },
+    "label_flipping_non_iid_0.5_m1": {
+      "attack_type": "label_flipping",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "m": 1,
+      "total_malicious_obs": 60,
+      "detected_malicious": 0,
+      "detected_suspicious": 54,
+      "detected_normal": 6
+    },
+    "model_poisoning_iid_None_m1": {
+      "attack_type": "model_poisoning",
+      "scenario": "iid",
+      "alpha": null,
+      "m": 1,
+      "total_malicious_obs": 120,
+      "detected_malicious": 62,
+      "detected_suspicious": 58,
+      "detected_normal": 0
+    },
+    "backdoor_iid_None_m1": {
+      "attack_type": "backdoor",
+      "scenario": "iid",
+      "alpha": null,
+      "m": 1,
+      "total_malicious_obs": 60,
+      "detected_malicious": 0,
+      "detected_suspicious": 55,
+      "detected_normal": 5
+    },
+    "backdoor_non_iid_0.5_m1": {
+      "attack_type": "backdoor",
+      "scenario": "non_iid",
+      "alpha": 0.5,
+      "m": 1,
+      "total_malicious_obs": 60,
+      "detected_malicious": 0,
+      "detected_suspicious": 42,
+      "detected_normal": 18
+    }
+  }
+}

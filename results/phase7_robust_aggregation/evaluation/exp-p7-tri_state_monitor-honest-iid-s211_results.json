@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-P7-TRI_STATE_MONITOR-HONEST-IID-S211",
+  "timestamp": "2026-11-02T10:36:19.246741+00:00",
+  "condition_id": "HONEST-IID",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "none",
+  "malicious_client_ids": [],
+  "aggregation_variant": "tri_state_monitor",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 12,
+  "best_val_acc": 95.8,
+  "test_metrics": {
+    "test_accuracy": 85.74,
+    "sensitivity": 96.41,
+    "specificity": 67.95,
+    "macro_f1": 83.78,
+    "test_loss": 0.4299,
+    "confusion_matrix": {
+      "tn": 159,
+      "fp": 75,
+      "fn": 14,
+      "tp": 376
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 96.75,
+    "ram_before_mb": 5347.3,
+    "peak_rss_mb": 1049.2,
+    "ram_after_mb": 5305.1
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-tri_state_monitor-honest-iid-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-tri_state_monitor-honest-iid-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-tri_state_monitor-honest-iid-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-tri_state_monitor-honest-iid-s211_results.json"
+  }
+}

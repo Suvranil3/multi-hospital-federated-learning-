@@ -1,0 +1,13 @@
+{
+  "clean_test_loss": 0.3431,
+  "clean_test_accuracy": 88.14,
+  "pneumonia_recall": 0.8744,
+  "pneumonia_precision": 0.9317,
+  "pneumonia_f1": 0.9021,
+  "normal_recall": 0.8932,
+  "normal_precision": 0.8101,
+  "normal_f1": 0.8496,
+  "macro_f1": 0.8759,
+  "false_negatives": 49,
+  "false_positives": 25
+}

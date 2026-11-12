@@ -1,0 +1,13 @@
+{
+  "z_mag_suspicious": 4.38,
+  "z_mag_malicious": 9.1,
+  "max_layer_z_suspicious": 9.1,
+  "max_layer_z_malicious": 12.41,
+  "cos_suspicious": 0.1465,
+  "cos_strong_negative": -0.75,
+  "cos_malicious_negative": 0.0,
+  "delta_loss_suspicious": 0.017,
+  "delta_loss_malicious": 0.0274,
+  "ema_accumulator_suspicious": 0.4768,
+  "ema_accumulator_malicious": 0.8023
+}

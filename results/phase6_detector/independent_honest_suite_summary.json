@@ -1,0 +1,2222 @@
+{
+  "total_simulations": 12,
+  "seeds": [
+    43,
+    44,
+    45
+  ],
+  "total_time_seconds": 1488.370309,
+  "simulations": [
+    {
+      "experiment_id": "EXP-MED-HONEST-A10-S43",
+      "duration_seconds": 144.112494,
+      "best_round": 15,
+      "best_val_acc": 95.99,
+      "best_param_hash": "5b6a4d1e6b0a66247c81a6bf2848ffb55a5ae9e068f6a6e3b0ec6f7021a8506d",
+      "final_param_hash": "1ad5d28db0bc8378d7ad2cb5fd98d14cad83e2cf3c0213f10f9d0e9c75c715f5",
+      "partition_hash": "6d47983c770ce000ece8890127a32b54a4a8a502e4494e434c0eaaaaf316a1a7",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 0.4453,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.2432,
+          "val_accuracy": 89.89,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.8889,
+          "pneumonia_f1": 0.9354,
+          "macro_f1": 0.851
+        },
+        {
+          "round": 3,
+          "val_loss": 0.3575,
+          "val_accuracy": 85.69,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.8384,
+          "pneumonia_f1": 0.9121,
+          "macro_f1": 0.7637
+        },
+        {
+          "round": 4,
+          "val_loss": 0.2241,
+          "val_accuracy": 90.46,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8897,
+          "pneumonia_f1": 0.9393,
+          "macro_f1": 0.8581
+        },
+        {
+          "round": 5,
+          "val_loss": 0.2082,
+          "val_accuracy": 92.37,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9145,
+          "pneumonia_f1": 0.9506,
+          "macro_f1": 0.8913
+        },
+        {
+          "round": 6,
+          "val_loss": 0.1869,
+          "val_accuracy": 93.7,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9279,
+          "pneumonia_f1": 0.959,
+          "macro_f1": 0.9116
+        },
+        {
+          "round": 7,
+          "val_loss": 0.2096,
+          "val_accuracy": 92.75,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9149,
+          "pneumonia_f1": 0.9532,
+          "macro_f1": 0.8961
+        },
+        {
+          "round": 8,
+          "val_loss": 0.1597,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9367,
+          "pneumonia_f1": 0.9625,
+          "macro_f1": 0.9208
+        },
+        {
+          "round": 9,
+          "val_loss": 0.1548,
+          "val_accuracy": 95.42,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.9529,
+          "pneumonia_f1": 0.9697,
+          "macro_f1": 0.938
+        },
+        {
+          "round": 10,
+          "val_loss": 0.1597,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9346,
+          "pneumonia_f1": 0.9626,
+          "macro_f1": 0.9203
+        },
+        {
+          "round": 11,
+          "val_loss": 0.1464,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9483,
+          "pneumonia_f1": 0.9686,
+          "macro_f1": 0.9349
+        },
+        {
+          "round": 12,
+          "val_loss": 0.1454,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.9505,
+          "pneumonia_f1": 0.9685,
+          "macro_f1": 0.9352
+        },
+        {
+          "round": 13,
+          "val_loss": 0.2015,
+          "val_accuracy": 93.51,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9257,
+          "pneumonia_f1": 0.9578,
+          "macro_f1": 0.9087
+        },
+        {
+          "round": 14,
+          "val_loss": 0.1599,
+          "val_accuracy": 94.08,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9303,
+          "pneumonia_f1": 0.9615,
+          "macro_f1": 0.917
+        },
+        {
+          "round": 15,
+          "val_loss": 0.114,
+          "val_accuracy": 95.99,
+          "pneumonia_recall": 0.982,
+          "pneumonia_precision": 0.9646,
+          "pneumonia_f1": 0.9732,
+          "macro_f1": 0.9467
+        },
+        {
+          "round": 16,
+          "val_loss": 0.1872,
+          "val_accuracy": 93.7,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9258,
+          "pneumonia_f1": 0.9591,
+          "macro_f1": 0.9111
+        },
+        {
+          "round": 17,
+          "val_loss": 0.1537,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9346,
+          "pneumonia_f1": 0.9626,
+          "macro_f1": 0.9203
+        },
+        {
+          "round": 18,
+          "val_loss": 0.1481,
+          "val_accuracy": 95.8,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9531,
+          "pneumonia_f1": 0.9723,
+          "macro_f1": 0.9428
+        },
+        {
+          "round": 19,
+          "val_loss": 0.1906,
+          "val_accuracy": 93.51,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9236,
+          "pneumonia_f1": 0.9579,
+          "macro_f1": 0.9081
+        },
+        {
+          "round": 20,
+          "val_loss": 0.1631,
+          "val_accuracy": 93.89,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9281,
+          "pneumonia_f1": 0.9603,
+          "macro_f1": 0.914
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A05-S43",
+      "duration_seconds": 137.615837,
+      "best_round": 6,
+      "best_val_acc": 91.79,
+      "best_param_hash": "f7f42db4931a3b72cc425acc4f1c8176878281a0aa0a4875bac0deb7dd0bdf9c",
+      "final_param_hash": "457ee7299997099f9f720710e48f8f35efcea6b3de3cd0fd33298a0cd8b02343",
+      "partition_hash": "93ddd9da141dffa2efb4cd47d906c686a1340a2f1ac9492ef4d108bf95b06b06",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 1.2802,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.6451,
+          "val_accuracy": 66.03,
+          "pneumonia_recall": 0.545,
+          "pneumonia_precision": 0.9953,
+          "pneumonia_f1": 0.7043,
+          "macro_f1": 0.6526
+        },
+        {
+          "round": 3,
+          "val_loss": 1.2639,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 4,
+          "val_loss": 0.3647,
+          "val_accuracy": 78.63,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7764,
+          "pneumonia_f1": 0.8742,
+          "macro_f1": 0.5826
+        },
+        {
+          "round": 5,
+          "val_loss": 1.7017,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 6,
+          "val_loss": 0.3778,
+          "val_accuracy": 91.79,
+          "pneumonia_recall": 0.9769,
+          "pneumonia_precision": 0.9179,
+          "pneumonia_f1": 0.9465,
+          "macro_f1": 0.8855
+        },
+        {
+          "round": 7,
+          "val_loss": 1.1814,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 8,
+          "val_loss": 0.3465,
+          "val_accuracy": 89.69,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.8868,
+          "pneumonia_f1": 0.9343,
+          "macro_f1": 0.8477
+        },
+        {
+          "round": 9,
+          "val_loss": 1.1981,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 10,
+          "val_loss": 0.3027,
+          "val_accuracy": 83.97,
+          "pneumonia_recall": 0.9974,
+          "pneumonia_precision": 0.8238,
+          "pneumonia_f1": 0.9023,
+          "macro_f1": 0.7278
+        },
+        {
+          "round": 11,
+          "val_loss": 1.1707,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 12,
+          "val_loss": 0.2711,
+          "val_accuracy": 86.26,
+          "pneumonia_recall": 0.9974,
+          "pneumonia_precision": 0.8453,
+          "pneumonia_f1": 0.9151,
+          "macro_f1": 0.7775
+        },
+        {
+          "round": 13,
+          "val_loss": 1.0447,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 14,
+          "val_loss": 0.2708,
+          "val_accuracy": 86.45,
+          "pneumonia_recall": 0.9974,
+          "pneumonia_precision": 0.8472,
+          "pneumonia_f1": 0.9162,
+          "macro_f1": 0.7815
+        },
+        {
+          "round": 15,
+          "val_loss": 1.0597,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 16,
+          "val_loss": 0.2664,
+          "val_accuracy": 86.45,
+          "pneumonia_recall": 0.9974,
+          "pneumonia_precision": 0.8472,
+          "pneumonia_f1": 0.9162,
+          "macro_f1": 0.7815
+        },
+        {
+          "round": 17,
+          "val_loss": 0.8558,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 18,
+          "val_loss": 0.2767,
+          "val_accuracy": 85.5,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.8366,
+          "pneumonia_f1": 0.911,
+          "macro_f1": 0.7596
+        },
+        {
+          "round": 19,
+          "val_loss": 0.7458,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 20,
+          "val_loss": 0.3904,
+          "val_accuracy": 79.77,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7859,
+          "pneumonia_f1": 0.8801,
+          "macro_f1": 0.6169
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A01-S43",
+      "duration_seconds": 132.009176,
+      "best_round": 1,
+      "best_val_acc": 74.24,
+      "best_param_hash": "583c734a384c5cf5b72ef369f30a5de648f0e2571456e73e80d2f3bfc2f8c136",
+      "final_param_hash": "57389962edaf09ed35118ceb2f07de9dcb16d3322051f8c5712b7a81cc37414d",
+      "partition_hash": "ac219676cd777623478dc02288505d244501cc7da052a6c8742da98365649b03",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 4.8548,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.9395,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 3,
+          "val_loss": 6.0539,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 4,
+          "val_loss": 0.8118,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 5,
+          "val_loss": 4.4451,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 6,
+          "val_loss": 0.7261,
+          "val_accuracy": 30.15,
+          "pneumonia_recall": 0.1774,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.2738,
+          "macro_f1": 0.3005
+        },
+        {
+          "round": 7,
+          "val_loss": 4.2661,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 8,
+          "val_loss": 0.6983,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 9,
+          "val_loss": 4.1957,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 10,
+          "val_loss": 0.6583,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 11,
+          "val_loss": 4.6109,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 12,
+          "val_loss": 0.6697,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 13,
+          "val_loss": 4.4624,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 14,
+          "val_loss": 0.6917,
+          "val_accuracy": 73.28,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.7399,
+          "pneumonia_f1": 0.8458,
+          "macro_f1": 0.4229
+        },
+        {
+          "round": 15,
+          "val_loss": 4.7918,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 16,
+          "val_loss": 0.6864,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 17,
+          "val_loss": 4.7432,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 18,
+          "val_loss": 0.7036,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 19,
+          "val_loss": 4.8066,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 20,
+          "val_loss": 0.7059,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-IID-S44",
+      "duration_seconds": 132.543292,
+      "best_round": 20,
+      "best_val_acc": 96.37,
+      "best_param_hash": "6c27dc081f52ebfeb4209cbcd364a65d1b03a4a40344590572f60c5402606a84",
+      "final_param_hash": "6c27dc081f52ebfeb4209cbcd364a65d1b03a4a40344590572f60c5402606a84",
+      "partition_hash": "e9d9600aacea3a83f7bc0a98c5e081477dbe484d61fafd7d5e9a88384d27b362",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 0.3985,
+          "val_accuracy": 93.51,
+          "pneumonia_recall": 0.9666,
+          "pneumonia_precision": 0.9471,
+          "pneumonia_f1": 0.9567,
+          "macro_f1": 0.9135
+        },
+        {
+          "round": 2,
+          "val_loss": 0.1419,
+          "val_accuracy": 94.66,
+          "pneumonia_recall": 0.9743,
+          "pneumonia_precision": 0.9547,
+          "pneumonia_f1": 0.9644,
+          "macro_f1": 0.9288
+        },
+        {
+          "round": 3,
+          "val_loss": 0.1298,
+          "val_accuracy": 95.04,
+          "pneumonia_recall": 0.9537,
+          "pneumonia_precision": 0.9789,
+          "pneumonia_f1": 0.9661,
+          "macro_f1": 0.9366
+        },
+        {
+          "round": 4,
+          "val_loss": 0.1357,
+          "val_accuracy": 94.47,
+          "pneumonia_recall": 0.9383,
+          "pneumonia_precision": 0.9865,
+          "pneumonia_f1": 0.9618,
+          "macro_f1": 0.9307
+        },
+        {
+          "round": 5,
+          "val_loss": 0.1417,
+          "val_accuracy": 94.08,
+          "pneumonia_recall": 0.928,
+          "pneumonia_precision": 0.9918,
+          "pneumonia_f1": 0.9588,
+          "macro_f1": 0.9269
+        },
+        {
+          "round": 6,
+          "val_loss": 0.1433,
+          "val_accuracy": 93.51,
+          "pneumonia_recall": 0.9203,
+          "pneumonia_precision": 0.9917,
+          "pneumonia_f1": 0.9547,
+          "macro_f1": 0.9203
+        },
+        {
+          "round": 7,
+          "val_loss": 0.134,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.928,
+          "pneumonia_precision": 0.9945,
+          "pneumonia_f1": 0.9601,
+          "macro_f1": 0.9294
+        },
+        {
+          "round": 8,
+          "val_loss": 0.1174,
+          "val_accuracy": 94.66,
+          "pneumonia_recall": 0.9434,
+          "pneumonia_precision": 0.9839,
+          "pneumonia_f1": 0.9633,
+          "macro_f1": 0.9327
+        },
+        {
+          "round": 9,
+          "val_loss": 0.1189,
+          "val_accuracy": 95.04,
+          "pneumonia_recall": 0.9434,
+          "pneumonia_precision": 0.9892,
+          "pneumonia_f1": 0.9658,
+          "macro_f1": 0.9378
+        },
+        {
+          "round": 10,
+          "val_loss": 0.0984,
+          "val_accuracy": 95.8,
+          "pneumonia_recall": 0.9614,
+          "pneumonia_precision": 0.9816,
+          "pneumonia_f1": 0.9714,
+          "macro_f1": 0.9461
+        },
+        {
+          "round": 11,
+          "val_loss": 0.1098,
+          "val_accuracy": 94.85,
+          "pneumonia_recall": 0.9434,
+          "pneumonia_precision": 0.9866,
+          "pneumonia_f1": 0.9645,
+          "macro_f1": 0.9352
+        },
+        {
+          "round": 12,
+          "val_loss": 0.0937,
+          "val_accuracy": 95.42,
+          "pneumonia_recall": 0.9614,
+          "pneumonia_precision": 0.9765,
+          "pneumonia_f1": 0.9689,
+          "macro_f1": 0.941
+        },
+        {
+          "round": 13,
+          "val_loss": 0.0944,
+          "val_accuracy": 95.42,
+          "pneumonia_recall": 0.9589,
+          "pneumonia_precision": 0.979,
+          "pneumonia_f1": 0.9688,
+          "macro_f1": 0.9413
+        },
+        {
+          "round": 14,
+          "val_loss": 0.0956,
+          "val_accuracy": 95.8,
+          "pneumonia_recall": 0.9563,
+          "pneumonia_precision": 0.9867,
+          "pneumonia_f1": 0.9713,
+          "macro_f1": 0.9466
+        },
+        {
+          "round": 15,
+          "val_loss": 0.096,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9486,
+          "pneumonia_precision": 0.9866,
+          "pneumonia_f1": 0.9672,
+          "macro_f1": 0.9398
+        },
+        {
+          "round": 16,
+          "val_loss": 0.0969,
+          "val_accuracy": 95.42,
+          "pneumonia_recall": 0.9512,
+          "pneumonia_precision": 0.9867,
+          "pneumonia_f1": 0.9686,
+          "macro_f1": 0.942
+        },
+        {
+          "round": 17,
+          "val_loss": 0.1045,
+          "val_accuracy": 95.04,
+          "pneumonia_recall": 0.946,
+          "pneumonia_precision": 0.9866,
+          "pneumonia_f1": 0.9659,
+          "macro_f1": 0.9375
+        },
+        {
+          "round": 18,
+          "val_loss": 0.0834,
+          "val_accuracy": 96.18,
+          "pneumonia_recall": 0.9666,
+          "pneumonia_precision": 0.9817,
+          "pneumonia_f1": 0.9741,
+          "macro_f1": 0.9508
+        },
+        {
+          "round": 19,
+          "val_loss": 0.0859,
+          "val_accuracy": 95.8,
+          "pneumonia_recall": 0.9589,
+          "pneumonia_precision": 0.9842,
+          "pneumonia_f1": 0.9714,
+          "macro_f1": 0.9464
+        },
+        {
+          "round": 20,
+          "val_loss": 0.0765,
+          "val_accuracy": 96.37,
+          "pneumonia_recall": 0.9717,
+          "pneumonia_precision": 0.9793,
+          "pneumonia_f1": 0.9755,
+          "macro_f1": 0.9529
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A10-S44",
+      "duration_seconds": 136.297716,
+      "best_round": 15,
+      "best_val_acc": 95.99,
+      "best_param_hash": "e72f6cef65650b8f23f26f1c0380085bf2f33c158adc401375c363a2fe13aa5e",
+      "final_param_hash": "3b607156a14765d93222fe88599a5fd675b15abbd67216d395eb47a9b48dae3e",
+      "partition_hash": "9d3d8756c4570a5bb279e114fa5260a46f8b6fc578f5f6e54f4a704a9e935a93",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 0.3599,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.2673,
+          "val_accuracy": 88.74,
+          "pneumonia_recall": 0.8663,
+          "pneumonia_precision": 0.9797,
+          "pneumonia_f1": 0.9195,
+          "macro_f1": 0.8661
+        },
+        {
+          "round": 3,
+          "val_loss": 0.4666,
+          "val_accuracy": 79.01,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7796,
+          "pneumonia_f1": 0.8761,
+          "macro_f1": 0.5943
+        },
+        {
+          "round": 4,
+          "val_loss": 0.1615,
+          "val_accuracy": 94.66,
+          "pneumonia_recall": 0.982,
+          "pneumonia_precision": 0.9479,
+          "pneumonia_f1": 0.9646,
+          "macro_f1": 0.9276
+        },
+        {
+          "round": 5,
+          "val_loss": 0.239,
+          "val_accuracy": 91.41,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9038,
+          "pneumonia_f1": 0.9448,
+          "macro_f1": 0.8758
+        },
+        {
+          "round": 6,
+          "val_loss": 0.1863,
+          "val_accuracy": 93.13,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9233,
+          "pneumonia_f1": 0.9553,
+          "macro_f1": 0.9033
+        },
+        {
+          "round": 7,
+          "val_loss": 0.1539,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9846,
+          "pneumonia_precision": 0.9527,
+          "pneumonia_f1": 0.9684,
+          "macro_f1": 0.9356
+        },
+        {
+          "round": 8,
+          "val_loss": 0.175,
+          "val_accuracy": 94.66,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9413,
+          "pneumonia_f1": 0.9649,
+          "macro_f1": 0.9265
+        },
+        {
+          "round": 9,
+          "val_loss": 0.1538,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9483,
+          "pneumonia_f1": 0.9686,
+          "macro_f1": 0.9349
+        },
+        {
+          "round": 10,
+          "val_loss": 0.1341,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.982,
+          "pneumonia_precision": 0.955,
+          "pneumonia_f1": 0.9683,
+          "macro_f1": 0.9359
+        },
+        {
+          "round": 11,
+          "val_loss": 0.1653,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9346,
+          "pneumonia_f1": 0.9626,
+          "macro_f1": 0.9203
+        },
+        {
+          "round": 12,
+          "val_loss": 0.1646,
+          "val_accuracy": 94.47,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9369,
+          "pneumonia_f1": 0.9638,
+          "macro_f1": 0.9232
+        },
+        {
+          "round": 13,
+          "val_loss": 0.1424,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.9552,
+          "pneumonia_f1": 0.9709,
+          "macro_f1": 0.9407
+        },
+        {
+          "round": 14,
+          "val_loss": 0.1969,
+          "val_accuracy": 93.89,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9301,
+          "pneumonia_f1": 0.9602,
+          "macro_f1": 0.9145
+        },
+        {
+          "round": 15,
+          "val_loss": 0.1212,
+          "val_accuracy": 95.99,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.96,
+          "pneumonia_f1": 0.9734,
+          "macro_f1": 0.9462
+        },
+        {
+          "round": 16,
+          "val_loss": 0.1503,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.953,
+          "pneumonia_f1": 0.971,
+          "macro_f1": 0.9404
+        },
+        {
+          "round": 17,
+          "val_loss": 0.126,
+          "val_accuracy": 95.99,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9577,
+          "pneumonia_f1": 0.9735,
+          "macro_f1": 0.9459
+        },
+        {
+          "round": 18,
+          "val_loss": 0.1483,
+          "val_accuracy": 95.8,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9531,
+          "pneumonia_f1": 0.9723,
+          "macro_f1": 0.9428
+        },
+        {
+          "round": 19,
+          "val_loss": 0.1442,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9507,
+          "pneumonia_f1": 0.9711,
+          "macro_f1": 0.9401
+        },
+        {
+          "round": 20,
+          "val_loss": 0.1393,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9507,
+          "pneumonia_f1": 0.9711,
+          "macro_f1": 0.9401
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A05-S44",
+      "duration_seconds": 124.436186,
+      "best_round": 4,
+      "best_val_acc": 91.41,
+      "best_param_hash": "860fe362130041985eebc234298f6732fcb2d331dce814e8043122ae6436a309",
+      "final_param_hash": "b30ed6f687796e013704d025dd3518acb6a11f291d7c7a40b329ac9d49b7f8df",
+      "partition_hash": "7374d326281bcc92faa44b05cb6c30ab5f73acc2e00e0adde07b279936f950df",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 1.0659,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.5661,
+          "val_accuracy": 75.76,
+          "pneumonia_recall": 0.6761,
+          "pneumonia_precision": 0.9962,
+          "pneumonia_f1": 0.8055,
+          "macro_f1": 0.742
+        },
+        {
+          "round": 3,
+          "val_loss": 1.301,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 4,
+          "val_loss": 0.3274,
+          "val_accuracy": 91.41,
+          "pneumonia_recall": 0.9769,
+          "pneumonia_precision": 0.9135,
+          "pneumonia_f1": 0.9441,
+          "macro_f1": 0.8795
+        },
+        {
+          "round": 5,
+          "val_loss": 1.2253,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 6,
+          "val_loss": 0.255,
+          "val_accuracy": 89.12,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.8807,
+          "pneumonia_f1": 0.9309,
+          "macro_f1": 0.8377
+        },
+        {
+          "round": 7,
+          "val_loss": 0.8913,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 8,
+          "val_loss": 0.2678,
+          "val_accuracy": 85.88,
+          "pneumonia_recall": 0.9974,
+          "pneumonia_precision": 0.8416,
+          "pneumonia_f1": 0.9129,
+          "macro_f1": 0.7696
+        },
+        {
+          "round": 9,
+          "val_loss": 0.6773,
+          "val_accuracy": 76.15,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7568,
+          "pneumonia_f1": 0.8616,
+          "macro_f1": 0.4998
+        },
+        {
+          "round": 10,
+          "val_loss": 0.3817,
+          "val_accuracy": 81.87,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.8037,
+          "pneumonia_f1": 0.8912,
+          "macro_f1": 0.6742
+        },
+        {
+          "round": 11,
+          "val_loss": 0.7073,
+          "val_accuracy": 75.0,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7481,
+          "pneumonia_f1": 0.8559,
+          "macro_f1": 0.4567
+        },
+        {
+          "round": 12,
+          "val_loss": 0.2946,
+          "val_accuracy": 85.31,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.8348,
+          "pneumonia_f1": 0.9099,
+          "macro_f1": 0.7555
+        },
+        {
+          "round": 13,
+          "val_loss": 0.6132,
+          "val_accuracy": 76.34,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7583,
+          "pneumonia_f1": 0.8625,
+          "macro_f1": 0.5066
+        },
+        {
+          "round": 14,
+          "val_loss": 0.2575,
+          "val_accuracy": 87.79,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8619,
+          "pneumonia_f1": 0.9236,
+          "macro_f1": 0.8094
+        },
+        {
+          "round": 15,
+          "val_loss": 0.5724,
+          "val_accuracy": 79.58,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7843,
+          "pneumonia_f1": 0.8791,
+          "macro_f1": 0.6113
+        },
+        {
+          "round": 16,
+          "val_loss": 0.2504,
+          "val_accuracy": 88.74,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8716,
+          "pneumonia_f1": 0.9292,
+          "macro_f1": 0.8274
+        },
+        {
+          "round": 17,
+          "val_loss": 0.6299,
+          "val_accuracy": 78.63,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7764,
+          "pneumonia_f1": 0.8742,
+          "macro_f1": 0.5826
+        },
+        {
+          "round": 18,
+          "val_loss": 0.2468,
+          "val_accuracy": 88.74,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8716,
+          "pneumonia_f1": 0.9292,
+          "macro_f1": 0.8274
+        },
+        {
+          "round": 19,
+          "val_loss": 0.6116,
+          "val_accuracy": 79.39,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7827,
+          "pneumonia_f1": 0.8781,
+          "macro_f1": 0.6057
+        },
+        {
+          "round": 20,
+          "val_loss": 0.2593,
+          "val_accuracy": 87.21,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.8578,
+          "pneumonia_f1": 0.9201,
+          "macro_f1": 0.7998
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A01-S44",
+      "duration_seconds": 130.458056,
+      "best_round": 1,
+      "best_val_acc": 74.24,
+      "best_param_hash": "788e80475d81a1dba42d1dd22653cd856194dc63276e5c0424571db4a829632d",
+      "final_param_hash": "307cb8f6e0a5268dbd9478bd9e690fc9dad735f4ad6a9bc50c1ca4cb9feccab1",
+      "partition_hash": "b67f81516c8b28422a5ca7873d0fcc66c2031d83d134a2cf99e2ace672dbf69e",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 4.7833,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.779,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 3,
+          "val_loss": 5.0621,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 4,
+          "val_loss": 0.7604,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 5,
+          "val_loss": 4.1907,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 6,
+          "val_loss": 0.7116,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 7,
+          "val_loss": 4.773,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 8,
+          "val_loss": 0.6551,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 9,
+          "val_loss": 5.7817,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 10,
+          "val_loss": 0.6641,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 11,
+          "val_loss": 4.9633,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 12,
+          "val_loss": 0.6775,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 13,
+          "val_loss": 4.9698,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 14,
+          "val_loss": 0.6956,
+          "val_accuracy": 25.0,
+          "pneumonia_recall": 0.2905,
+          "pneumonia_precision": 0.4913,
+          "pneumonia_f1": 0.3651,
+          "macro_f1": 0.2245
+        },
+        {
+          "round": 15,
+          "val_loss": 5.9247,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 16,
+          "val_loss": 0.6998,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 17,
+          "val_loss": 4.5783,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 18,
+          "val_loss": 0.692,
+          "val_accuracy": 71.95,
+          "pneumonia_recall": 0.8715,
+          "pneumonia_precision": 0.7775,
+          "pneumonia_f1": 0.8218,
+          "macro_f1": 0.5813
+        },
+        {
+          "round": 19,
+          "val_loss": 4.8484,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 20,
+          "val_loss": 0.6935,
+          "val_accuracy": 41.6,
+          "pneumonia_recall": 0.2519,
+          "pneumonia_precision": 0.8673,
+          "pneumonia_f1": 0.3904,
+          "macro_f1": 0.415
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-IID-S45",
+      "duration_seconds": 128.137291,
+      "best_round": 17,
+      "best_val_acc": 96.56,
+      "best_param_hash": "2a829f2ccb3b5baa709233233c0a5d5014ee57d16f60694e82811c765b1df667",
+      "final_param_hash": "d4e0584f5bacd1a9c1aef717d160d438917d03b93b6cd7f051d6060604440690",
+      "partition_hash": "7949db0903b787345ac4947c8f88c3dd8efd4e0aaf2f775b11f1d17170effb49",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 0.3521,
+          "val_accuracy": 90.65,
+          "pneumonia_recall": 0.9743,
+          "pneumonia_precision": 0.9067,
+          "pneumonia_f1": 0.9393,
+          "macro_f1": 0.868
+        },
+        {
+          "round": 2,
+          "val_loss": 0.1405,
+          "val_accuracy": 94.47,
+          "pneumonia_recall": 0.9666,
+          "pneumonia_precision": 0.9592,
+          "pneumonia_f1": 0.9629,
+          "macro_f1": 0.9271
+        },
+        {
+          "round": 3,
+          "val_loss": 0.1262,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9614,
+          "pneumonia_precision": 0.9791,
+          "pneumonia_f1": 0.9702,
+          "macro_f1": 0.9436
+        },
+        {
+          "round": 4,
+          "val_loss": 0.157,
+          "val_accuracy": 93.13,
+          "pneumonia_recall": 0.9203,
+          "pneumonia_precision": 0.9862,
+          "pneumonia_f1": 0.9521,
+          "macro_f1": 0.9153
+        },
+        {
+          "round": 5,
+          "val_loss": 0.1658,
+          "val_accuracy": 93.13,
+          "pneumonia_recall": 0.9152,
+          "pneumonia_precision": 0.9916,
+          "pneumonia_f1": 0.9519,
+          "macro_f1": 0.9159
+        },
+        {
+          "round": 6,
+          "val_loss": 0.1453,
+          "val_accuracy": 93.7,
+          "pneumonia_recall": 0.9203,
+          "pneumonia_precision": 0.9944,
+          "pneumonia_f1": 0.9559,
+          "macro_f1": 0.9228
+        },
+        {
+          "round": 7,
+          "val_loss": 0.1309,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.9332,
+          "pneumonia_precision": 0.9891,
+          "pneumonia_f1": 0.9603,
+          "macro_f1": 0.9288
+        },
+        {
+          "round": 8,
+          "val_loss": 0.1363,
+          "val_accuracy": 94.27,
+          "pneumonia_recall": 0.928,
+          "pneumonia_precision": 0.9945,
+          "pneumonia_f1": 0.9601,
+          "macro_f1": 0.9294
+        },
+        {
+          "round": 9,
+          "val_loss": 0.0992,
+          "val_accuracy": 95.42,
+          "pneumonia_recall": 0.9563,
+          "pneumonia_precision": 0.9815,
+          "pneumonia_f1": 0.9688,
+          "macro_f1": 0.9415
+        },
+        {
+          "round": 10,
+          "val_loss": 0.1324,
+          "val_accuracy": 94.08,
+          "pneumonia_recall": 0.928,
+          "pneumonia_precision": 0.9918,
+          "pneumonia_f1": 0.9588,
+          "macro_f1": 0.9269
+        },
+        {
+          "round": 11,
+          "val_loss": 0.0975,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9512,
+          "pneumonia_precision": 0.984,
+          "pneumonia_f1": 0.9673,
+          "macro_f1": 0.9395
+        },
+        {
+          "round": 12,
+          "val_loss": 0.1065,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9486,
+          "pneumonia_precision": 0.9919,
+          "pneumonia_f1": 0.9698,
+          "macro_f1": 0.9448
+        },
+        {
+          "round": 13,
+          "val_loss": 0.1072,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.946,
+          "pneumonia_precision": 0.9892,
+          "pneumonia_f1": 0.9671,
+          "macro_f1": 0.94
+        },
+        {
+          "round": 14,
+          "val_loss": 0.0846,
+          "val_accuracy": 95.99,
+          "pneumonia_recall": 0.9692,
+          "pneumonia_precision": 0.9767,
+          "pneumonia_f1": 0.9729,
+          "macro_f1": 0.948
+        },
+        {
+          "round": 15,
+          "val_loss": 0.0917,
+          "val_accuracy": 95.61,
+          "pneumonia_recall": 0.9563,
+          "pneumonia_precision": 0.9841,
+          "pneumonia_f1": 0.97,
+          "macro_f1": 0.9441
+        },
+        {
+          "round": 16,
+          "val_loss": 0.1013,
+          "val_accuracy": 95.23,
+          "pneumonia_recall": 0.9486,
+          "pneumonia_precision": 0.9866,
+          "pneumonia_f1": 0.9672,
+          "macro_f1": 0.9398
+        },
+        {
+          "round": 17,
+          "val_loss": 0.0836,
+          "val_accuracy": 96.56,
+          "pneumonia_recall": 0.9692,
+          "pneumonia_precision": 0.9843,
+          "pneumonia_f1": 0.9767,
+          "macro_f1": 0.9557
+        },
+        {
+          "round": 18,
+          "val_loss": 0.0962,
+          "val_accuracy": 95.04,
+          "pneumonia_recall": 0.9486,
+          "pneumonia_precision": 0.984,
+          "pneumonia_f1": 0.966,
+          "macro_f1": 0.9372
+        },
+        {
+          "round": 19,
+          "val_loss": 0.083,
+          "val_accuracy": 96.18,
+          "pneumonia_recall": 0.9717,
+          "pneumonia_precision": 0.9767,
+          "pneumonia_f1": 0.9742,
+          "macro_f1": 0.9503
+        },
+        {
+          "round": 20,
+          "val_loss": 0.0794,
+          "val_accuracy": 96.18,
+          "pneumonia_recall": 0.9692,
+          "pneumonia_precision": 0.9792,
+          "pneumonia_f1": 0.9742,
+          "macro_f1": 0.9506
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A10-S45",
+      "duration_seconds": 132.42918,
+      "best_round": 18,
+      "best_val_acc": 94.85,
+      "best_param_hash": "c92108cf5288d6eb98606f06851396b95f1b10d956ddb31eb20d71f2e763d17e",
+      "final_param_hash": "acf0aa40d703db82a33d2a18d85879fb4a68c3f877ef28c2a54a5075a0b679a5",
+      "partition_hash": "03bc0f67b87d7a2ae17bcd9c867382b8479a3c75c14f2c7322f778fc95c654f1",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 0.4487,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.2944,
+          "val_accuracy": 87.02,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.8591,
+          "pneumonia_f1": 0.9187,
+          "macro_f1": 0.799
+        },
+        {
+          "round": 3,
+          "val_loss": 0.5256,
+          "val_accuracy": 78.44,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7749,
+          "pneumonia_f1": 0.8732,
+          "macro_f1": 0.5767
+        },
+        {
+          "round": 4,
+          "val_loss": 0.313,
+          "val_accuracy": 87.02,
+          "pneumonia_recall": 0.9974,
+          "pneumonia_precision": 0.8527,
+          "pneumonia_f1": 0.9194,
+          "macro_f1": 0.793
+        },
+        {
+          "round": 5,
+          "val_loss": 0.2389,
+          "val_accuracy": 90.46,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.8933,
+          "pneumonia_f1": 0.939,
+          "macro_f1": 0.8599
+        },
+        {
+          "round": 6,
+          "val_loss": 0.2434,
+          "val_accuracy": 90.65,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8917,
+          "pneumonia_f1": 0.9405,
+          "macro_f1": 0.8613
+        },
+        {
+          "round": 7,
+          "val_loss": 0.1905,
+          "val_accuracy": 93.32,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9255,
+          "pneumonia_f1": 0.9565,
+          "macro_f1": 0.9062
+        },
+        {
+          "round": 8,
+          "val_loss": 0.335,
+          "val_accuracy": 86.64,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8505,
+          "pneumonia_f1": 0.9171,
+          "macro_f1": 0.787
+        },
+        {
+          "round": 9,
+          "val_loss": 0.1713,
+          "val_accuracy": 93.89,
+          "pneumonia_recall": 0.9846,
+          "pneumonia_precision": 0.9364,
+          "pneumonia_f1": 0.9599,
+          "macro_f1": 0.9159
+        },
+        {
+          "round": 10,
+          "val_loss": 0.2581,
+          "val_accuracy": 90.65,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8917,
+          "pneumonia_f1": 0.9405,
+          "macro_f1": 0.8613
+        },
+        {
+          "round": 11,
+          "val_loss": 0.1889,
+          "val_accuracy": 94.47,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.939,
+          "pneumonia_f1": 0.9637,
+          "macro_f1": 0.9236
+        },
+        {
+          "round": 12,
+          "val_loss": 0.2582,
+          "val_accuracy": 90.46,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.8897,
+          "pneumonia_f1": 0.9393,
+          "macro_f1": 0.8581
+        },
+        {
+          "round": 13,
+          "val_loss": 0.2054,
+          "val_accuracy": 92.18,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9085,
+          "pneumonia_f1": 0.9497,
+          "macro_f1": 0.8869
+        },
+        {
+          "round": 14,
+          "val_loss": 0.195,
+          "val_accuracy": 93.32,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9234,
+          "pneumonia_f1": 0.9566,
+          "macro_f1": 0.9057
+        },
+        {
+          "round": 15,
+          "val_loss": 0.2091,
+          "val_accuracy": 93.13,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9192,
+          "pneumonia_f1": 0.9556,
+          "macro_f1": 0.9021
+        },
+        {
+          "round": 16,
+          "val_loss": 0.1688,
+          "val_accuracy": 94.66,
+          "pneumonia_recall": 0.9871,
+          "pneumonia_precision": 0.9435,
+          "pneumonia_f1": 0.9648,
+          "macro_f1": 0.9269
+        },
+        {
+          "round": 17,
+          "val_loss": 0.2294,
+          "val_accuracy": 91.41,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9,
+          "pneumonia_f1": 0.9451,
+          "macro_f1": 0.8743
+        },
+        {
+          "round": 18,
+          "val_loss": 0.177,
+          "val_accuracy": 94.85,
+          "pneumonia_recall": 0.9923,
+          "pneumonia_precision": 0.9415,
+          "pneumonia_f1": 0.9662,
+          "macro_f1": 0.9289
+        },
+        {
+          "round": 19,
+          "val_loss": 0.2157,
+          "val_accuracy": 92.37,
+          "pneumonia_recall": 0.9949,
+          "pneumonia_precision": 0.9106,
+          "pneumonia_f1": 0.9509,
+          "macro_f1": 0.89
+        },
+        {
+          "round": 20,
+          "val_loss": 0.182,
+          "val_accuracy": 94.66,
+          "pneumonia_recall": 0.9897,
+          "pneumonia_precision": 0.9413,
+          "pneumonia_f1": 0.9649,
+          "macro_f1": 0.9265
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A05-S45",
+      "duration_seconds": 135.207052,
+      "best_round": 1,
+      "best_val_acc": 74.24,
+      "best_param_hash": "ed17059bf4a6832aaf86b47a1d77d41ff50d5036c2e493d9efeb4df6470bc9e2",
+      "final_param_hash": "d2a0dd7562f3f72bcdfadc84b1e37e506b006c0e860591f3e7677d1016c8aeb2",
+      "partition_hash": "ff6bfeff6c052bf7a7fcf45e5632d1c3944b529ec867f39ce8ec5cd760029210",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 2.4814,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.8381,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 3,
+          "val_loss": 2.5373,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 4,
+          "val_loss": 0.7536,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 5,
+          "val_loss": 2.5386,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 6,
+          "val_loss": 0.7102,
+          "val_accuracy": 39.12,
+          "pneumonia_recall": 0.1799,
+          "pneumonia_precision": 1.0,
+          "pneumonia_f1": 0.305,
+          "macro_f1": 0.3817
+        },
+        {
+          "round": 7,
+          "val_loss": 2.4061,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 8,
+          "val_loss": 0.6863,
+          "val_accuracy": 61.64,
+          "pneumonia_recall": 0.491,
+          "pneumonia_precision": 0.9845,
+          "pneumonia_f1": 0.6552,
+          "macro_f1": 0.6115
+        },
+        {
+          "round": 9,
+          "val_loss": 2.1227,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 10,
+          "val_loss": 0.6752,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 11,
+          "val_loss": 2.6743,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 12,
+          "val_loss": 0.6741,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 13,
+          "val_loss": 1.9517,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 14,
+          "val_loss": 0.6232,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 15,
+          "val_loss": 1.9604,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 16,
+          "val_loss": 0.6447,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 17,
+          "val_loss": 2.0234,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 18,
+          "val_loss": 0.6391,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 19,
+          "val_loss": 1.8956,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 20,
+          "val_loss": 0.5824,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        }
+      ],
+      "feature_count": 200
+    },
+    {
+      "experiment_id": "EXP-MED-HONEST-A01-S45",
+      "duration_seconds": 138.915712,
+      "best_round": 8,
+      "best_val_acc": 89.12,
+      "best_param_hash": "8dc52217d5f6898fc7a764c3e6420ff89308baaf78480eb364de551076a123ec",
+      "final_param_hash": "58eb575b87c8613b277e3c9a145a8fc49a93ca8c7c59a493663d1819b5e1835d",
+      "partition_hash": "6c11376dae5eea258f9fc6a157069e9e15fdbaff17023e405b69f9b2fe258787",
+      "round_history": [
+        {
+          "round": 0,
+          "val_loss": 0.7122,
+          "val_accuracy": 25.95,
+          "pneumonia_recall": 0.0077,
+          "pneumonia_precision": 0.6,
+          "pneumonia_f1": 0.0152,
+          "macro_f1": 0.211
+        },
+        {
+          "round": 1,
+          "val_loss": 3.2413,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 2,
+          "val_loss": 0.7467,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 3,
+          "val_loss": 4.044,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 4,
+          "val_loss": 0.7095,
+          "val_accuracy": 37.98,
+          "pneumonia_recall": 0.1645,
+          "pneumonia_precision": 1.0,
+          "pneumonia_f1": 0.2826,
+          "macro_f1": 0.3682
+        },
+        {
+          "round": 5,
+          "val_loss": 3.3673,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 6,
+          "val_loss": 0.7419,
+          "val_accuracy": 25.76,
+          "pneumonia_recall": 0.0,
+          "pneumonia_precision": 0.0,
+          "pneumonia_f1": 0.0,
+          "macro_f1": 0.2049
+        },
+        {
+          "round": 7,
+          "val_loss": 2.8768,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 8,
+          "val_loss": 0.6667,
+          "val_accuracy": 89.12,
+          "pneumonia_recall": 0.8946,
+          "pneumonia_precision": 0.956,
+          "pneumonia_f1": 0.9243,
+          "macro_f1": 0.8655
+        },
+        {
+          "round": 9,
+          "val_loss": 2.8261,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 10,
+          "val_loss": 0.6613,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 11,
+          "val_loss": 3.3925,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 12,
+          "val_loss": 0.6716,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 13,
+          "val_loss": 3.0043,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 14,
+          "val_loss": 0.6886,
+          "val_accuracy": 86.26,
+          "pneumonia_recall": 0.9357,
+          "pneumonia_precision": 0.8856,
+          "pneumonia_f1": 0.91,
+          "macro_f1": 0.8098
+        },
+        {
+          "round": 15,
+          "val_loss": 3.0287,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 16,
+          "val_loss": 0.704,
+          "val_accuracy": 31.11,
+          "pneumonia_recall": 0.072,
+          "pneumonia_precision": 1.0,
+          "pneumonia_f1": 0.1343,
+          "macro_f1": 0.2811
+        },
+        {
+          "round": 17,
+          "val_loss": 2.7257,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 18,
+          "val_loss": 0.6984,
+          "val_accuracy": 39.69,
+          "pneumonia_recall": 0.1877,
+          "pneumonia_precision": 1.0,
+          "pneumonia_f1": 0.316,
+          "macro_f1": 0.3884
+        },
+        {
+          "round": 19,
+          "val_loss": 2.5944,
+          "val_accuracy": 74.24,
+          "pneumonia_recall": 1.0,
+          "pneumonia_precision": 0.7424,
+          "pneumonia_f1": 0.8521,
+          "macro_f1": 0.4261
+        },
+        {
+          "round": 20,
+          "val_loss": 0.692,
+          "val_accuracy": 44.66,
+          "pneumonia_recall": 0.2545,
+          "pneumonia_precision": 1.0,
+          "pneumonia_f1": 0.4057,
+          "macro_f1": 0.4439
+        }
+      ],
+      "feature_count": 200
+    }
+  ]
+}

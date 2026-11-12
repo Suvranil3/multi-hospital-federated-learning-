@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-P7-TRIMMED_MEAN_BETA1-HONEST-IID-S211",
+  "timestamp": "2026-11-02T10:04:59.759988+00:00",
+  "condition_id": "HONEST-IID",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "none",
+  "malicious_client_ids": [],
+  "aggregation_variant": "trimmed_mean_beta1",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 17,
+  "best_val_acc": 95.8,
+  "test_metrics": {
+    "test_accuracy": 86.22,
+    "sensitivity": 96.67,
+    "specificity": 68.8,
+    "macro_f1": 84.34,
+    "test_loss": 0.4486,
+    "confusion_matrix": {
+      "tn": 161,
+      "fp": 73,
+      "fn": 13,
+      "tp": 377
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 87.06,
+    "ram_before_mb": 5359.5,
+    "peak_rss_mb": 1100.4,
+    "ram_after_mb": 5325.7
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-trimmed_mean_beta1-honest-iid-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-trimmed_mean_beta1-honest-iid-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-trimmed_mean_beta1-honest-iid-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-trimmed_mean_beta1-honest-iid-s211_results.json"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PREFLIGHT_EXPLORATORY",
+  "seed": 101,
+  "tasks_associated": ["task-1666", "task-1724"],
+  "preservation_timestamp": "2026-11-01T12:03:30+05:30",
+  "integrity_declaration": "Seed 101 was exposed to exploratory technical smoke tests and test set evaluations prior to full suite launch. To maintain pristine scientific integrity, all artifacts from seed 101 are archived here as preflight exploratory records and are strictly excluded from the genuine blind evaluation cohort (seeds 111, 112, 113).",
+  "archived_checkpoints_count": 16,
+  "archived_instrumentation_count": 9,
+  "frozen_detector_preserved": true
+}

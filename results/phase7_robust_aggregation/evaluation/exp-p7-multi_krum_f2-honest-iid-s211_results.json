@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-P7-MULTI_KRUM_F2-HONEST-IID-S211",
+  "timestamp": "2026-11-02T10:34:42.493163+00:00",
+  "condition_id": "HONEST-IID",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "none",
+  "malicious_client_ids": [],
+  "aggregation_variant": "multi_krum_f2",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 12,
+  "best_val_acc": 95.61,
+  "test_metrics": {
+    "test_accuracy": 85.74,
+    "sensitivity": 96.15,
+    "specificity": 68.38,
+    "macro_f1": 83.82,
+    "test_loss": 0.4449,
+    "confusion_matrix": {
+      "tn": 160,
+      "fp": 74,
+      "fn": 15,
+      "tp": 375
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 97.62,
+    "ram_before_mb": 5376.4,
+    "peak_rss_mb": 1049.2,
+    "ram_after_mb": 5347.3
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-multi_krum_f2-honest-iid-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-multi_krum_f2-honest-iid-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-multi_krum_f2-honest-iid-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-multi_krum_f2-honest-iid-s211_results.json"
+  }
+}

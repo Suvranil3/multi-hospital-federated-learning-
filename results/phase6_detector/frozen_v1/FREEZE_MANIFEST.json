@@ -1,0 +1,22 @@
+{
+  "freeze_version": "v1.0-phase6-development-benchmark",
+  "git_commit": "3a6c7f9b453ec689f5cc1759208790a1b88977a3",
+  "timestamp": "2026-10-31T23:05:00+05:30",
+  "files": {
+    "detector.py": {
+      "relative_path": "federated_learning/detection/frozen_v1/detector.py",
+      "sha256": "6576468da037927fda3283a1e2d8402f3b2739d6c45b6fe8ad517900e94a7f07",
+      "size_bytes": 14659
+    },
+    "feature_extractor.py": {
+      "relative_path": "federated_learning/detection/frozen_v1/feature_extractor.py",
+      "sha256": "66de939c5c0432bb8570fa5d0de82f7701a07a699f4e3d3c6aa528316122c906",
+      "size_bytes": 15891
+    },
+    "calibrated_thresholds.json": {
+      "relative_path": "federated_learning/detection/frozen_v1/calibrated_thresholds.json",
+      "sha256": "737c4819df70a8cadc93d9ff9a2db82bc36040403e11ee1240031c9b0cf34507",
+      "size_bytes": 363
+    }
+  }
+}

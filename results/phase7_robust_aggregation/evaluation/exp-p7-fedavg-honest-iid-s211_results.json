@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-P7-FEDAVG-HONEST-IID-S211",
+  "timestamp": "2026-11-02T10:00:43.590612+00:00",
+  "condition_id": "HONEST-IID",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "none",
+  "malicious_client_ids": [],
+  "aggregation_variant": "fedavg",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 12,
+  "best_val_acc": 95.8,
+  "test_metrics": {
+    "test_accuracy": 85.74,
+    "sensitivity": 96.41,
+    "specificity": 67.95,
+    "macro_f1": 83.78,
+    "test_loss": 0.4299,
+    "confusion_matrix": {
+      "tn": 159,
+      "fp": 75,
+      "fn": 14,
+      "tp": 376
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 87.34,
+    "ram_before_mb": 5265.8,
+    "peak_rss_mb": 1094.1,
+    "ram_after_mb": 5340.3
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-fedavg-honest-iid-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-fedavg-honest-iid-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-fedavg-honest-iid-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-fedavg-honest-iid-s211_results.json"
+  }
+}

@@ -79,6 +79,13 @@ class HospitalClient(fl.client.NumPyClient):
         """
         set_parameters_to_model(self.model, parameters)
 
+        # Ensure deterministic batch ordering and training across matched runs
+        rnd = int(config.get("round", 1))
+        t_seed = int(config.get("training_seed", 42))
+        c_seed = t_seed + rnd * 1000 + (int(self.client_id) if self.client_id.isdigit() else 0)
+        torch.manual_seed(c_seed)
+        np.random.seed(c_seed)
+
         # Allow override of local_epochs or lr from server config
         epochs = int(config.get("local_epochs", self.local_epochs))
         lr = float(config.get("lr", self.learning_rate))

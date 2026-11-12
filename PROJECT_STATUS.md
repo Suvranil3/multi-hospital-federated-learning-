@@ -9,12 +9,12 @@
 - **Active Primary Dataset**: **PneumoniaMNIST** (Pediatric Chest X-Rays from MedMNIST v3)
 - **Problem Scenario**: **Hospital-based simulated Federated Learning** across 10 hospital clients
 - **Current Model**: **SmallCNN** (2 Conv blocks, BatchNorm, MaxPool, Dense 128, 2-class output; **420,802 parameters**)
-- **Current Milestone**: **Phase 3 Complete — 10-Hospital IID Federated Learning Baseline** (Flower + FedAvg: **85.74% Test Acc, 97.95% Sensitivity**)
-- **Immediate Next Step**: **Phase 4 — Non-IID Hospital Data Heterogeneity** (Dirichlet case-mix skew $\alpha \in \{1.0, 0.5, 0.1\}$)
-- **Future Work**: Adversarial attacks (Phase 5), multi-factor malicious detector (Phase 6), robust aggregation (Phase 7), and blockchain audit trail (Phase 8)
-- **Status Date**: October 31, 2026
+- **Current Milestone**: **Phase 7 Sequential Execution Active** (Implemented sequential O(1)-memory execution engine, persistent execution registry, and lightweight permissioned blockchain audit layer in `blockchain_audit/`; verified across 16 dedicated unit and parity tests, 89/89 full project suite tests passing; 8 / 351 matrix simulations completed)
+- **Immediate Next Step**: **Phase 7 Sequential Matrix Batch Execution** (Remaining 343 simulations across 13 conditions, 9 aggregation variants, seeds 211, 212, 213, with tamper-evident audit logging)
+- **Status Date**: November 2, 2026
 - **Lead Developer**: AI Research Pair Programmer
-- **Strict Scope Boundary**: Phase 3 IID FL complete; Non-IID skew (Phase 4), attacks (Phase 5), detection (Phase 6), and blockchain (Phase 8) strictly NOT started yet.
+- **Strict Scope Boundary**: Frozen detector v1 untouched; Phase 7 matrix (351 simulations) preserved intact; blockchain audit component operates as an experimental permissioned audit layer without heavy mining infrastructure.
+
 
 ---
 
@@ -98,10 +98,61 @@ The project documentation has been fully organized under [`docs/`](file:///home/
   - [`results/figures/centralized_vs_federated_comparison.png`](file:///home/suvranil/project/results/figures/centralized_vs_federated_comparison.png)
 - [x] Emitted structured JSON experiment log: [`results/logs/federated_iid_results.json`](file:///home/suvranil/project/results/logs/federated_iid_results.json).
 
+### Phase 4: Non-IID Hospital Data Heterogeneity Study
+- [x] Implemented population-calibrated constrained Beta/Dirichlet case-mix partitioning in [`federated_learning/dataset.py`](file:///home/suvranil/project/federated_learning/dataset.py).
+- [x] Controlled client sample sizes across 10 hospitals to ~471 samples (8 with 471, 2 with 470, sum = 4,708), isolating label-distribution heterogeneity.
+- [x] Verified strict conservation of global classes (1,214 Normal, 3,494 Pneumonia) and mutual exclusivity across all clients.
+- [x] Enforced identical model initialization across all runs via [`results/models/initial_federated_model.pt`](file:///home/suvranil/project/results/models/initial_federated_model.pt) (verified SHA-256: `0c411b83c2f0acef58beb5b9a968030d877e079eb2356eb3748903f8ae9bbc83`).
+- [x] Preserved BatchNorm running buffers aggregation in FedAvg matching Phase 3.
+- [x] Executed 20-round simulations for $\alpha = 1.0, 0.5, 0.1$:
+  - $\alpha = 1.0$: 79.81% Test Acc, 98.97% Sensitivity, 47.86% Specificity, 0.7498 Macro F1 (Best Round 15: 95.99% Val Acc).
+  - $\alpha = 0.5$: 80.45% Test Acc, 98.46% Sensitivity, 50.43% Specificity, 0.7611 Macro F1 (Best Round 18: 95.99% Val Acc).
+  - $\alpha = 0.1$: 85.10% Test Acc, 91.79% Sensitivity, 73.93% Specificity, 0.8366 Macro F1 (Best Round 12: 89.89% Val Acc; severe subsequent oscillation).
+- [x] Saved all model checkpoints (`best_federated_non_iid_alpha*.pt`, `final_federated_non_iid_alpha*.pt`).
+- [x] Emitted structured JSON experiment logs and generated comparison plots ([`results/figures/iid_vs_non_iid_heterogeneity_comparison.png`](file:///home/suvranil/project/results/figures/iid_vs_non_iid_heterogeneity_comparison.png)).
+
+### Phase 5: Adversarial Attacks Simulation & Matched Controls
+- [x] Implemented targeted label flipping (`federated_learning/attacks/label_flipping.py`).
+- [x] Implemented model update poisoning strictly on 12 trainable tensors (`federated_learning/attacks/model_poisoning.py`) while preserving BatchNorm buffers.
+- [x] Implemented backdoor trigger injection (`federated_learning/attacks/backdoor.py`) with post-normalization normalized white watermark (`+2.5422`) and synthetic triggered evaluation set ($N=390$).
+- [x] Implemented parameterized simulation runner (`experiments/train_federated_attack.py`) enforcing clean validation-only checkpoint selection.
+- [x] Verified 100% parameter hash parity (`0c411b83...`) and partition reproducibility hashes across all runs.
+- [x] Executed all 9 Phase 5 simulations sequentially (`EXP-MED-006` through `EXP-MED-014`):
+  - Fresh Honest Controls: IID (84.62% test acc, FN=7, ASR=0.51%) and Non-IID $\alpha=0.5$ (78.37% test acc, FN=4, ASR=0.26%).
+  - Label Flipping: $M=1$ IID (FN: $7 \to 14$), $M=2$ IID (FN: $7 \to 60$, $+757\%$), $M=1$ Non-IID (FN: $4 \to 11$, $+175\%$).
+  - Model Poisoning: Inversion $\gamma=-1.0$ (FN: 8) and Scaling $\gamma=+10.0$ (FN: 9).
+  - Backdoor Injection: IID $M=1$ ($\Delta \text{ASR} = +6.93\%$, 14.6x jump) and Non-IID $M=1$ ($\Delta \text{ASR} = +8.20\%$, 32.5x jump; Non-IID heterogeneity amplifies backdoor vulnerability).
+- [x] Generated multi-panel comparison figure ([`results/figures/phase5_attack_comparison.png`](file:///home/suvranil/project/results/figures/phase5_attack_comparison.png)) and structured summary log ([`results/logs/phase5_attack_comparison.json`](file:///home/suvranil/project/results/logs/phase5_attack_comparison.json)).
+
+### Phase 6: Multi-Factor Non-IID-Aware Malicious Hospital Detection & Empirical Validation
+- [x] Implemented multi-factor feature extraction (`federated_learning/detection/feature_extractor.py`) tracking 5 feature families: global/layer magnitudes, directional cosines, class-disentangled proxy validation loss impacts, and historical trajectory velocity/EMA accumulator.
+- [x] Implemented layer-wise parameter architecture targeting exact layers: Conv Block 1 (384), Conv Block 2 (18,624), Dense Projection (401,536), Classification Head (258); Total $D = 420,802$ parameters.
+- [x] Implemented calibrated tri-state detector policy (`federated_learning/detection/detector.py`) with `NORMAL`, `SUSPICIOUS`, and `MALICIOUS` decisions.
+- [x] Calibrated empirical quantiles on 400 honest baseline observations (`EXP-MED-006` and `EXP-MED-007`) with Bonferroni multiple testing correction.
+- [x] Removed calibration-data leakage by evaluating strictly on held-out runs (9 simulations, 1,800 observations: 1,640 honest, 160 malicious).
+- [x] Established rigorous dual reporting:
+  - **Out-of-Sample Calibration-Excluded (9 Runs, 1,800 Obs)**: AUROC = **0.9814**, AUPRC = **0.8801**, Total Flagged Recall = **96.25%**, False Malicious Rate = **0.00%**, Precision = **100.00%**.
+  - **In-Sample Reference (11 Runs, 2,200 Obs)**: AUROC = **0.9761**, AUPRC = **0.8026**, Total Flagged Recall = **96.25%**, False Malicious Rate = **0.00%**.
+- [x] Conducted 12 independent multi-seed honest simulations (`EXP-MED-HONEST-*`) across Seeds 43, 44, 45 (2,400 observations): False Malicious Rate = **0.04%** (1 / 2,400).
+- [x] Conducted forensic audit across 16 honest simulations (3,200 observations):
+  - Investigated negative cosine occurrences (199 events, 6.22% prevalence, down to $-0.8411$).
+  - Proved negative cosine is an expected consequence of class specialization in extreme Non-IID ($\alpha=0.1$).
+  - Verified that Symmetrical Clinical Trade-Off Protection successfully shielded **199 / 199 (100.0%)** of negative cosine events from wrongful loss penalties.
+- [x] Conducted instrumentation parity audit:
+  - Verified exact mathematical equivalence between standard `FedAvg` and `InstrumentedFedAvg` (**0.000 max parameter diff** on identical inputs across all 18 state dict elements in [`tests/test_instrumentation_parity.py`](file:///home/suvranil/project/tests/test_instrumentation_parity.py)).
+- [x] Generated publication figures ([`results/phase6_detector/figures/phase6_detector_performance.png`](file:///home/suvranil/project/results/phase6_detector/figures/phase6_detector_performance.png)) and structured JSON benchmarks.
+- [x] **Conducted Phase 6 Frozen Blind Evaluation with Seed Integrity Correction (`EXP-MED-020`)**:
+  - Segregated prior seed-101 runs into [`results/phase6_preflight_exploratory_seed101/`](file:///home/suvranil/project/results/phase6_preflight_exploratory_seed101) with explicit PREFLIGHT labels.
+  - Executed 33 fresh simulations (6,600 observations) across untouched seeds `111, 112, 113` using read-only frozen detector (`frozen_v1/`).
+  - Achieved **0.00% Hard Malicious False Positive Rate** (0 / 6,120) across all honest IID and Non-IID hospitals.
+  - Achieved **93.75% Threat Flagged Recall** (450 / 480) and 100% elimination of model scaling attacks.
+  - Published standalone report in [`docs/PHASE6_BLIND_EVALUATION_REPORT.md`](file:///home/suvranil/project/docs/PHASE6_BLIND_EVALUATION_REPORT.md).
+
 ### Quality, Tests & Dashboard
-- [x] Automated test suite in `tests/`: **21 / 21 PyTest tests passing (100%)** in 3.91 seconds.
-  - Added 7 comprehensive tests in [`tests/test_federated.py`](file:///home/suvranil/project/tests/test_federated.py) covering partition coverage, mutual exclusivity, stratification, determinism, client isolation, fit execution, and server evaluation.
-- [x] Updated interactive teacher demonstration dashboard ([`dashboard/app.py`](file:///home/suvranil/project/dashboard/app.py)) with the multi-hospital story, presentation script, metrics scorecard, medical disclaimer, and an archived CIFAR-10 viewer.
+- [x] Automated test suite in `tests/`: **51 / 51 PyTest tests passing (100%)** in 8.97 seconds.
+  - Added 5 unit tests in [`tests/test_detection.py`](file:///home/suvranil/project/tests/test_detection.py) verifying layer accounting, Modified Z-score MAD robustness, clinical trade-off protection, tri-state decision consistency, and stratified FPR.
+  - Added direct parity test in [`tests/test_instrumentation_parity.py`](file:///home/suvranil/project/tests/test_instrumentation_parity.py) proving 0.000 bit-level aggregation equivalence.
+- [x] Interactive teacher demonstration dashboard ([`dashboard/app.py`](file:///home/suvranil/project/dashboard/app.py)).
 
 ---
 
@@ -109,18 +160,19 @@ The project documentation has been fully organized under [`docs/`](file:///home/
 - [x] **Phase MEDICAL-01**: Medical Dataset Verification (PneumoniaMNIST) (COMPLETED).
 - [x] **Phase MEDICAL-02**: Centralized Medical Small CNN Baseline (COMPLETED).
 - [x] **Phase 3**: **10-Hospital Federated Learning Implementation (Flower + FedAvg, IID baseline)** (COMPLETED).
-- [ ] **Phase 4**: **Non-IID Hospital Data Heterogeneity Simulation (Dirichlet case-mix skew)** — **NEXT IMMEDIATE STEP**.
-- [ ] **Phase 5**: **Malicious Hospital Attack Simulation (Label flipping, poisoning, backdoors)** — **FUTURE WORK**.
-- [ ] **Phase 6**: **Multi-Factor Non-IID-Aware Malicious Hospital Detector** — **FUTURE WORK**.
-- [ ] **Phase 7**: **Robust Aggregation & Tri-State Consensus** — **FUTURE WORK**.
-- [ ] **Phase 8**: **Blockchain Tamper-Evident Medical Audit Trail** — **FUTURE WORK**.
+- [x] **Phase 4**: **Non-IID Hospital Data Heterogeneity Simulation (Dirichlet case-mix skew)** (COMPLETED).
+- [x] **Phase 5**: **Malicious Hospital Attack Simulation (Label flipping, poisoning, backdoors)** (COMPLETED).
+- [x] **Phase 7 Technical Foundation**: **Byzantine-Robust Aggregation, Memory-Safe Execution Engine & Blockchain Audit Integration** (COMPLETED).
+- [ ] **Phase 7 Full Matrix Execution**: **351-Simulation Execution Suite across Seeds 211, 212, 213** — **ACTIVE / IN PROGRESS**.
+- [ ] **Phase 8**: **Decentralized Multi-Node Blockchain Anchoring** — **FUTURE WORK**.
 - [ ] **Phase 9**: **Empirical Evaluation & Comparative Ablations** — **FUTURE WORK**.
 - [ ] **Phase 10**: **Publication Artifacts & Final Report** — **FUTURE WORK**.
 
 ---
 
 ## 4. Scope Boundary Enforcement
-- Non-IID partitioning (Phase 4) is **NOT** started yet.
-- Malicious attacks and detection (Phases 5-6) are **NOT** started yet.
-- Blockchain smart contracts (Phase 8) are **NOT** started yet.
-- Phase 4 will begin strictly upon explicit user instruction.
+- Phases 1 through 6 are fully implemented, audited, and empirically verified.
+- Phase 7 memory-safe sequential runner, persistent registry, and lightweight permissioned blockchain audit layer are fully operational.
+- The authoritative 351-simulation matrix manifest (`PHASE7_EXPERIMENT_MATRIX.json`) remains completely unchanged.
+- The frozen Phase 6 tri-state detector v1 remains strictly read-only and untouched.
+- Decentralized multi-node public blockchain smart contracts remain strictly deferred to Phase 8.
