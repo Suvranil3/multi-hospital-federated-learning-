@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-P7-TRI_STATE_MONITOR-ATK-BN-IID-M1-S211",
+  "timestamp": "2026-11-16T16:05:07.402462+00:00",
+  "condition_id": "ATK-BN-IID-M1",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "batchnorm_poisoning",
+  "malicious_client_ids": [
+    0
+  ],
+  "aggregation_variant": "tri_state_monitor",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 1,
+  "best_val_acc": 25.76,
+  "test_metrics": {
+    "test_accuracy": 37.5,
+    "sensitivity": 0.0,
+    "specificity": 100.0,
+    "macro_f1": 27.27,
+    "test_loss": 0.6953,
+    "confusion_matrix": {
+      "tn": 234,
+      "fp": 0,
+      "fn": 390,
+      "tp": 0
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 92.22,
+    "ram_before_mb": 4679.9,
+    "peak_rss_mb": 1105.6,
+    "ram_after_mb": 4682.1
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-tri_state_monitor-atk-bn-iid-m1-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-tri_state_monitor-atk-bn-iid-m1-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-tri_state_monitor-atk-bn-iid-m1-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-tri_state_monitor-atk-bn-iid-m1-s211_results.json"
+  }
+}

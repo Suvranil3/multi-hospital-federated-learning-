@@ -17,23 +17,22 @@ This research project follows a strict, disciplined phased methodology. Each pha
 [✓] Phase 4: Non-IID Hospital Case-Mix Heterogeneity             (COMPLETED - alpha in {1.0, 0.5, 0.1})
            │
            ▼
-[→] Phase 5: Adversarial Attacks (Label Flip, Poisoning)        (NEXT IMMEDIATE STEP)
-
+[✓] Phase 5: Adversarial Attacks (Label Flip, Poisoning)        (COMPLETED - 12 Attack Scenarios)
            │
            ▼
-[○] Phase 6: Multi-Factor Non-IID-Aware Detector                 (FUTURE WORK)
+[✓] Phase 6: Multi-Factor Non-IID-Aware Detector                 (COMPLETED - AUROC 0.9814, 0.00% Hard FPR)
            │
            ▼
-[○] Phase 7: Robust Aggregation & Tri-State Consensus            (FUTURE WORK)
+[✓] Phase 7: Robust Aggregation & Consensus Under Non-IID Skew   (COMPLETED & AUDITED - 72 Primary Cells)
            │
            ▼
-[○] Phase 8: Blockchain Tamper-Evident Medical Audit Trail       (FUTURE WORK)
+[→] Phase 8: Research Consolidation & Paper Preparation          (CURRENT / PLANNED - Zero Experiments Run)
            │
            ▼
-[○] Phase 9: Comprehensive Empirical Evaluation & Ablations      (FUTURE WORK)
+[○] Phase 9: Extended Ablations & Robust Buffer Auditing         (FUTURE WORK)
            │
            ▼
-[○] Phase 10: Publication Artifacts & Final Report               (FUTURE WORK)
+[○] Phase 10: Publication Artifacts & Final Defense Deck         (FUTURE WORK)
 ```
 
 ---
@@ -134,26 +133,52 @@ This research project follows a strict, disciplined phased methodology. Each pha
 
 ---
 
-### Phase 7: Robust Aggregation & Tri-State Consensus — NEXT IMMEDIATE STEP
-- **Status**: **READY TO BEGIN (Awaiting user review)**
-- **Objective**: Combine non-rejected hospital updates using weighted aggregation and compare performance against classical Byzantine-robust aggregators (Multi-Krum, Trimmed Mean, Coordinate Median).
-- **Primary Metric**: Reduction in False Positive Rate (FPR) on honest specialized hospitals while maintaining high Attack Detection Recall.
+### Phase 7: Robust Aggregation & Consensus Under Non-IID Skew — COMPLETED & AUDITED
+- **Status**: **COMPLETED & AUDITED (November 17, 2026)**
+- **Objective**: Evaluate Byzantine-robust aggregation strategies (Standard FedAvg, Multi-Krum $f=1$, Tri-State Monitor, Tri-State Discount $\lambda=0.50$) across varying clinical Dirichlet heterogeneity ($\alpha \in \{1.0, 0.5, 0.1\}$) and attack vectors (Label Flipping, Backdoors, BatchNorm buffer poisoning).
+- **Execution & Scope**: 72 balanced primary matrix cells (Seeds 211 and 212) + 24 preserved supplementary historical experiments = 96 unique simulations; 97 physical launches (including 1 documented crash recovery in Batch 2). Strictly sequential in-process execution with memory circuit breaker.
+- **Untouched Test Benchmark**: $N=624$ images (234 Normal, 390 Pneumonia).
+- **Statistical Disclosure**: Evaluated across $N=2$ distinct seeds (Seeds 211, 212) as exploratory benchmark trends; not claimed as hypothesis-tested statistical significance. Client nodes are simulated partitions over PneumoniaMNIST and do not represent actual clinical hospital infrastructure.
+- **Key Empirical Results**:
+  1. **Non-IID Label-Flipping Defense**: Tri-State Discounting ($\lambda=0.50$) achieved **83.09% mean accuracy and 58.98% specificity** under Non-IID label flipping ($\alpha=0.5, M=1$), outperforming FedAvg (73.96% Acc / 30.77% Spec) and Multi-Krum (71.72% Acc / 25.00% Spec).
+  2. **Multi-Krum Trade-Off (IID vs Non-IID)**: Multi-Krum ($f=1$) was the top performer against IID backdoors (reducing test ASR to **2.43%** vs. FedAvg 8.46%), but suffered severe specificity collapse down to **23.08%** under honest $\alpha=0.5$ skew due to geometric rejection of the primary Normal-specialized client node (verified in telemetry: Client 2 dropped in 18/20 rounds in Seed 211; Client 3 dropped in 19/20 rounds in Seed 212).
+  3. **Extreme Skew ($\alpha=0.1$) Class Starvation**: Under severe skew, honest minority-class updates were discounted, causing Tri-State Discounting to collapse to All-Pneumonia (0.00% Spec, 62.50% Acc). Unweighted FedAvg was the most resilient aggregator (78.77% Acc, 70.72% Spec).
+  4. **Universal BatchNorm Poisoning Vulnerability**: In all 16 simulations, parameter-only defense metrics failed to detect buffer poisoning (Client 0 classified `NORMAL` in 100% of rounds), and linear buffer averaging caused global model collapse (37.50% All-Normal or 62.50% All-Pneumonia).
+- **Ledger Verification**: Cryptographic blockchain audit ledger validated at tip Block #2133 (2,134 blocks, `is_valid = True`, 0 broken links).
+- **Artifacts**: Registry: [`results/phase7_robust_aggregation/execution_registry_reduced_96.json`](file:///home/suvranil/project/results/phase7_robust_aggregation/execution_registry_reduced_96.json), Manifest: [`results/phase7_robust_aggregation/PHASE7_REDUCED_EXPERIMENT_MATRIX_96.json`](file:///home/suvranil/project/results/phase7_robust_aggregation/PHASE7_REDUCED_EXPERIMENT_MATRIX_96.json), Audit Trail: [`results/blockchain_audit/audit_ledger.jsonl`](file:///home/suvranil/project/results/blockchain_audit/audit_ledger.jsonl), Synthesis: [`docs/PHASE7_ROBUST_AGGREGATION_SYNTHESIS.md`](file:///home/suvranil/project/docs/PHASE7_ROBUST_AGGREGATION_SYNTHESIS.md).
 
 ---
 
-### Phase 8: Blockchain Tamper-Evident Medical Audit Trail — FUTURE WORK
-- **Status**: **PLANNED**
-- **Objective**: Deploy a lightweight, local Ethereum-compatible smart contract to log SHA-256 update hashes, hospital IDs, and detector classifications for clinical regulatory accountability.
-- **Rule**: Zero patient images and zero neural network weights on-chain.
+### Phase 8: Research Consolidation, Paper Artifacts & Publication Preparation — CURRENT / PLANNED
+- **Status**: **PLANNED / CURRENT SCOPE (Zero Simulations Launched)**
+- **Scope Note**: *Explicitly no new training, simulation runs, or smart-contract network deployments have been executed for Phase 8.* This phase focuses strictly on consolidating empirical findings into publication-ready tables, manuscript drafting, and architectural documentation.
+- **Key Objectives**:
+  1. Author a comprehensive research paper manuscript synthesizing the multi-factor detector (Phase 6), the robust aggregation trade-offs (Phase 7), and the cryptographic audit trail.
+  2. Generate high-resolution publication figures (vector PDF / PNG):
+     - Empirical ROC/PR curves from Phase 6.
+     - 4-strategy comparative performance radar and bar charts across Dirichlet $\alpha$ regimes.
+     - Telemetry visualization showing Client 0 attenuation and Multi-Krum geometric minority rejection.
+     - BatchNorm buffer corruption distribution diagram.
+  3. Formalize the mathematical formulation of Tri-State Soft-Discount Aggregation and prove bounds on adversarial gradient influence under bounded heterogeneity.
+  4. Package complete experiment registries, manifests, and verification scripts for open-source reproducibility.
 
 ---
 
-### Phase 9: Comprehensive Empirical Evaluation & Ablation — FUTURE WORK
-- **Status**: **PLANNED**
-- **Objective**: Run exhaustive multi-seed ablation experiments evaluating each detector component individually across varying non-IID levels ($\alpha \in \{1.0, 0.5, 0.1\}$) and attack percentages ($10\%, 20\%, 30\%$).
+### Phase 9: Extended Ablations & Robust Buffer Auditing — FUTURE WORK
+- **Status**: **FUTURE RESEARCH DIRECTION (Unexecuted)**
+- **Future Research Directions**:
+  1. **Non-Linear Batch Normalization Buffer Aggregation**:
+     - *Coordinate-Wise Median Buffers*: Aggregate floating-point running statistics (`running_mean`, `running_var`) using coordinate-wise medians rather than linear sample-weighted averaging, preventing single-client outliers ($10^6$) from corrupting global batch statistics.
+     - *Buffer Divergence Auditing*: Extend the Phase 6 detector to audit client buffer updates against peer distributions (e.g. running mean $L_2$ norm and Kolmogorov-Smirnov distance) before allowing buffer incorporation.
+  2. **Adaptive Extreme-Skew Trust Thresholding**:
+     - Dynamically adapt the cosine similarity threshold $\tau_{\text{cos}}$ as a function of measured local data imbalance to avoid minority-class starvation under extreme Dirichlet skew ($\alpha \le 0.1$).
+  3. **Multi-Seed Scaling ($N \ge 5$)**:
+     - Expand beyond exploratory benchmark seeds ($N=2$) to formal hypothesis-tested statistical evaluations across 5+ independent random seeds.
+  4. **Smart Contract Deployment on Ethereum-Compatible Testnets**:
+     - Deploy lightweight Solidity verification contracts to test gas costs and on-chain event indexing for multi-hospital regulatory audits.
 
 ---
 
-### Phase 10: Publication Artifacts & Final Report — FUTURE WORK
-- **Status**: **PLANNED**
-- **Objective**: Synthesize empirical findings into final project thesis, publication-ready figures, and academic defense slide deck.
+### Phase 10: Publication Artifacts & Defense Slide Deck — FUTURE WORK
+- **Status**: **FUTURE WORK**
+- **Objective**: Finalize thesis dissertation chapters, produce academic conference slide decks, and archive the complete research repository.

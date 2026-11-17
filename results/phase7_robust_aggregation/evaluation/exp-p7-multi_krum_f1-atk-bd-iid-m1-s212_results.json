@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-P7-MULTI_KRUM_F1-ATK-BD-IID-M1-S212",
+  "timestamp": "2026-11-17T06:16:09.763045+00:00",
+  "condition_id": "ATK-BD-IID-M1",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "backdoor",
+  "malicious_client_ids": [
+    0
+  ],
+  "aggregation_variant": "multi_krum_f1",
+  "seed": 212,
+  "rounds": 20,
+  "best_round": 16,
+  "best_val_acc": 95.8,
+  "test_metrics": {
+    "test_accuracy": 86.54,
+    "sensitivity": 96.92,
+    "specificity": 69.23,
+    "macro_f1": 84.71,
+    "test_loss": 0.4571,
+    "confusion_matrix": {
+      "tn": 162,
+      "fp": 72,
+      "fn": 12,
+      "tp": 378
+    },
+    "backdoor_asr": 2.82
+  },
+  "performance": {
+    "duration_seconds": 90.39,
+    "ram_before_mb": 4693.9,
+    "peak_rss_mb": 1099.1,
+    "ram_after_mb": 4645.1
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-multi_krum_f1-atk-bd-iid-m1-s212.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-multi_krum_f1-atk-bd-iid-m1-s212.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-multi_krum_f1-atk-bd-iid-m1-s212_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-multi_krum_f1-atk-bd-iid-m1-s212_results.json"
+  }
+}

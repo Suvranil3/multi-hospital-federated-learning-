@@ -464,7 +464,17 @@ def execute_single_simulation(
     # Backdoor ASR evaluation if backdoor attack
     asr: Optional[float] = None
     if attack_type == "backdoor":
-        asr = evaluate_backdoor_asr(test_eval_model, test_loader, device=device)
+        triggered_dataset = TriggeredPneumoniaTestDataset(clean_test_dataset=test_loader.dataset)
+        triggered_loader = DataLoader(
+            triggered_dataset,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=0,
+        )
+        asr_dict = evaluate_backdoor_asr(model=test_eval_model, triggered_loader=triggered_loader, device=device)
+        asr = float(asr_dict["attack_success_rate_percent"])
+        del triggered_loader
+        del triggered_dataset
 
     del test_eval_model
     del client_loaders
@@ -549,6 +559,7 @@ def execute_single_simulation(
 
 def run_matrix_suite(
     manifest_path: Path = MATRIX_MANIFEST,
+    registry_path: Path = REGISTRY_FILE,
     max_experiments: Optional[int] = None,
     target_seed: Optional[int] = None,
     target_condition: Optional[str] = None,
@@ -564,7 +575,7 @@ def run_matrix_suite(
         manifest = json.load(f)
 
     experiments = manifest["experiments"]
-    registry = ExecutionRegistry(REGISTRY_FILE)
+    registry = ExecutionRegistry(registry_path)
     audit_logger = AuditLogger(LEDGER_FILE)
 
     filtered = []
@@ -580,7 +591,7 @@ def run_matrix_suite(
     print("\n" + "=" * 90)
     print(f"  PHASE 7 RESUMABLE MEMORY-SAFE RUNNER (Total Candidates: {len(filtered)}/{len(experiments)})")
     print(f"  Authoritative Manifest: {manifest_path}")
-    print(f"  Execution Registry:     {REGISTRY_FILE}")
+    print(f"  Execution Registry:     {registry_path}")
     print(f"  Blockchain Ledger:      {LEDGER_FILE}")
     print(f"  Critical RAM Limit:     {CRITICAL_RAM_THRESHOLD_MB} MB available")
     print("=" * 90 + "\n")
@@ -655,6 +666,8 @@ def run_matrix_suite(
 
 def main():
     parser = argparse.ArgumentParser(description="Phase 7 Memory-Safe Sequential Federated Learning Runner")
+    parser.add_argument("--manifest", type=str, default=str(MATRIX_MANIFEST), help="Path to experiment matrix manifest JSON")
+    parser.add_argument("--registry", type=str, default=str(REGISTRY_FILE), help="Path to execution registry JSON")
     parser.add_argument("--max-experiments", type=int, default=None, help="Maximum number of experiments to run in this invocation")
     parser.add_argument("--seed", type=int, default=None, help="Filter by seed (211, 212, 213)")
     parser.add_argument("--condition", type=str, default=None, help="Filter by condition ID (e.g. HONEST-IID, ATK-BN-IID-M1)")
@@ -673,6 +686,8 @@ def main():
         sys.exit(0)
 
     run_matrix_suite(
+        manifest_path=Path(args.manifest),
+        registry_path=Path(args.registry),
         max_experiments=args.max_experiments,
         target_seed=args.seed,
         target_condition=args.condition,

@@ -38,3 +38,4 @@ data/processed/*.npy
 .idea/
 .DS_Store
 Thumbs.db
+*.bak

@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-P7-COORDINATE_MEDIAN-HONEST-A10-S211",
+  "timestamp": "2026-11-16T13:31:52.834228+00:00",
+  "condition_id": "HONEST-A10",
+  "scenario": "non_iid",
+  "alpha": 1.0,
+  "attack_type": "none",
+  "malicious_client_ids": [],
+  "aggregation_variant": "coordinate_median",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 16,
+  "best_val_acc": 95.8,
+  "test_metrics": {
+    "test_accuracy": 83.97,
+    "sensitivity": 97.44,
+    "specificity": 61.54,
+    "macro_f1": 81.3,
+    "test_loss": 0.481,
+    "confusion_matrix": {
+      "tn": 144,
+      "fp": 90,
+      "fn": 10,
+      "tp": 380
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 89.9,
+    "ram_before_mb": 4984.3,
+    "peak_rss_mb": 1102.5,
+    "ram_after_mb": 4931.5
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-coordinate_median-honest-a10-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-coordinate_median-honest-a10-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-coordinate_median-honest-a10-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-coordinate_median-honest-a10-s211_results.json"
+  }
+}

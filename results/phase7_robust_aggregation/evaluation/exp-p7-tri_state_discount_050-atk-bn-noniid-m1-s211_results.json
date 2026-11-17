@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BN-NONIID-M1-S211",
+  "timestamp": "2026-11-17T05:13:46.027773+00:00",
+  "condition_id": "ATK-BN-NONIID-M1",
+  "scenario": "non_iid",
+  "alpha": 0.5,
+  "attack_type": "batchnorm_poisoning",
+  "malicious_client_ids": [
+    0
+  ],
+  "aggregation_variant": "tri_state_discount_050",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 15,
+  "best_val_acc": 74.24,
+  "test_metrics": {
+    "test_accuracy": 62.5,
+    "sensitivity": 100.0,
+    "specificity": 0.0,
+    "macro_f1": 38.46,
+    "test_loss": 0.6931,
+    "confusion_matrix": {
+      "tn": 0,
+      "fp": 234,
+      "fn": 0,
+      "tp": 390
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 88.03,
+    "ram_before_mb": 4996.4,
+    "peak_rss_mb": 1103.8,
+    "ram_after_mb": 4946.2
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-tri_state_discount_050-atk-bn-noniid-m1-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-tri_state_discount_050-atk-bn-noniid-m1-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-tri_state_discount_050-atk-bn-noniid-m1-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-tri_state_discount_050-atk-bn-noniid-m1-s211_results.json"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-P7-FEDAVG-ATK-BD-IID-M1-S211",
+  "timestamp": "2026-11-16T15:21:46.154681+00:00",
+  "condition_id": "ATK-BD-IID-M1",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "backdoor",
+  "malicious_client_ids": [
+    0
+  ],
+  "aggregation_variant": "fedavg",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 12,
+  "best_val_acc": 95.61,
+  "test_metrics": {
+    "test_accuracy": 85.58,
+    "sensitivity": 96.15,
+    "specificity": 67.95,
+    "macro_f1": 83.61,
+    "test_loss": 0.3813,
+    "confusion_matrix": {
+      "tn": 159,
+      "fp": 75,
+      "fn": 15,
+      "tp": 375
+    },
+    "backdoor_asr": 7.69
+  },
+  "performance": {
+    "duration_seconds": 84.34,
+    "ram_before_mb": 4468.5,
+    "peak_rss_mb": 1097.8,
+    "ram_after_mb": 4711.5
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-fedavg-atk-bd-iid-m1-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-fedavg-atk-bd-iid-m1-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-fedavg-atk-bd-iid-m1-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-fedavg-atk-bd-iid-m1-s211_results.json"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BD-IID-M1-S211",
+  "timestamp": "2026-11-16T15:26:20.010474+00:00",
+  "condition_id": "ATK-BD-IID-M1",
+  "scenario": "iid",
+  "alpha": null,
+  "attack_type": "backdoor",
+  "malicious_client_ids": [
+    0
+  ],
+  "aggregation_variant": "tri_state_discount_050",
+  "seed": 211,
+  "rounds": 20,
+  "best_round": 16,
+  "best_val_acc": 95.61,
+  "test_metrics": {
+    "test_accuracy": 86.38,
+    "sensitivity": 96.41,
+    "specificity": 69.66,
+    "macro_f1": 84.58,
+    "test_loss": 0.4015,
+    "confusion_matrix": {
+      "tn": 163,
+      "fp": 71,
+      "fn": 14,
+      "tp": 376
+    },
+    "backdoor_asr": 4.87
+  },
+  "performance": {
+    "duration_seconds": 90.95,
+    "ram_before_mb": 4488.1,
+    "peak_rss_mb": 1104.2,
+    "ram_after_mb": 4504.0
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-tri_state_discount_050-atk-bd-iid-m1-s211.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-tri_state_discount_050-atk-bd-iid-m1-s211.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-tri_state_discount_050-atk-bd-iid-m1-s211_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-tri_state_discount_050-atk-bd-iid-m1-s211_results.json"
+  }
+}

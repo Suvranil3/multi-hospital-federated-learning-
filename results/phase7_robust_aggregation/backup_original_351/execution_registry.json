@@ -1,0 +1,1034 @@
+{
+  "EXP-P7-FEDAVG-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "fedavg",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:00:43.590612+00:00",
+    "test_metrics": {
+      "test_accuracy": 85.74,
+      "sensitivity": 96.41,
+      "specificity": 67.95,
+      "macro_f1": 83.78,
+      "test_loss": 0.4299,
+      "confusion_matrix": {
+        "tn": 159,
+        "fp": 75,
+        "fn": 14,
+        "tp": 376
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 87.34,
+    "blockchain_block": 43,
+    "blockchain_hash": "af66de82cd6f4149841e3d623bbe83df43b6917884a394cef465a5db1d51c552"
+  },
+  "EXP-P7-COORDINATE_MEDIAN-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "coordinate_median",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:03:32.687360+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.54,
+      "sensitivity": 96.67,
+      "specificity": 69.66,
+      "macro_f1": 84.74,
+      "test_loss": 0.3815,
+      "confusion_matrix": {
+        "tn": 163,
+        "fp": 71,
+        "fn": 13,
+        "tp": 377
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.45,
+    "blockchain_block": 65,
+    "blockchain_hash": "c86c9b5165c3a9b9a14975a58d3dcbddc59036dfb81985c31d3aa61f3b25c686"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA1-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "trimmed_mean_beta1",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:04:59.759988+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.22,
+      "sensitivity": 96.67,
+      "specificity": 68.8,
+      "macro_f1": 84.34,
+      "test_loss": 0.4486,
+      "confusion_matrix": {
+        "tn": 161,
+        "fp": 73,
+        "fn": 13,
+        "tp": 377
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 87.06,
+    "blockchain_block": 87,
+    "blockchain_hash": "bbbf51dd0c095963082562b3611d3ff1627d98d7a9ac230a9254c81c367e1604"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA2-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "trimmed_mean_beta2",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:31:26.271628+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.7,
+      "sensitivity": 95.9,
+      "specificity": 71.37,
+      "macro_f1": 85.05,
+      "test_loss": 0.3829,
+      "confusion_matrix": {
+        "tn": 167,
+        "fp": 67,
+        "fn": 16,
+        "tp": 374
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 97.99,
+    "blockchain_block": 109,
+    "blockchain_hash": "1434399fec56a944720fca5c857548f28cba930239c223dc04d19bb029c488fe"
+  },
+  "EXP-P7-MULTI_KRUM_F1-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "multi_krum_f1",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:33:04.859771+00:00",
+    "test_metrics": {
+      "test_accuracy": 85.58,
+      "sensitivity": 97.44,
+      "specificity": 65.81,
+      "macro_f1": 83.4,
+      "test_loss": 0.517,
+      "confusion_matrix": {
+        "tn": 154,
+        "fp": 80,
+        "fn": 10,
+        "tp": 380
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 98.57,
+    "blockchain_block": 131,
+    "blockchain_hash": "14cee0957f2c91c94e8c1d5f364d7ee4e0146eb9d1699180ff6bda7d6df88bcb"
+  },
+  "EXP-P7-MULTI_KRUM_F2-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "multi_krum_f2",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:34:42.493163+00:00",
+    "test_metrics": {
+      "test_accuracy": 85.74,
+      "sensitivity": 96.15,
+      "specificity": 68.38,
+      "macro_f1": 83.82,
+      "test_loss": 0.4449,
+      "confusion_matrix": {
+        "tn": 160,
+        "fp": 74,
+        "fn": 15,
+        "tp": 375
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 97.62,
+    "blockchain_block": 153,
+    "blockchain_hash": "0263df721b42168958022caf471cae8fde24f5fcbc03c569ec6cfef019280817"
+  },
+  "EXP-P7-TRI_STATE_MONITOR-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "tri_state_monitor",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:36:19.246741+00:00",
+    "test_metrics": {
+      "test_accuracy": 85.74,
+      "sensitivity": 96.41,
+      "specificity": 67.95,
+      "macro_f1": 83.78,
+      "test_loss": 0.4299,
+      "confusion_matrix": {
+        "tn": 159,
+        "fp": 75,
+        "fn": 14,
+        "tp": 376
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 96.75,
+    "blockchain_block": 175,
+    "blockchain_hash": "e49a78b35ef7d46f1e8fc448c90ff9c9df02b1c15487769dfedf379f30d4ba04"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "tri_state_discount_050",
+    "seed": 211,
+    "completed_at": "2026-11-02T10:37:56.953257+00:00",
+    "test_metrics": {
+      "test_accuracy": 85.74,
+      "sensitivity": 97.44,
+      "specificity": 66.24,
+      "macro_f1": 83.61,
+      "test_loss": 0.5017,
+      "confusion_matrix": {
+        "tn": 155,
+        "fp": 79,
+        "fn": 10,
+        "tp": 380
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 97.7,
+    "blockchain_block": 197,
+    "blockchain_hash": "23e6a0f077e4400a29c7a699f96163a827567e0d7ed614abab6b79742bd4aefe"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_025-HONEST-IID-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-IID",
+    "aggregation_variant": "tri_state_discount_025",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:28:53.767709+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.54,
+      "sensitivity": 96.67,
+      "specificity": 69.66,
+      "macro_f1": 84.74,
+      "test_loss": 0.4285,
+      "confusion_matrix": {
+        "tn": 163,
+        "fp": 71,
+        "fn": 13,
+        "tp": 377
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.95,
+    "blockchain_block": 219,
+    "blockchain_hash": "199bfead3638684efe53018ac57a372f54e712d26ebfa4e84a2fade1ccc6af61"
+  },
+  "EXP-P7-FEDAVG-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "fedavg",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:30:22.924081+00:00",
+    "test_metrics": {
+      "test_accuracy": 82.21,
+      "sensitivity": 98.46,
+      "specificity": 55.13,
+      "macro_f1": 78.65,
+      "test_loss": 0.6669,
+      "confusion_matrix": {
+        "tn": 129,
+        "fp": 105,
+        "fn": 6,
+        "tp": 384
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.15,
+    "blockchain_block": 241,
+    "blockchain_hash": "0c910f9e20cbfa53cba5fbd21e614238ef6a956cf18ede0ecd309a935383ad18"
+  },
+  "EXP-P7-COORDINATE_MEDIAN-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "coordinate_median",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:31:52.834228+00:00",
+    "test_metrics": {
+      "test_accuracy": 83.97,
+      "sensitivity": 97.44,
+      "specificity": 61.54,
+      "macro_f1": 81.3,
+      "test_loss": 0.481,
+      "confusion_matrix": {
+        "tn": 144,
+        "fp": 90,
+        "fn": 10,
+        "tp": 380
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.9,
+    "blockchain_block": 263,
+    "blockchain_hash": "ee5cef2295ef3780cc22660fcb55b30fec41ce2744e36054eba7e600ec918a72"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA1-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "trimmed_mean_beta1",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:33:22.285986+00:00",
+    "test_metrics": {
+      "test_accuracy": 80.77,
+      "sensitivity": 98.97,
+      "specificity": 50.43,
+      "macro_f1": 76.42,
+      "test_loss": 0.6644,
+      "confusion_matrix": {
+        "tn": 118,
+        "fp": 116,
+        "fn": 4,
+        "tp": 386
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.44,
+    "blockchain_block": 285,
+    "blockchain_hash": "dd0f31bd02a4cc51080bfd359cfc23f0a871a21890d748c4fbb2b55996c4aa72"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA2-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "trimmed_mean_beta2",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:34:50.799359+00:00",
+    "test_metrics": {
+      "test_accuracy": 79.33,
+      "sensitivity": 98.97,
+      "specificity": 46.58,
+      "macro_f1": 74.25,
+      "test_loss": 0.7207,
+      "confusion_matrix": {
+        "tn": 109,
+        "fp": 125,
+        "fn": 4,
+        "tp": 386
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 88.5,
+    "blockchain_block": 307,
+    "blockchain_hash": "f29ab0aa2a6bb5d9fa49436280bb0a818af11c3ea8976f0192d7a62fb113fd6f"
+  },
+  "EXP-P7-MULTI_KRUM_F1-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "multi_krum_f1",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:39:05.013680+00:00",
+    "test_metrics": {
+      "test_accuracy": 83.97,
+      "sensitivity": 97.95,
+      "specificity": 60.68,
+      "macro_f1": 81.19,
+      "test_loss": 0.5059,
+      "confusion_matrix": {
+        "tn": 142,
+        "fp": 92,
+        "fn": 8,
+        "tp": 382
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 92.69,
+    "blockchain_block": 329,
+    "blockchain_hash": "8b1229778a043ef7a17e0e842f3ec7495bfd61fc72c3073649c8d44ba0793220"
+  },
+  "EXP-P7-MULTI_KRUM_F2-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "multi_krum_f2",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:40:38.043437+00:00",
+    "test_metrics": {
+      "test_accuracy": 83.97,
+      "sensitivity": 98.21,
+      "specificity": 60.26,
+      "macro_f1": 81.14,
+      "test_loss": 0.5254,
+      "confusion_matrix": {
+        "tn": 141,
+        "fp": 93,
+        "fn": 7,
+        "tp": 383
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 93.02,
+    "blockchain_block": 351,
+    "blockchain_hash": "ebeb9b73e82379d4cd6f5147242ab8affa0a35342e25dbbf24e84a4342199d4a"
+  },
+  "EXP-P7-TRI_STATE_MONITOR-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "tri_state_monitor",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:42:10.114293+00:00",
+    "test_metrics": {
+      "test_accuracy": 82.21,
+      "sensitivity": 98.46,
+      "specificity": 55.13,
+      "macro_f1": 78.65,
+      "test_loss": 0.6669,
+      "confusion_matrix": {
+        "tn": 129,
+        "fp": 105,
+        "fn": 6,
+        "tp": 384
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 92.06,
+    "blockchain_block": 373,
+    "blockchain_hash": "33e1ea04c9e9899b188ec78e0cdcdcb50a10d6aa0000ccdf1727460abd80db3b"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "tri_state_discount_050",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:43:43.011701+00:00",
+    "test_metrics": {
+      "test_accuracy": 80.45,
+      "sensitivity": 98.97,
+      "specificity": 49.57,
+      "macro_f1": 75.95,
+      "test_loss": 0.6948,
+      "confusion_matrix": {
+        "tn": 116,
+        "fp": 118,
+        "fn": 4,
+        "tp": 386
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 92.88,
+    "blockchain_block": 395,
+    "blockchain_hash": "b68a7109264c16af498162761ab0ce2aab177d8b8a8949da36ce02309db0b92b"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_025-HONEST-A10-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A10",
+    "aggregation_variant": "tri_state_discount_025",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:45:14.687049+00:00",
+    "test_metrics": {
+      "test_accuracy": 83.65,
+      "sensitivity": 97.69,
+      "specificity": 60.26,
+      "macro_f1": 80.82,
+      "test_loss": 0.5517,
+      "confusion_matrix": {
+        "tn": 141,
+        "fp": 93,
+        "fn": 9,
+        "tp": 381
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 91.66,
+    "blockchain_block": 417,
+    "blockchain_hash": "657b39f06e89bfe90230d4d5e918198e960012b5afb0a6cd96116b1cf2543cb9"
+  },
+  "EXP-P7-FEDAVG-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "fedavg",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:48:55.425881+00:00",
+    "test_metrics": {
+      "test_accuracy": 84.94,
+      "sensitivity": 93.59,
+      "specificity": 70.51,
+      "macro_f1": 83.21,
+      "test_loss": 0.4207,
+      "confusion_matrix": {
+        "tn": 165,
+        "fp": 69,
+        "fn": 25,
+        "tp": 365
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.51,
+    "blockchain_block": 439,
+    "blockchain_hash": "11b5ec80ca3a0f27dade9ce640ed5ec1f573c4818c051e4cb38bcbb0d0ef5229"
+  },
+  "EXP-P7-COORDINATE_MEDIAN-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "coordinate_median",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:50:25.732086+00:00",
+    "test_metrics": {
+      "test_accuracy": 87.66,
+      "sensitivity": 94.1,
+      "specificity": 76.92,
+      "macro_f1": 86.44,
+      "test_loss": 0.4658,
+      "confusion_matrix": {
+        "tn": 180,
+        "fp": 54,
+        "fn": 23,
+        "tp": 367
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.29,
+    "blockchain_block": 461,
+    "blockchain_hash": "e9c9127e241b9dc10e6adfb6d7dd486b19f0dc40f88efe014e264188c6da75c9"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA1-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "trimmed_mean_beta1",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:51:55.973893+00:00",
+    "test_metrics": {
+      "test_accuracy": 85.74,
+      "sensitivity": 90.51,
+      "specificity": 77.78,
+      "macro_f1": 84.58,
+      "test_loss": 0.4807,
+      "confusion_matrix": {
+        "tn": 182,
+        "fp": 52,
+        "fn": 37,
+        "tp": 353
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.23,
+    "blockchain_block": 483,
+    "blockchain_hash": "aaa3e351afa53c6f9c987d9d23db9ee8f81c7ebe5e6ca76ba9732b70dd50ca58"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA2-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "trimmed_mean_beta2",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:53:26.630868+00:00",
+    "test_metrics": {
+      "test_accuracy": 73.88,
+      "sensitivity": 100.0,
+      "specificity": 30.34,
+      "macro_f1": 64.64,
+      "test_loss": 0.4652,
+      "confusion_matrix": {
+        "tn": 71,
+        "fp": 163,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.65,
+    "blockchain_block": 505,
+    "blockchain_hash": "56cc31f13364d64233a84f718055e1e1e631da771634048da09740140891df40"
+  },
+  "EXP-P7-MULTI_KRUM_F1-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "multi_krum_f1",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:54:56.388706+00:00",
+    "test_metrics": {
+      "test_accuracy": 71.96,
+      "sensitivity": 100.0,
+      "specificity": 25.21,
+      "macro_f1": 60.97,
+      "test_loss": 0.4769,
+      "confusion_matrix": {
+        "tn": 59,
+        "fp": 175,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.74,
+    "blockchain_block": 527,
+    "blockchain_hash": "4f96b54b617969988bb612cfafe130f374b351044688541447f82fbd16c959e3"
+  },
+  "EXP-P7-MULTI_KRUM_F2-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "multi_krum_f2",
+    "seed": 211,
+    "completed_at": "2026-11-16T13:58:31.348984+00:00",
+    "test_metrics": {
+      "test_accuracy": 66.83,
+      "sensitivity": 100.0,
+      "specificity": 11.54,
+      "macro_f1": 49.86,
+      "test_loss": 0.5375,
+      "confusion_matrix": {
+        "tn": 27,
+        "fp": 207,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.09,
+    "blockchain_block": 549,
+    "blockchain_hash": "6782c3561674fc7eb3c557ec6eda6abe8bd04e105e302c88a7c35132763f7c5d"
+  },
+  "EXP-P7-TRI_STATE_MONITOR-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "tri_state_monitor",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:00:00.945934+00:00",
+    "test_metrics": {
+      "test_accuracy": 84.94,
+      "sensitivity": 93.59,
+      "specificity": 70.51,
+      "macro_f1": 83.21,
+      "test_loss": 0.4207,
+      "confusion_matrix": {
+        "tn": 165,
+        "fp": 69,
+        "fn": 25,
+        "tp": 365
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.59,
+    "blockchain_block": 571,
+    "blockchain_hash": "19b5973132e29f91e57fdbd90e9eeba6b106abd78ac625196c4f3b5ecc7b73b2"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "tri_state_discount_050",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:01:29.858528+00:00",
+    "test_metrics": {
+      "test_accuracy": 84.29,
+      "sensitivity": 97.69,
+      "specificity": 61.97,
+      "macro_f1": 81.67,
+      "test_loss": 0.3864,
+      "confusion_matrix": {
+        "tn": 145,
+        "fp": 89,
+        "fn": 9,
+        "tp": 381
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 88.9,
+    "blockchain_block": 593,
+    "blockchain_hash": "742aedba07c08ac2c2908fea1858a41dee464a4e3c1f948c592d8309ab48ca93"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_025-HONEST-A05-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A05",
+    "aggregation_variant": "tri_state_discount_025",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:02:59.575181+00:00",
+    "test_metrics": {
+      "test_accuracy": 73.4,
+      "sensitivity": 100.0,
+      "specificity": 29.06,
+      "macro_f1": 63.74,
+      "test_loss": 0.5416,
+      "confusion_matrix": {
+        "tn": 68,
+        "fp": 166,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.7,
+    "blockchain_block": 615,
+    "blockchain_hash": "56a3e5b075f77067a2dcaab5b5ac945103da299a890467250bebe8c2919767da"
+  },
+  "EXP-P7-FEDAVG-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "fedavg",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:04:29.166344+00:00",
+    "test_metrics": {
+      "test_accuracy": 81.41,
+      "sensitivity": 79.23,
+      "specificity": 85.04,
+      "macro_f1": 80.81,
+      "test_loss": 0.6299,
+      "confusion_matrix": {
+        "tn": 199,
+        "fp": 35,
+        "fn": 81,
+        "tp": 309
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.58,
+    "blockchain_block": 637,
+    "blockchain_hash": "906e3e36fcbeee680e9edced11f604e566ca5c1efac8f8e4e054aab79c0ae431"
+  },
+  "EXP-P7-COORDINATE_MEDIAN-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "coordinate_median",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:08:24.099020+00:00",
+    "test_metrics": {
+      "test_accuracy": 62.5,
+      "sensitivity": 100.0,
+      "specificity": 0.0,
+      "macro_f1": 38.46,
+      "test_loss": 10.7063,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 234,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 85.28,
+    "blockchain_block": 659,
+    "blockchain_hash": "3b6b26324de310a8d27732404f8637614070585f35d1fed136be2e0d98f42b70"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA1-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "trimmed_mean_beta1",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:09:54.137759+00:00",
+    "test_metrics": {
+      "test_accuracy": 64.26,
+      "sensitivity": 99.74,
+      "specificity": 5.13,
+      "macro_f1": 43.72,
+      "test_loss": 0.5353,
+      "confusion_matrix": {
+        "tn": 12,
+        "fp": 222,
+        "fn": 1,
+        "tp": 389
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.02,
+    "blockchain_block": 681,
+    "blockchain_hash": "a300013a4c2bc30978d2a0c7c7bc051b654aed81a9a007a5b087a7dda8e564dd"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA2-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "trimmed_mean_beta2",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:11:24.699277+00:00",
+    "test_metrics": {
+      "test_accuracy": 79.33,
+      "sensitivity": 79.74,
+      "specificity": 78.63,
+      "macro_f1": 78.43,
+      "test_loss": 0.6533,
+      "confusion_matrix": {
+        "tn": 184,
+        "fp": 50,
+        "fn": 79,
+        "tp": 311
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.55,
+    "blockchain_block": 703,
+    "blockchain_hash": "bcf01328786ce4ffd918f5428221e5a66cc1e5fac9e4134257eff73b72524527"
+  },
+  "EXP-P7-MULTI_KRUM_F1-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "multi_krum_f1",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:12:54.247191+00:00",
+    "test_metrics": {
+      "test_accuracy": 82.05,
+      "sensitivity": 86.15,
+      "specificity": 75.21,
+      "macro_f1": 80.79,
+      "test_loss": 0.6127,
+      "confusion_matrix": {
+        "tn": 176,
+        "fp": 58,
+        "fn": 54,
+        "tp": 336
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.53,
+    "blockchain_block": 725,
+    "blockchain_hash": "db98413ea31cc49d5dd67d4046ca0785a07e74e37eb819f0d026cdc3141f90ab"
+  },
+  "EXP-P7-MULTI_KRUM_F2-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "multi_krum_f2",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:14:23.783783+00:00",
+    "test_metrics": {
+      "test_accuracy": 62.5,
+      "sensitivity": 100.0,
+      "specificity": 0.0,
+      "macro_f1": 38.46,
+      "test_loss": 6.0669,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 234,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.52,
+    "blockchain_block": 747,
+    "blockchain_hash": "97708d0fe278f9a7c5f4f346751ee033b88bb8a398d0609942d045081336f783"
+  },
+  "EXP-P7-TRI_STATE_MONITOR-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "tri_state_monitor",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:18:16.066461+00:00",
+    "test_metrics": {
+      "test_accuracy": 81.41,
+      "sensitivity": 79.23,
+      "specificity": 85.04,
+      "macro_f1": 80.81,
+      "test_loss": 0.6299,
+      "confusion_matrix": {
+        "tn": 199,
+        "fp": 35,
+        "fn": 81,
+        "tp": 309
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.24,
+    "blockchain_block": 769,
+    "blockchain_hash": "7c18cda273c6faf2ae9f04fe906adaf0d6c7765c808df30195cf4e49337237ce"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "tri_state_discount_050",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:19:45.180438+00:00",
+    "test_metrics": {
+      "test_accuracy": 62.5,
+      "sensitivity": 100.0,
+      "specificity": 0.0,
+      "macro_f1": 38.46,
+      "test_loss": 5.0072,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 234,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.1,
+    "blockchain_block": 791,
+    "blockchain_hash": "919410180ed9a918683a65721c13a7f6e77005ed08ae9928134d7a1ac1210dd0"
+  },
+  "EXP-P7-TRI_STATE_DISCOUNT_025-HONEST-A01-S211": {
+    "status": "COMPLETED",
+    "condition_id": "HONEST-A01",
+    "aggregation_variant": "tri_state_discount_025",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:21:14.299355+00:00",
+    "test_metrics": {
+      "test_accuracy": 62.5,
+      "sensitivity": 100.0,
+      "specificity": 0.0,
+      "macro_f1": 38.46,
+      "test_loss": 6.4194,
+      "confusion_matrix": {
+        "tn": 0,
+        "fp": 234,
+        "fn": 0,
+        "tp": 390
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 89.1,
+    "blockchain_block": 813,
+    "blockchain_hash": "afa06ce05edc17788fbe48d902aeaf1e58ac472156a635225313c7eef241a73b"
+  },
+  "EXP-P7-FEDAVG-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "fedavg",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:22:44.480942+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.22,
+      "sensitivity": 93.59,
+      "specificity": 73.93,
+      "macro_f1": 84.78,
+      "test_loss": 0.3347,
+      "confusion_matrix": {
+        "tn": 173,
+        "fp": 61,
+        "fn": 25,
+        "tp": 365
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.16,
+    "blockchain_block": 835,
+    "blockchain_hash": "73ce733288a33c6af32900663c47624bc811da7b9e7495e31e40defa0fae166c"
+  },
+  "EXP-P7-COORDINATE_MEDIAN-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "coordinate_median",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:24:15.192266+00:00",
+    "test_metrics": {
+      "test_accuracy": 83.65,
+      "sensitivity": 97.69,
+      "specificity": 60.26,
+      "macro_f1": 80.82,
+      "test_loss": 0.4889,
+      "confusion_matrix": {
+        "tn": 141,
+        "fp": 93,
+        "fn": 9,
+        "tp": 381
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 90.7,
+    "blockchain_block": 857,
+    "blockchain_hash": "3964c8cf36769c2907d9578640e7ffe8fe59b23aaef6674ee186e7786250803c"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA1-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "trimmed_mean_beta1",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:27:46.719324+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.7,
+      "sensitivity": 96.92,
+      "specificity": 69.66,
+      "macro_f1": 84.91,
+      "test_loss": 0.4055,
+      "confusion_matrix": {
+        "tn": 163,
+        "fp": 71,
+        "fn": 12,
+        "tp": 378
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 84.34,
+    "blockchain_block": 879,
+    "blockchain_hash": "5e5218753c59c56bc84e64296cfa81e28f1d39f0e9d7fb10a1cc9866bab7a280"
+  },
+  "EXP-P7-TRIMMED_MEAN_BETA2-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "trimmed_mean_beta2",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:29:07.129314+00:00",
+    "test_metrics": {
+      "test_accuracy": 84.46,
+      "sensitivity": 97.44,
+      "specificity": 62.82,
+      "macro_f1": 81.94,
+      "test_loss": 0.4406,
+      "confusion_matrix": {
+        "tn": 147,
+        "fp": 87,
+        "fn": 10,
+        "tp": 380
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 80.4,
+    "blockchain_block": 901,
+    "blockchain_hash": "0427ee7b1c5168a72c0ad2fde636bab401da15809f4cc8e597e57aa8e87f9837"
+  },
+  "EXP-P7-MULTI_KRUM_F1-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "multi_krum_f1",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:30:27.430455+00:00",
+    "test_metrics": {
+      "test_accuracy": 84.29,
+      "sensitivity": 97.44,
+      "specificity": 62.39,
+      "macro_f1": 81.72,
+      "test_loss": 0.4978,
+      "confusion_matrix": {
+        "tn": 146,
+        "fp": 88,
+        "fn": 10,
+        "tp": 380
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 80.29,
+    "blockchain_block": 923,
+    "blockchain_hash": "58195877d2acce613f9154e494c76aa2d6e92966a1368ae0c0b550ad568e3bab"
+  },
+  "EXP-P7-MULTI_KRUM_F2-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "multi_krum_f2",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:31:54.758400+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.38,
+      "sensitivity": 96.92,
+      "specificity": 68.8,
+      "macro_f1": 84.5,
+      "test_loss": 0.4433,
+      "confusion_matrix": {
+        "tn": 161,
+        "fp": 73,
+        "fn": 12,
+        "tp": 378
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 87.31,
+    "blockchain_block": 945,
+    "blockchain_hash": "1fd3b018888dfd78d8dea3f67e84b329442eb5a7cdcac5294d5d15a32ed458bb"
+  },
+  "EXP-P7-TRI_STATE_MONITOR-ATK-LF-IID-M1-S211": {
+    "status": "COMPLETED",
+    "condition_id": "ATK-LF-IID-M1",
+    "aggregation_variant": "tri_state_monitor",
+    "seed": 211,
+    "completed_at": "2026-11-16T14:33:16.865394+00:00",
+    "test_metrics": {
+      "test_accuracy": 86.22,
+      "sensitivity": 93.59,
+      "specificity": 73.93,
+      "macro_f1": 84.78,
+      "test_loss": 0.3347,
+      "confusion_matrix": {
+        "tn": 173,
+        "fp": 61,
+        "fn": 25,
+        "tp": 365
+      },
+      "backdoor_asr": null
+    },
+    "duration_seconds": 82.09,
+    "blockchain_block": 967,
+    "blockchain_hash": "5505878ca7ba7429a9fe75389130473866fb9f1e257fe973b8be93248a78125d"
+  }
+}

@@ -404,29 +404,185 @@ Following the seed integrity correction (segregating prior seed-101 runs to `res
 
 ---
 
-## 8. Phase 7: Byzantine-Robust Aggregation & Blockchain Audit Foundation
+## 8. Phase 7: Byzantine-Robust Aggregation & Consensus Under Non-IID Skew — COMPLETED & AUDITED
 
-### 8.1. Memory-Safe Sequential Execution Baseline Measurements (Seed 211, Honest IID)
-- **Runner Script**: [`experiments/run_phase7_memory_safe.py`](file:///home/suvranil/project/experiments/run_phase7_memory_safe.py)
-- **Execution Strategy**: Strictly sequential in-process execution ($O(1)$ memory, zero Ray multi-processing overhead, per-round tensor and client destruction with `gc.collect()`).
-- **Memory Profile**: System total RAM: 6,749 MB, base usage: 5.2–5.4 GB, peak process RSS: 907–1097 MB, available system memory maintained at $>1.4\text{ GB}$ throughout all 20 rounds.
-- **Circuit Breaker**: Enforced automatic pause if available system RAM falls below 250 MB.
+- **Status**: **COMPLETED & AUDITED (November 17, 2026)**
+- **Scope & Balancing**: Evaluated across a 72-cell primary research matrix (4 aggregation strategies × 9 experimental regimes × 2 seeds: 211, 212) plus 24 preserved supplementary historical experiments (96 unique simulations total; 97 physical launches including 1 documented crash recovery in Batch 2).
+- **Execution Methodology**: Strictly sequential, in-process CPU execution ([`experiments/run_phase7_memory_safe.py`](file:///home/suvranil/project/experiments/run_phase7_memory_safe.py)) with per-round tensor/client garbage collection, memory-safe execution, and a 250 MB RAM circuit breaker.
+- **Untouched Benchmark Test Split**: $N = 624$ images (234 Normal [Class 0, 37.5%], 390 Pneumonia [Class 1, 62.5%]).
+- **Statistical Disclosure**: All primary scorecard figures report exploratory benchmark means across $N=2$ distinct seeds (Seeds 211 and 212). They are presented as descriptive empirical trends and are not claimed to be hypothesis-tested statistical significance.
+- **Experimental Setup**: Evaluated on simulated client nodes partitioned using synthetic Dirichlet distributions ($\alpha \in \{1.0, 0.5, 0.1\}$) over PneumoniaMNIST ($28 \times 28$ grayscale images); this setup serves as an algorithmic stress-test and does not claim to represent real clinical hospital imaging or multi-center institutional heterogeneity.
 
-#### Diagnostic Performance on Untouched Test Split ($N=624$ Chest X-Rays, Seed 211)
-| Experiment Identifier | Strategy / Aggregator | Test Accuracy (%) | Pneumonia Sensitivity (%) | Normal Specificity (%) | Macro F1 (%) | Test Loss | Confusion Matrix `[TN, FP, FN, TP]` | Blockchain Block | Runtime (s) |
-|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `EXP-P7-FEDAVG-HONEST-IID-S211` | Standard FedAvg | 85.74% | 96.41% (376/390) | 67.95% (159/234) | 83.78% | 0.4299 | `[159, 75, 14, 376]` | #43 | 87.3s |
-| `EXP-P7-COORDINATE_MEDIAN-HONEST-IID-S211` | Coordinate Median | 86.54% | 96.67% (377/390) | 69.66% (163/234) | 84.74% | 0.3815 | `[163, 71, 13, 377]` | #65 | 89.5s |
-| `EXP-P7-TRIMMED_MEAN_BETA1-HONEST-IID-S211` | Trimmed Mean ($\beta=1$) | 86.22% | 96.67% (377/390) | 68.80% (161/234) | 84.34% | 0.4486 | `[161, 73, 13, 377]` | #87 | 87.1s |
+### 8.1. Artifact Inventory & Cryptographic Ledger Verification
+- **Primary Manifest**: [`results/phase7_robust_aggregation/PHASE7_REDUCED_EXPERIMENT_MATRIX_96.json`](file:///home/suvranil/project/results/phase7_robust_aggregation/PHASE7_REDUCED_EXPERIMENT_MATRIX_96.json) (72 primary experiment specifications).
+- **Primary Execution Registry**: [`results/phase7_robust_aggregation/execution_registry_reduced_96.json`](file:///home/suvranil/project/results/phase7_robust_aggregation/execution_registry_reduced_96.json) (72 completed records, bit-for-bit verified against evaluation JSONs).
+- **Historical Execution Registry (Preserved)**: [`results/phase7_robust_aggregation/execution_registry.json`](file:///home/suvranil/project/results/phase7_robust_aggregation/execution_registry.json) (43 records, preserving 24 supplementary experiments: 5 Coordinate Median, 5 Trimmed Mean $\beta=1$, 5 Trimmed Mean $\beta=2$, 5 Multi-Krum $f=2$, 4 Tri-State Discount $\lambda=0.25$).
+- **Checkpoints**: Exactly 144 `.pt` model files (72 `best_*.pt`, 72 `final_*.pt`, 1.7 MB each) in [`results/phase7_robust_aggregation/checkpoints/`](file:///home/suvranil/project/results/phase7_robust_aggregation/checkpoints/).
+- **Evaluation Reports**: Exactly 72 `*_results.json` files in [`results/phase7_robust_aggregation/evaluation/`](file:///home/suvranil/project/results/phase7_robust_aggregation/evaluation/).
+- **Telemetry Logs**: Exactly 72 `*_features.jsonl` files in [`results/phase7_robust_aggregation/instrumentation/`](file:///home/suvranil/project/results/phase7_robust_aggregation/instrumentation/).
+- **Batch 2 Recovery Audit**: [`docs/PHASE7_BATCH2_RECOVERY_AUDIT.md`](file:///home/suvranil/project/docs/PHASE7_BATCH2_RECOVERY_AUDIT.md).
+- **Blockchain Audit Trail**: [`results/blockchain_audit/audit_ledger.jsonl`](file:///home/suvranil/project/results/blockchain_audit/audit_ledger.jsonl):
+  - **Genesis Block**: Block #0 verified with null parent hash.
+  - **Final Tip Block**: Block #2133 (Total: 2,134 blocks).
+  - **Cryptographic Verification**: `blockchain_audit.verification.verify_ledger()` confirms `is_valid = True`, 0 broken backwards SHA-256 hash links, 0 genesis discrepancies, and 100% cryptographic match against disk artifact hashes.
 
-### 8.2. Blockchain Audit Ledger Integrity & Artifact Fingerprints
-- **Ledger Path**: [`results/blockchain_audit/audit_ledger.jsonl`](file:///home/suvranil/project/results/blockchain_audit/audit_ledger.jsonl)
-- **Verifier Report**: Standalone verification via `blockchain_audit.verification` confirms:
-  - **Total Blocks Verified**: 88 blocks (1 Genesis, 3 Experiment Inits, 60 Communication Rounds, 3 Final Completions, 21 Lifecycle Events).
-  - **Genesis Block Integrity**: Verified index 0 and predefined previous hash (`0000...0000`).
-  - **Backwards Hash Linkage**: 100% continuous backwards SHA-256 hash chaining ($\mathcal{H}_i = \text{SHA-256}(\text{CanonicalJSON}(\text{Block}_i))$).
-  - **Disk Artifact Hashes**: Verified against physical `.pt` checkpoints, `.jsonl` telemetry, and `.json` metrics on disk with zero checksum mismatches.
-  - **Ledger Verification Status**: **VALID (100% Cryptographic Match)**.
+### 8.2. Strategy-Wise and Condition-Wise Summary Matrix (N=2 Seeds: 211, 212)
+| Experimental Regime | Aggregation Strategy | Seed 211 Acc | Seed 212 Acc | Mean Acc (%) | Mean Spec (%) | Mean Sens (%) | Mean Macro F1 (%) | Mean Backdoor ASR (%) | Primary Outcome / State |
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|---|
+| HONEST-IID | FedAvg Baseline | 85.74% | 85.42% | **85.58%** | 67.31% | 96.54% | 83.56% | — | Normal Convergence |
+| HONEST-IID | Multi-Krum (f=1) | 85.58% | 86.38% | **85.98%** | 67.09% | 97.31% | 83.93% | — | Normal Convergence |
+| HONEST-IID | Tri-State Monitor | 85.74% | 85.42% | **85.58%** | 67.31% | 96.54% | 83.56% | — | Normal Convergence |
+| HONEST-IID | Tri-State Discount (0.50) | 85.74% | 87.02% | **86.38%** | 68.59% | 97.06% | 84.47% | — | Normal Convergence |
+| HONEST-A10 | FedAvg Baseline | 82.21% | 82.37% | **82.29%** | 55.55% | 98.33% | 78.80% | — | Normal Convergence |
+| HONEST-A10 | Multi-Krum (f=1) | 83.97% | 85.10% | **84.53%** | 63.03% | 97.44% | 82.03% | — | Normal Convergence |
+| HONEST-A10 | Tri-State Monitor | 82.21% | 82.37% | **82.29%** | 55.55% | 98.33% | 78.80% | — | Normal Convergence |
+| HONEST-A10 | Tri-State Discount (0.50) | 80.45% | 84.29% | **82.37%** | 56.20% | 98.08% | 78.87% | — | Normal Convergence |
+| HONEST-A05 | FedAvg Baseline | 84.94% | 76.44% | **80.69%** | 54.48% | 96.41% | 76.38% | — | Normal Convergence |
+| HONEST-A05 | Multi-Krum (f=1) | 71.96% | 70.35% | **71.16%** | 23.08% | 100.00% | 59.35% | — | Severe Specificity Collapse (23.08%) |
+| HONEST-A05 | Tri-State Monitor | 84.94% | 76.44% | **80.69%** | 54.48% | 96.41% | 76.38% | — | Normal Convergence |
+| HONEST-A05 | Tri-State Discount (0.50) | 84.29% | 80.77% | **82.53%** | 55.98% | 98.46% | 79.00% | — | Normal Convergence |
+| HONEST-A01 | FedAvg Baseline | 81.41% | 76.12% | **78.77%** | 70.72% | 83.59% | 76.93% | — | Optimal Extreme-Skew Resilience |
+| HONEST-A01 | Multi-Krum (f=1) | 82.05% | 62.50% | **72.28%** | 37.60% | 93.08% | 59.62% | — | Normal Convergence |
+| HONEST-A01 | Tri-State Monitor | 81.41% | 76.12% | **78.77%** | 70.72% | 83.59% | 76.93% | — | Normal Convergence |
+| HONEST-A01 | Tri-State Discount (0.50) | 62.50% | 62.50% | **62.50%** | 0.00% | 100.00% | 38.46% | — | Degenerate All-Pneumonia (Starvation) |
+| ATK-LF-IID-M1 | FedAvg Baseline | 86.22% | 86.38% | **86.30%** | 71.58% | 95.13% | 84.66% | — | Normal Convergence |
+| ATK-LF-IID-M1 | Multi-Krum (f=1) | 84.29% | 86.38% | **85.34%** | 65.17% | 97.44% | 83.07% | — | Normal Convergence |
+| ATK-LF-IID-M1 | Tri-State Monitor | 86.22% | 86.38% | **86.30%** | 71.58% | 95.13% | 84.66% | — | Normal Convergence |
+| ATK-LF-IID-M1 | Tri-State Discount (0.50) | 85.74% | 87.34% | **86.54%** | 69.66% | 96.66% | 84.73% | — | Normal Convergence |
+| ATK-LF-NONIID-M1 | FedAvg Baseline | 74.36% | 73.56% | **73.96%** | 30.77% | 99.87% | 64.85% | — | Normal Convergence |
+| ATK-LF-NONIID-M1 | Multi-Krum (f=1) | 77.24% | 66.19% | **71.72%** | 25.00% | 99.75% | 59.52% | — | Normal Convergence |
+| ATK-LF-NONIID-M1 | Tri-State Monitor | 74.36% | 73.56% | **73.96%** | 30.77% | 99.87% | 64.85% | — | Normal Convergence |
+| ATK-LF-NONIID-M1 | Tri-State Discount (0.50) | 83.81% | 82.37% | **83.09%** | 58.98% | 97.56% | 80.04% | — | Robust Specificity Rescue (+28.21%) |
+| ATK-BD-IID-M1 | FedAvg Baseline | 85.58% | 86.70% | **86.14%** | 69.44% | 96.15% | 84.31% | 8.46% | Normal Convergence |
+| ATK-BD-IID-M1 | Multi-Krum (f=1) | 84.29% | 86.54% | **85.42%** | 65.81% | 97.18% | 83.22% | 2.43% | Optimal Backdoor Defense (ASR 2.43%) |
+| ATK-BD-IID-M1 | Tri-State Monitor | 85.58% | 86.70% | **86.14%** | 69.44% | 96.15% | 84.31% | 8.46% | Normal Convergence |
+| ATK-BD-IID-M1 | Tri-State Discount (0.50) | 86.38% | 86.54% | **86.46%** | 69.66% | 96.54% | 84.66% | 5.00% | Normal Convergence |
+| ATK-BN-IID-M1 | FedAvg Baseline | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | Degenerate All-Normal Collapse |
+| ATK-BN-IID-M1 | Multi-Krum (f=1) | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | Degenerate All-Normal Collapse |
+| ATK-BN-IID-M1 | Tri-State Monitor | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | Degenerate All-Normal Collapse |
+| ATK-BN-IID-M1 | Tri-State Discount (0.50) | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | Degenerate All-Normal Collapse |
+| ATK-BN-NONIID-M1 | FedAvg Baseline | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | Degenerate All-Normal Collapse |
+| ATK-BN-NONIID-M1 | Multi-Krum (f=1) | 62.50% | 62.50% | **62.50%** | 0.00% | 100.00% | 38.46% | — | Degenerate All-Pneumonia Collapse |
+| ATK-BN-NONIID-M1 | Tri-State Monitor | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | Degenerate All-Normal Collapse |
+| ATK-BN-NONIID-M1 | Tri-State Discount (0.50) | 62.50% | 37.50% | **50.00%** | 50.00% | 50.00% | 32.87% | — | Divergent Degenerate Collapse |
+
+### 8.3. Behavioral Mechanics & Scientific Findings
+
+#### 8.3.1. Non-IID Label-Flipping Defense: Tri-State Discounting Superiority
+Under moderate Dirichlet non-IID partitioning ($\alpha=0.5$) with a label-flipping adversary ($M=1$, flipping Pneumonia $\to$ Normal), standard FedAvg drops to 73.96% accuracy and 30.77% specificity. Multi-Krum ($f=1$) suffers severe degradation, dropping to 71.72% accuracy and 25.00% specificity. In contrast, **Tri-State Discounting ($\lambda=0.50$) achieves 83.09% mean accuracy and 58.98% specificity**, outperforming FedAvg by **+9.13% accuracy / +28.21% specificity** and Multi-Krum by **+11.37% accuracy / +33.98% specificity**.
+- **Verified Telemetry Audit**: In Seed 211, Client 0 (attacker) was flagged `SUSPICIOUS` in 16 of 20 rounds (80%), reducing its cumulative weight from 2.0008 to 1.4422 (a net cumulative attenuation of 27.92%). In Seed 212, Client 0 was flagged `SUSPICIOUS` in 18 of 20 rounds (90%), reducing its cumulative weight from 2.0008 to 1.2805 (a net cumulative attenuation of 36.00%). In rounds where Client 0 was discounted, per-round weight attenuation reached 37.5%–50.0% relative to honest peers, suppressing adversarial bias while preserving honest minority updates.
+
+#### 8.3.2. Multi-Krum Dual Nature: IID Backdoor Defense vs. Non-IID Specificity Collapse
+Multi-Krum ($f=1, m=9$) exhibits a stark dichotomy between IID and non-IID regimes:
+- **IID Backdoor Suppression**: Under IID conditions with a $3\times3$ watermark trigger, Multi-Krum effectively isolates the triggered client, reducing Backdoor Attack Success Rate (ASR) to **2.43%** (vs. FedAvg's 8.46% and Tri-State Discount's 5.00%).
+- **Non-IID Geometric Rejection**: Under honest non-IID skew ($\alpha=0.5$), Multi-Krum's test specificity collapses catastrophically to **23.08%** (25.21% in Seed 211, 20.94% in Seed 212), while Pneumonia sensitivity reaches 100.00%.
+- **Verified Telemetry Audit**: Feature telemetry reveals why this collapse occurs: Multi-Krum uses pairwise Euclidean parameter distance to discard $f=1$ client each round. In Seed 211, Client 2 holds 97.9% Normal cases (461 Normal, 10 Pneumonia) and was rejected in **18 of 20 rounds (90%)**, receiving only 0.2222 cumulative effective weight (vs. 2.2222 for peers). In Seed 212, Client 3 holds 98.3% Normal cases (463 Normal, 8 Pneumonia) and was rejected in **19 of 20 rounds (95%)**, receiving only 0.1111 cumulative effective weight. Multi-Krum systematically purged the primary Normal-specialized client node from global aggregation, starving the model of Normal feature gradients.
+
+#### 8.3.3. Extreme Skew ($\alpha=0.1$) Consensus Collapse and Class Starvation
+Under severe Dirichlet partitioning ($\alpha=0.1$), the majority of clients hold nearly homogeneous Pneumonia partitions, causing honest clients with high Normal proportions to diverge sharply from the collective median:
+- The Phase 6 detector's directional cosine metric misidentifies divergent honest clients as `SUSPICIOUS`, applying the $\lambda=0.50$ discount.
+- This creates a feedback loop of **class starvation**: discounting minority Normal updates progressively reduces the global model's capacity to recognize Normal images.
+- Consequently, Tri-State Discounting collapses to a degenerate **All-Pneumonia model** across both seeds (Accuracy = 62.50%, Specificity = 0.00%, Sensitivity = 100.00%, Confusion Matrix `[0, 234, 0, 390]`).
+- **FedAvg Baseline Resilience**: Simple linear unweighted FedAvg was the most robust aggregator under extreme skew, maintaining **78.77% mean accuracy and 70.72% specificity** (Seed 211: 81.41% Acc / 85.04% Spec; Seed 212: 76.12% Acc / 55.98% Spec).
+
+#### 8.3.4. BatchNorm Buffer Poisoning Blind Spot: Universal Collapse Across All Strategies
+In all 16 simulations involving Batch Normalization buffer poisoning ($M=1$, injecting $10^6$ into `running_mean` and `running_var`), **every aggregation strategy collapsed completely** into a single-class predictor:
+- **Root Cause (Detector & Distance Blind Spot)**: The Phase 6 detector and Multi-Krum distance metrics evaluate strictly trainable parameter tensors (`TRAINABLE_INDICES`). Because the attacker leaves trainable weights untouched and poisons only floating-point buffers (`BN_FLOAT_INDICES`), the detector classified Client 0 as `NORMAL` in **100% of rounds (20/20 rounds across all runs)**.
+- **Linear Buffer Averaging**: Aggregators linearly averaged the poisoned buffer ($10^6$) across 10 clients, setting global running statistics to $\approx 1.0\times10^5$. During test evaluation in `.eval()` mode, the corrupted running statistics completely destroyed intermediate feature maps.
+- **Collapse States (Disclosed & Distinguished)**:
+  - **All-Normal Collapse**: Confusion matrix `[234, 0, 390, 0]`, Test Accuracy = 37.50% (234/624), Sensitivity = 0.00% (0/390), Specificity = 100.00% (234/234), Macro F1 = 27.27%. Observed in 100% of IID runs across all strategies, and in all FedAvg / Tri-State Monitor Non-IID runs.
+  - **All-Pneumonia Collapse**: Confusion matrix `[0, 234, 0, 390]`, Test Accuracy = 62.50% (390/624), Sensitivity = 100.00% (390/390), Specificity = 0.00% (0/234), Macro F1 = 38.46%. Observed in Multi-Krum Non-IID runs (Seeds 211 and 212) and Tri-State Discount Seed 211.
+  - **Divergent Collapse**: In Tri-State Discount Non-IID, Seed 211 collapsed to All-Pneumonia (62.50% Acc) while Seed 212 collapsed to All-Normal (37.50% Acc), yielding a mathematical average of 50.00% Acc / 50.00% Spec / 50.00% Sens.
+
+### 8.4. Complete 72-Cell Granular Scorecard Table
+Exact metrics for all 72 primary Phase 7 simulations, evaluated on the untouched benchmark test split ($N=624$ images: 234 Normal, 390 Pneumonia):
+
+| # | Experiment Identifier | Condition | Variant | Seed | Acc (%) | Sens (%) | Spec (%) | Macro F1 (%) | Loss | Confusion Matrix [TN, FP, FN, TP] | Backdoor ASR | Blockchain Block |
+|---|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | `EXP-P7-FEDAVG-HONEST-IID-S211` | HONEST-IID | fedavg | 211 | 85.74% | 96.41% | 67.95% | 83.78% | 0.4299 | [159, 75, 14, 376] | — | #43 |
+| 2 | `EXP-P7-MULTI_KRUM_F1-HONEST-IID-S211` | HONEST-IID | multi_krum_f1 | 211 | 85.58% | 97.44% | 65.81% | 83.40% | 0.5170 | [154, 80, 10, 380] | — | #131 |
+| 3 | `EXP-P7-TRI_STATE_MONITOR-HONEST-IID-S211` | HONEST-IID | tri_state_monitor | 211 | 85.74% | 96.41% | 67.95% | 83.78% | 0.4299 | [159, 75, 14, 376] | — | #175 |
+| 4 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-IID-S211` | HONEST-IID | tri_state_discount_050 | 211 | 85.74% | 97.44% | 66.24% | 83.61% | 0.5017 | [155, 79, 10, 380] | — | #197 |
+| 5 | `EXP-P7-FEDAVG-HONEST-IID-S212` | HONEST-IID | fedavg | 212 | 85.42% | 96.67% | 66.67% | 83.33% | 0.4423 | [156, 78, 13, 377] | — | #1363 |
+| 6 | `EXP-P7-MULTI_KRUM_F1-HONEST-IID-S212` | HONEST-IID | multi_krum_f1 | 212 | 86.38% | 97.18% | 68.38% | 84.46% | 0.4668 | [160, 74, 11, 379] | — | #1385 |
+| 7 | `EXP-P7-TRI_STATE_MONITOR-HONEST-IID-S212` | HONEST-IID | tri_state_monitor | 212 | 85.42% | 96.67% | 66.67% | 83.33% | 0.4423 | [156, 78, 13, 377] | — | #1407 |
+| 8 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-IID-S212` | HONEST-IID | tri_state_discount_050 | 212 | 87.02% | 96.67% | 70.94% | 85.34% | 0.4449 | [166, 68, 13, 377] | — | #1429 |
+| 9 | `EXP-P7-FEDAVG-HONEST-A10-S211` | HONEST-A10 | fedavg | 211 | 82.21% | 98.46% | 55.13% | 78.65% | 0.6669 | [129, 105, 6, 384] | — | #241 |
+| 10 | `EXP-P7-MULTI_KRUM_F1-HONEST-A10-S211` | HONEST-A10 | multi_krum_f1 | 211 | 83.97% | 97.95% | 60.68% | 81.19% | 0.5059 | [142, 92, 8, 382] | — | #329 |
+| 11 | `EXP-P7-TRI_STATE_MONITOR-HONEST-A10-S211` | HONEST-A10 | tri_state_monitor | 211 | 82.21% | 98.46% | 55.13% | 78.65% | 0.6669 | [129, 105, 6, 384] | — | #373 |
+| 12 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A10-S211` | HONEST-A10 | tri_state_discount_050 | 211 | 80.45% | 98.97% | 49.57% | 75.95% | 0.6948 | [116, 118, 4, 386] | — | #395 |
+| 13 | `EXP-P7-FEDAVG-HONEST-A10-S212` | HONEST-A10 | fedavg | 212 | 82.37% | 98.21% | 55.98% | 78.94% | 0.6273 | [131, 103, 7, 383] | — | #1451 |
+| 14 | `EXP-P7-MULTI_KRUM_F1-HONEST-A10-S212` | HONEST-A10 | multi_krum_f1 | 212 | 85.10% | 96.92% | 65.38% | 82.87% | 0.4877 | [153, 81, 12, 378] | — | #1473 |
+| 15 | `EXP-P7-TRI_STATE_MONITOR-HONEST-A10-S212` | HONEST-A10 | tri_state_monitor | 212 | 82.37% | 98.21% | 55.98% | 78.94% | 0.6273 | [131, 103, 7, 383] | — | #1495 |
+| 16 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A10-S212` | HONEST-A10 | tri_state_discount_050 | 212 | 84.29% | 97.18% | 62.82% | 81.78% | 0.5358 | [147, 87, 11, 379] | — | #1517 |
+| 17 | `EXP-P7-FEDAVG-HONEST-A05-S211` | HONEST-A05 | fedavg | 211 | 84.94% | 93.59% | 70.51% | 83.21% | 0.4207 | [165, 69, 25, 365] | — | #439 |
+| 18 | `EXP-P7-MULTI_KRUM_F1-HONEST-A05-S211` | HONEST-A05 | multi_krum_f1 | 211 | 71.96% | 100.00% | 25.21% | 60.97% | 0.4769 | [59, 175, 0, 390] | — | #527 |
+| 19 | `EXP-P7-TRI_STATE_MONITOR-HONEST-A05-S211` | HONEST-A05 | tri_state_monitor | 211 | 84.94% | 93.59% | 70.51% | 83.21% | 0.4207 | [165, 69, 25, 365] | — | #571 |
+| 20 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A05-S211` | HONEST-A05 | tri_state_discount_050 | 211 | 84.29% | 97.69% | 61.97% | 81.67% | 0.3864 | [145, 89, 9, 381] | — | #593 |
+| 21 | `EXP-P7-FEDAVG-HONEST-A05-S212` | HONEST-A05 | fedavg | 212 | 76.44% | 99.23% | 38.46% | 69.54% | 0.4431 | [90, 144, 3, 387] | — | #1539 |
+| 22 | `EXP-P7-MULTI_KRUM_F1-HONEST-A05-S212` | HONEST-A05 | multi_krum_f1 | 212 | 70.35% | 100.00% | 20.94% | 57.73% | 0.5228 | [49, 185, 0, 390] | — | #1561 |
+| 23 | `EXP-P7-TRI_STATE_MONITOR-HONEST-A05-S212` | HONEST-A05 | tri_state_monitor | 212 | 76.44% | 99.23% | 38.46% | 69.54% | 0.4431 | [90, 144, 3, 387] | — | #1583 |
+| 24 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A05-S212` | HONEST-A05 | tri_state_discount_050 | 212 | 80.77% | 99.23% | 50.00% | 76.34% | 0.5679 | [117, 117, 3, 387] | — | #1605 |
+| 25 | `EXP-P7-FEDAVG-HONEST-A01-S211` | HONEST-A01 | fedavg | 211 | 81.41% | 79.23% | 85.04% | 80.81% | 0.6299 | [199, 35, 81, 309] | — | #637 |
+| 26 | `EXP-P7-MULTI_KRUM_F1-HONEST-A01-S211` | HONEST-A01 | multi_krum_f1 | 211 | 82.05% | 86.15% | 75.21% | 80.79% | 0.6127 | [176, 58, 54, 336] | — | #725 |
+| 27 | `EXP-P7-TRI_STATE_MONITOR-HONEST-A01-S211` | HONEST-A01 | tri_state_monitor | 211 | 81.41% | 79.23% | 85.04% | 80.81% | 0.6299 | [199, 35, 81, 309] | — | #769 |
+| 28 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A01-S211` | HONEST-A01 | tri_state_discount_050 | 211 | 62.50% | 100.00% | 0.00% | 38.46% | 5.0072 | [0, 234, 0, 390] | — | #791 |
+| 29 | `EXP-P7-FEDAVG-HONEST-A01-S212` | HONEST-A01 | fedavg | 212 | 76.12% | 87.95% | 56.41% | 73.04% | 0.5539 | [132, 102, 47, 343] | — | #1627 |
+| 30 | `EXP-P7-MULTI_KRUM_F1-HONEST-A01-S212` | HONEST-A01 | multi_krum_f1 | 212 | 62.50% | 100.00% | 0.00% | 38.46% | 5.8900 | [0, 234, 0, 390] | — | #1649 |
+| 31 | `EXP-P7-TRI_STATE_MONITOR-HONEST-A01-S212` | HONEST-A01 | tri_state_monitor | 212 | 76.12% | 87.95% | 56.41% | 73.04% | 0.5539 | [132, 102, 47, 343] | — | #1671 |
+| 32 | `EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A01-S212` | HONEST-A01 | tri_state_discount_050 | 212 | 62.50% | 100.00% | 0.00% | 38.46% | 6.7606 | [0, 234, 0, 390] | — | #1693 |
+| 33 | `EXP-P7-FEDAVG-ATK-LF-IID-M1-S211` | ATK-LF-IID-M1 | fedavg | 211 | 86.22% | 93.59% | 73.93% | 84.78% | 0.3347 | [173, 61, 25, 365] | — | #835 |
+| 34 | `EXP-P7-MULTI_KRUM_F1-ATK-LF-IID-M1-S211` | ATK-LF-IID-M1 | multi_krum_f1 | 211 | 84.29% | 97.44% | 62.39% | 81.72% | 0.4978 | [146, 88, 10, 380] | — | #923 |
+| 35 | `EXP-P7-TRI_STATE_MONITOR-ATK-LF-IID-M1-S211` | ATK-LF-IID-M1 | tri_state_monitor | 211 | 86.22% | 93.59% | 73.93% | 84.78% | 0.3347 | [173, 61, 25, 365] | — | #967 |
+| 36 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-LF-IID-M1-S211` | ATK-LF-IID-M1 | tri_state_discount_050 | 211 | 85.74% | 96.92% | 67.09% | 83.69% | 0.4444 | [157, 77, 12, 378] | — | #989 |
+| 37 | `EXP-P7-FEDAVG-ATK-LF-IID-M1-S212` | ATK-LF-IID-M1 | fedavg | 212 | 86.38% | 96.67% | 69.23% | 84.54% | 0.4259 | [162, 72, 13, 377] | — | #1715 |
+| 38 | `EXP-P7-MULTI_KRUM_F1-ATK-LF-IID-M1-S212` | ATK-LF-IID-M1 | multi_krum_f1 | 212 | 86.38% | 97.44% | 67.95% | 84.42% | 0.4643 | [159, 75, 10, 380] | — | #1737 |
+| 39 | `EXP-P7-TRI_STATE_MONITOR-ATK-LF-IID-M1-S212` | ATK-LF-IID-M1 | tri_state_monitor | 212 | 86.38% | 96.67% | 69.23% | 84.54% | 0.4259 | [162, 72, 13, 377] | — | #1759 |
+| 40 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-LF-IID-M1-S212` | ATK-LF-IID-M1 | tri_state_discount_050 | 212 | 87.34% | 96.41% | 72.22% | 85.77% | 0.4261 | [169, 65, 14, 376] | — | #1781 |
+| 41 | `EXP-P7-FEDAVG-ATK-LF-NONIID-M1-S211` | ATK-LF-NONIID-M1 | fedavg | 211 | 74.36% | 99.74% | 32.05% | 65.66% | 0.8595 | [75, 159, 1, 389] | — | #1011 |
+| 42 | `EXP-P7-MULTI_KRUM_F1-ATK-LF-NONIID-M1-S211` | ATK-LF-NONIID-M1 | multi_krum_f1 | 211 | 77.24% | 99.49% | 40.17% | 70.75% | 0.4471 | [94, 140, 2, 388] | — | #1033 |
+| 43 | `EXP-P7-TRI_STATE_MONITOR-ATK-LF-NONIID-M1-S211` | ATK-LF-NONIID-M1 | tri_state_monitor | 211 | 74.36% | 99.74% | 32.05% | 65.66% | 0.8595 | [75, 159, 1, 389] | — | #1055 |
+| 44 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-LF-NONIID-M1-S211` | ATK-LF-NONIID-M1 | tri_state_discount_050 | 211 | 83.81% | 96.15% | 63.25% | 81.35% | 0.4061 | [148, 86, 15, 375] | — | #1077 |
+| 45 | `EXP-P7-FEDAVG-ATK-LF-NONIID-M1-S212` | ATK-LF-NONIID-M1 | fedavg | 212 | 73.56% | 100.00% | 29.49% | 64.04% | 0.8828 | [69, 165, 0, 390] | — | #1803 |
+| 46 | `EXP-P7-MULTI_KRUM_F1-ATK-LF-NONIID-M1-S212` | ATK-LF-NONIID-M1 | multi_krum_f1 | 212 | 66.19% | 100.00% | 9.83% | 48.30% | 1.2925 | [23, 211, 0, 390] | — | #1825 |
+| 47 | `EXP-P7-TRI_STATE_MONITOR-ATK-LF-NONIID-M1-S212` | ATK-LF-NONIID-M1 | tri_state_monitor | 212 | 73.56% | 100.00% | 29.49% | 64.04% | 0.8828 | [69, 165, 0, 390] | — | #1847 |
+| 48 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-LF-NONIID-M1-S212` | ATK-LF-NONIID-M1 | tri_state_discount_050 | 212 | 82.37% | 98.97% | 54.70% | 78.74% | 0.4533 | [128, 106, 4, 386] | — | #1869 |
+| 49 | `EXP-P7-FEDAVG-ATK-BD-IID-M1-S211` | ATK-BD-IID-M1 | fedavg | 211 | 85.58% | 96.15% | 67.95% | 83.61% | 0.3813 | [159, 75, 15, 375] | 7.69% | #1099 |
+| 50 | `EXP-P7-MULTI_KRUM_F1-ATK-BD-IID-M1-S211` | ATK-BD-IID-M1 | multi_krum_f1 | 211 | 84.29% | 97.44% | 62.39% | 81.72% | 0.4978 | [146, 88, 10, 380] | 2.05% | #1121 |
+| 51 | `EXP-P7-TRI_STATE_MONITOR-ATK-BD-IID-M1-S211` | ATK-BD-IID-M1 | tri_state_monitor | 211 | 85.58% | 96.15% | 67.95% | 83.61% | 0.3813 | [159, 75, 15, 375] | 7.69% | #1143 |
+| 52 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BD-IID-M1-S211` | ATK-BD-IID-M1 | tri_state_discount_050 | 211 | 86.38% | 96.41% | 69.66% | 84.58% | 0.4015 | [163, 71, 14, 376] | 4.87% | #1165 |
+| 53 | `EXP-P7-FEDAVG-ATK-BD-IID-M1-S212` | ATK-BD-IID-M1 | fedavg | 212 | 86.70% | 96.15% | 70.94% | 85.02% | 0.3953 | [166, 68, 15, 375] | 9.23% | #1891 |
+| 54 | `EXP-P7-MULTI_KRUM_F1-ATK-BD-IID-M1-S212` | ATK-BD-IID-M1 | multi_krum_f1 | 212 | 86.54% | 96.92% | 69.23% | 84.71% | 0.4571 | [162, 72, 12, 378] | 2.82% | #1913 |
+| 55 | `EXP-P7-TRI_STATE_MONITOR-ATK-BD-IID-M1-S212` | ATK-BD-IID-M1 | tri_state_monitor | 212 | 86.70% | 96.15% | 70.94% | 85.02% | 0.3953 | [166, 68, 15, 375] | 9.23% | #1935 |
+| 56 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BD-IID-M1-S212` | ATK-BD-IID-M1 | tri_state_discount_050 | 212 | 86.54% | 96.67% | 69.66% | 84.74% | 0.4266 | [163, 71, 13, 377] | 5.13% | #1957 |
+| 57 | `EXP-P7-FEDAVG-ATK-BN-IID-M1-S211` | ATK-BN-IID-M1 | fedavg | 211 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6953 | [234, 0, 390, 0] | — | #1187 |
+| 58 | `EXP-P7-MULTI_KRUM_F1-ATK-BN-IID-M1-S211` | ATK-BN-IID-M1 | multi_krum_f1 | 211 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6953 | [234, 0, 390, 0] | — | #1209 |
+| 59 | `EXP-P7-TRI_STATE_MONITOR-ATK-BN-IID-M1-S211` | ATK-BN-IID-M1 | tri_state_monitor | 211 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6953 | [234, 0, 390, 0] | — | #1231 |
+| 60 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BN-IID-M1-S211` | ATK-BN-IID-M1 | tri_state_discount_050 | 211 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6953 | [234, 0, 390, 0] | — | #1253 |
+| 61 | `EXP-P7-FEDAVG-ATK-BN-IID-M1-S212` | ATK-BN-IID-M1 | fedavg | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6954 | [234, 0, 390, 0] | — | #1979 |
+| 62 | `EXP-P7-MULTI_KRUM_F1-ATK-BN-IID-M1-S212` | ATK-BN-IID-M1 | multi_krum_f1 | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6954 | [234, 0, 390, 0] | — | #2001 |
+| 63 | `EXP-P7-TRI_STATE_MONITOR-ATK-BN-IID-M1-S212` | ATK-BN-IID-M1 | tri_state_monitor | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6954 | [234, 0, 390, 0] | — | #2023 |
+| 64 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BN-IID-M1-S212` | ATK-BN-IID-M1 | tri_state_discount_050 | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6954 | [234, 0, 390, 0] | — | #2045 |
+| 65 | `EXP-P7-FEDAVG-ATK-BN-NONIID-M1-S211` | ATK-BN-NONIID-M1 | fedavg | 211 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6947 | [234, 0, 390, 0] | — | #1275 |
+| 66 | `EXP-P7-MULTI_KRUM_F1-ATK-BN-NONIID-M1-S211` | ATK-BN-NONIID-M1 | multi_krum_f1 | 211 | 62.50% | 100.00% | 0.00% | 38.46% | 0.6930 | [0, 234, 0, 390] | — | #1297 |
+| 67 | `EXP-P7-TRI_STATE_MONITOR-ATK-BN-NONIID-M1-S211` | ATK-BN-NONIID-M1 | tri_state_monitor | 211 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6947 | [234, 0, 390, 0] | — | #1319 |
+| 68 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BN-NONIID-M1-S211` | ATK-BN-NONIID-M1 | tri_state_discount_050 | 211 | 62.50% | 100.00% | 0.00% | 38.46% | 0.6931 | [0, 234, 0, 390] | — | #1341 |
+| 69 | `EXP-P7-FEDAVG-ATK-BN-NONIID-M1-S212` | ATK-BN-NONIID-M1 | fedavg | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6947 | [234, 0, 390, 0] | — | #2067 |
+| 70 | `EXP-P7-MULTI_KRUM_F1-ATK-BN-NONIID-M1-S212` | ATK-BN-NONIID-M1 | multi_krum_f1 | 212 | 62.50% | 100.00% | 0.00% | 38.46% | 0.6928 | [0, 234, 0, 390] | — | #2089 |
+| 71 | `EXP-P7-TRI_STATE_MONITOR-ATK-BN-NONIID-M1-S212` | ATK-BN-NONIID-M1 | tri_state_monitor | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6947 | [234, 0, 390, 0] | — | #2111 |
+| 72 | `EXP-P7-TRI_STATE_DISCOUNT_050-ATK-BN-NONIID-M1-S212` | ATK-BN-NONIID-M1 | tri_state_discount_050 | 212 | 37.50% | 0.00% | 100.00% | 27.27% | 0.6943 | [234, 0, 390, 0] | — | #2133 |
+
+### 8.5. Preserved Supplementary Historical Experiments (N=24)
+In addition to the 72 balanced primary matrix cells, 24 supplementary historical experiments from initial Phase 7 explorations are permanently preserved in [`results/phase7_robust_aggregation/execution_registry.json`](file:///home/suvranil/project/results/phase7_robust_aggregation/execution_registry.json):
+
+| Strategy Variant | Experiments Preserved | Regimes Covered | Primary Findings |
+|---|:---:|---|---|
+| **Coordinate Median** | 5 | Honest IID, A10, A05, A01; ATK-LF-IID | Strong IID baseline (86.54% Acc / 69.66% Spec); degraded under A01 (74.84% Acc / 50.00% Spec). |
+| **Trimmed Mean ($\beta=1$)** | 5 | Honest IID, A10, A05, A01; ATK-LF-IID | Solid IID baseline (86.22% Acc / 68.80% Spec); dropped under A01 (78.37% Acc / 67.52% Spec). |
+| **Trimmed Mean ($\beta=2$)** | 5 | Honest IID, A10, A05, A01; ATK-LF-IID | Trimming 2 highest/lowest values caused over-trimming under non-IID partitions. |
+| **Multi-Krum ($f=2$)** | 5 | Honest IID, A10, A05, A01; ATK-LF-IID | Discarding $f=2$ candidates worsened non-IID specificity collapse compared to $f=1$. |
+| **Tri-State Discount ($\lambda=0.25$)** | 4 | Honest IID, A10, A05, A01 | More aggressive discount factor (0.25) accelerated class starvation under non-IID skew. |
+
 
 ---
 

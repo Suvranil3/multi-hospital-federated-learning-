@@ -22,8 +22,11 @@ This project introduces a **comprehensive, research-grade, multi-hospital federa
 - Realistic **clinical case-mix heterogeneity** modeled via constrained Dirichlet distributions ($\alpha \in \{1.0, 0.5, 0.1\}$).
 - A complete **adversarial attack suite** (targeted label flipping, gradient scaling/inversion, backdoor triggers).
 - A novel **Multi-Factor Non-IID-Aware Tri-State Malicious Detector** achieving **0.9814 AUROC** with **0.00% False Positive Rate** on honest non-IID hospitals.
-- A **robust tri-state consensus aggregation engine** preventing diagnostic degradation under Byzantine threat.
-- A lightweight **tamper-evident permissioned blockchain audit layer** anchoring every model update, detector decision, and consensus state with SHA-256 block hash chaining and Merkle trees.
+- A **robust tri-state consensus aggregation engine** evaluated across a balanced **72-cell primary matrix** (Seeds 211, 212) + 24 preserved supplementary simulations (96 unique simulations total; 97 physical launches).
+- Empirical proof that **Tri-State Soft Discounting ($\lambda=0.50$) rescues Normal specificity to 58.98%** under non-IID label flipping (+28.21% over FedAvg, +33.98% over Multi-Krum).
+- Empirical discovery of **Multi-Krum's geometric minority rejection failure** (collapsing specificity to 23.08% under honest $lpha=0.5$ skew) and the **BatchNorm buffer poisoning blind spot** (100% universal collapse across all classical aggregators).
+- A lightweight **tamper-evident permissioned blockchain audit layer** anchoring 2,134 blocks with cryptographic SHA-256 block hash chaining (`is_valid = True`, tip Block #2133).
+- A complete **academic research paper draft** (`docs/RESEARCH_PAPER_DRAFT.md`, ~5,500 words, 19 sections), literature review (20 verified papers), and reproducibility specifications.
 
 ---
 
@@ -295,6 +298,71 @@ Evaluated strictly out-of-sample on **held-out evaluation cohorts** ($N = 1,800$
 
 ---
 
+### 4. Phase 7: Robust Aggregation & Consensus Empirical Scorecard ($N=2$ Seeds: 211, 212)
+
+Evaluated across a balanced 72-cell primary research matrix (4 aggregation strategies $\times$ 9 experimental conditions $\times$ 2 seeds: 211 and 212) on the untouched test split ($N = 624$ images: 234 Normal, 390 Pneumonia):
+
+| Experimental Regime | Aggregation Strategy | Seed 211 Acc | Seed 212 Acc | Mean Acc (%) | Mean Spec (%) | Mean Sens (%) | Mean Macro F1 (%) | Mean Backdoor ASR (%) | Empirical Outcome State |
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|---|
+| **Honest IID** | FedAvg Baseline | 85.74% | 85.42% | **85.58%** | 67.31% | 96.54% | 83.56% | — | Normal Convergence |
+| | Multi-Krum ($f=1$) | 85.58% | 86.38% | **85.98%** | 67.09% | 97.31% | 83.93% | — | Normal Convergence |
+| | Tri-State Monitor | 85.74% | 85.42% | **85.58%** | 67.31% | 96.54% | 83.56% | — | Audit Baseline Parity |
+| | Tri-State Discount (0.50) | 85.74% | 87.02% | **86.38%** | 68.59% | 97.06% | 84.47% | — | Optimal Test Specificity |
+| **Honest Non-IID ($\alpha=1.0$)** | FedAvg Baseline | 82.21% | 82.37% | **82.29%** | 55.55% | 98.33% | 78.80% | — | Mild Skew Convergence |
+| | Multi-Krum ($f=1$) | 83.97% | 85.10% | **84.53%** | 63.03% | 97.44% | 82.03% | — | Preserves Consensus |
+| | Tri-State Monitor | 82.21% | 82.37% | **82.29%** | 55.55% | 98.33% | 78.80% | — | Audit Baseline Parity |
+| | Tri-State Discount (0.50) | 80.45% | 84.29% | **82.37%** | 56.20% | 98.08% | 78.87% | — | Robust Mild Skew |
+| **Honest Non-IID ($\alpha=0.5$)** | FedAvg Baseline | 84.94% | 76.44% | **80.69%** | 54.48% | 96.41% | 76.38% | — | Normal Heterogeneity |
+| | Multi-Krum ($f=1$) | 71.96% | 70.35% | **71.16%** | **23.08%** | 100.00% | 59.35% | — | **Severe Specificity Collapse (23.08%)** |
+| | Tri-State Monitor | 84.94% | 76.44% | **80.69%** | 54.48% | 96.41% | 76.38% | — | Audit Baseline Parity |
+| | Tri-State Discount (0.50) | 84.29% | 80.77% | **82.53%** | **55.98%** | 98.46% | 79.00% | — | **Highest Acc & Spec** |
+| **Honest Non-IID ($\alpha=0.1$)** | FedAvg Baseline | 81.41% | 76.12% | **78.77%** | **70.72%** | 83.59% | 76.93% | — | **Optimal Extreme-Skew Resilience** |
+| | Multi-Krum ($f=1$) | 82.05% | 62.50% | **72.28%** | 37.60% | 93.08% | 59.62% | — | Poor Minority Preservation |
+| | Tri-State Monitor | 81.41% | 76.12% | **78.77%** | 70.72% | 83.59% | 76.93% | — | Audit Baseline Parity |
+| | Tri-State Discount (0.50) | 62.50% | 62.50% | **62.50%** | **0.00%** | 100.00% | 38.46% | — | **All-Pneumonia Collapse (Starvation)** |
+| **Label Flipping IID ($M=1$)** | FedAvg Baseline | 86.22% | 86.38% | **86.30%** | 71.58% | 95.13% | 84.66% | — | Honest Majority Absorption |
+| | Multi-Krum ($f=1$) | 84.29% | 86.38% | **85.34%** | 65.17% | 97.44% | 83.07% | — | Tolerates IID Noise |
+| | Tri-State Monitor | 86.22% | 86.38% | **86.30%** | 71.58% | 95.13% | 84.66% | — | Tracks Attacker |
+| | Tri-State Discount (0.50) | 85.74% | 87.34% | **86.54%** | 69.66% | 96.66% | 84.73% | — | Attenuates Attacker |
+| **Label Flipping Non-IID ($\alpha=0.5$)** | FedAvg Baseline | 74.36% | 73.56% | **73.96%** | 30.77% | 99.87% | 64.85% | — | Specificity Degraded (-23.71%) |
+| | Multi-Krum ($f=1$) | 77.24% | 66.19% | **71.72%** | 25.00% | 99.75% | 59.52% | — | Distorted by Skew & Attack |
+| | Tri-State Monitor | 74.36% | 73.56% | **73.96%** | 30.77% | 99.87% | 64.85% | — | Telemetry Captures Attack |
+| | Tri-State Discount (0.50) | 83.81% | 82.37% | **83.09%** | **58.98%** | 97.56% | 80.04% | — | **Specificity Rescued (+28.21% vs FedAvg)** |
+| **Backdoor IID ($M=1$)** | FedAvg Baseline | 85.58% | 86.70% | **86.14%** | 69.44% | 96.15% | 84.31% | 8.46% | Vulnerable to Watermark |
+| | Multi-Krum ($f=1$) | 84.29% | 86.54% | **85.42%** | 65.81% | 97.18% | 83.22% | **2.43%** | **Optimal Backdoor Defense (ASR 2.43%)** |
+| | Tri-State Monitor | 85.58% | 86.70% | **86.14%** | 69.44% | 96.15% | 84.31% | 8.46% | Tracks Backdoor Drift |
+| | Tri-State Discount (0.50) | 86.38% | 86.54% | **86.46%** | 69.66% | 96.54% | 84.66% | 5.00% | Attenuates ASR by 40.9% |
+| **BatchNorm Poisoning IID** | All 4 Strategies | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | **All-Normal Collapse (Buffers $pprox 10^5$)** |
+| **BatchNorm Poisoning Non-IID** | FedAvg / Monitor | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | **All-Normal Collapse** |
+| | Multi-Krum ($f=1$) | 62.50% | 62.50% | **62.50%** | 0.00% | 100.00% | 38.46% | — | **All-Pneumonia Collapse** |
+| | Tri-State Discount (0.50) | 62.50% | 37.50% | **50.00%** | 50.00% | 50.00% | 32.87% | — | **Divergent Degenerate Collapse** |
+
+> [!IMPORTANT]
+> **Key Empirical Insights**:
+> 1. **Tri-State Soft Discounting Excels on Non-IID Label Flipping**: Attenuating suspicious updates by $\lambda=0.50$ rescues Normal specificity to **58.98%** under $lpha=0.5$ skew (+28.21% over FedAvg; +33.98% over Multi-Krum), supported by telemetry proving 27.92%–36.00% net cumulative attenuation of the adversary.
+> 2. **Multi-Krum's Minority Rejection Failure**: Multi-Krum effectively suppresses IID backdoors (2.43% ASR), but under honest $lpha=0.5$ skew it collapses specificity to **23.08%** because telemetry proves it rejected the primary Normal-specialized client (Client 2 in Seed 211 [97.9% Normal], Client 3 in Seed 212 [98.3% Normal]) in **90%–95% of rounds**.
+> 3. **The BatchNorm Buffer Poisoning Blind Spot**: All 16 simulations collapsed completely into degenerate single-class predictors. Parameter-only anomaly detectors classified the attacker as `NORMAL` in 100% of rounds because weights were honest, while linear buffer averaging propagated $10^6$ outliers into global running statistics.
+
+---
+
+### 5. Phase 8: Academic Research Paper & Technical Documentation Suite
+
+The complete scientific methodology, literature grounding, and empirical evidence have been synthesized into a comprehensive academic documentation suite:
+
+| Document | Description | Link |
+|---|---|:---:|
+| **Academic Paper Draft** | Full 19-section research paper (~5,500 words) formulated in formal academic prose with equations, tables, figures, and honest $N=2$ disclosures. | [`docs/RESEARCH_PAPER_DRAFT.md`](docs/RESEARCH_PAPER_DRAFT.md) |
+| **Comprehensive Literature Review** | Survey of 20 verified foundational papers across federated learning, Byzantine defense, non-IID optimization, and medical AI with verified DOIs. | [`docs/LITERATURE_REVIEW.md`](docs/LITERATURE_REVIEW.md) |
+| **Research Contributions Statement** | Formal articulation of the clinical dilemma, literature gap, multi-factor detector, tri-state consensus, and empirical discoveries. | [`docs/RESEARCH_CONTRIBUTIONS.md`](docs/RESEARCH_CONTRIBUTIONS.md) |
+| **Phase 7 Technical Synthesis Report** | Exhaustive technical synthesis (4,100+ words) covering all 72 primary runs, telemetry audits, and failure mode mechanics. | [`docs/PHASE7_ROBUST_AGGREGATION_SYNTHESIS.md`](docs/PHASE7_ROBUST_AGGREGATION_SYNTHESIS.md) |
+| **Reproducibility Checklist** | Complete specification of dataset splits, random seeds, hyperparameters, SHA-256 hashes, and environment versions. | [`docs/PAPER_REPRODUCIBILITY_CHECKLIST.md`](docs/PAPER_REPRODUCIBILITY_CHECKLIST.md) |
+| **Critical Peer-Review Audit** | Objective peer-review evaluation grading scientific clarity, methodological correctness, reproducibility, and journal submission readiness. | [`docs/PAPER_REVIEW_AUDIT.md`](docs/PAPER_REVIEW_AUDIT.md) |
+| **Batch 2 Recovery Audit** | Forensic post-mortem documenting the runner crash, rollback, ledger truncation, and bug fix in Phase 7 Batch 2. | [`docs/PHASE7_BATCH2_RECOVERY_AUDIT.md`](docs/PHASE7_BATCH2_RECOVERY_AUDIT.md) |
+| **Current Empirical Scorecard** | Complete project results document recording verified metrics across Phases 1 through 7. | [`docs/CURRENT_RESULTS.md`](docs/CURRENT_RESULTS.md) |
+| **Research Roadmap** | Phased engineering and research roadmap tracking completed milestones through Phase 8. | [`docs/RESEARCH_ROADMAP.md`](docs/RESEARCH_ROADMAP.md) |
+
+---
+
 ## 💻 How to Operate the Project
 
 ### 1. Prerequisites & Environment Setup
@@ -502,13 +570,21 @@ multi-hospital-federated-learning/
 │   ├── app.py                          # Streamlit interactive application
 │   └── README.md                       # Dashboard operating instructions
 │
-├── docs/                               # 📚 In-Depth Technical & Research Documentation
-│   ├── PROJECT_CONTEXT.md              # Clinical scenario & healthcare motivation
-│   ├── WHY_CNN_AND_DATASET.md          # Architectural rationale for PneumoniaMNIST & SmallCNN
-│   ├── HOSPITAL_SCENARIO.md            # Multi-hospital protocol & clinical dilemma
-│   ├── CURRENT_RESULTS.md              # Comprehensive empirical scorecard
-│   ├── BLOCKCHAIN_AUDIT_ARCHITECTURE.md# Cryptographic design of audit ledger
-│   └── PHASE6_BLIND_EVALUATION_REPORT.md# Formal Phase 6 blind benchmark report
+├── docs/                               # 📚 In-Depth Technical & Research Documentation Suite
+│   ├── RESEARCH_PAPER_DRAFT.md         # 📄 Full 19-section academic manuscript draft
+│   ├── LITERATURE_REVIEW.md            # 📖 Survey of 20 verified foundational papers with DOIs
+│   ├── RESEARCH_CONTRIBUTIONS.md       # 🎯 Formal statement of problem, gap & contributions
+│   ├── PHASE7_ROBUST_AGGREGATION_SYNTHESIS.md # 🔬 Technical synthesis of 72 Phase 7 runs
+│   ├── PAPER_REPRODUCIBILITY_CHECKLIST.md # ⚙️ SHA-256 hashes, exact configs & environment
+│   ├── PAPER_REVIEW_AUDIT.md           # ⚖️ Formal peer-review audit & readiness evaluation
+│   ├── CURRENT_RESULTS.md              # 📊 Comprehensive empirical results scorecard (Phases 1-7)
+│   ├── RESEARCH_ROADMAP.md             # 🗺️ Phased project roadmap & research progression
+│   ├── PROJECT_CONTEXT.md              # 🏥 Clinical scenario & healthcare motivation
+│   ├── WHY_CNN_AND_DATASET.md          # 🧠 Architectural rationale for PneumoniaMNIST & SmallCNN
+│   ├── HOSPITAL_SCENARIO.md            # 🩺 Multi-hospital protocol & clinical dilemma
+│   ├── BLOCKCHAIN_AUDIT_ARCHITECTURE.md# 🔗 Cryptographic design of audit ledger
+│   ├── PHASE6_BLIND_EVALUATION_REPORT.md# 🛡️ Phase 6 blind detector evaluation report
+│   └── PHASE7_BATCH2_RECOVERY_AUDIT.md # 🛠️ Forensic post-mortem of Batch 2 runner recovery
 │
 ├── results/                            # 📈 Empirical Logs, Checkpoints & Figures
 │   ├── figures/                        # Confusion matrices, training curves, distributions

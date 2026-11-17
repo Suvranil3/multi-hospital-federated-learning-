@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-P7-TRI_STATE_DISCOUNT_050-HONEST-A05-S212",
+  "timestamp": "2026-11-17T05:40:07.153610+00:00",
+  "condition_id": "HONEST-A05",
+  "scenario": "non_iid",
+  "alpha": 0.5,
+  "attack_type": "none",
+  "malicious_client_ids": [],
+  "aggregation_variant": "tri_state_discount_050",
+  "seed": 212,
+  "rounds": 20,
+  "best_round": 18,
+  "best_val_acc": 94.85,
+  "test_metrics": {
+    "test_accuracy": 80.77,
+    "sensitivity": 99.23,
+    "specificity": 50.0,
+    "macro_f1": 76.34,
+    "test_loss": 0.5679,
+    "confusion_matrix": {
+      "tn": 117,
+      "fp": 117,
+      "fn": 3,
+      "tp": 387
+    },
+    "backdoor_asr": null
+  },
+  "performance": {
+    "duration_seconds": 91.48,
+    "ram_before_mb": 4604.6,
+    "peak_rss_mb": 1102.7,
+    "ram_after_mb": 4601.2
+  },
+  "artifacts": {
+    "best_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/best_exp-p7-tri_state_discount_050-honest-a05-s212.pt",
+    "final_checkpoint": "/home/suvranil/project/results/phase7_robust_aggregation/checkpoints/final_exp-p7-tri_state_discount_050-honest-a05-s212.pt",
+    "features_jsonl": "/home/suvranil/project/results/phase7_robust_aggregation/instrumentation/exp-p7-tri_state_discount_050-honest-a05-s212_features.jsonl",
+    "results_json": "/home/suvranil/project/results/phase7_robust_aggregation/evaluation/exp-p7-tri_state_discount_050-honest-a05-s212_results.json"
+  }
+}
