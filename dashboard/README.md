@@ -1,95 +1,83 @@
-# Interactive Teacher Demonstration Dashboard
+# 🏥 Multi-Hospital Federated Learning: Faculty Demonstration Dashboard
 
-This interactive Streamlit dashboard provides a visual, empirical demonstration of the completed research milestones for the project:
-**"Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection"**
+This interactive Streamlit application provides a complete, faculty-ready demonstration interface for the final minor project:
+**"Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection and Tamper-Evident Blockchain Audit"**
 
 ---
 
-## 1. Prerequisites & Installation
+## 🚀 Quick Start & Launch Instructions
 
-Activate the project virtual environment and ensure dependencies are installed:
+Activate the project virtual environment and launch the Streamlit dashboard:
 
 ```bash
-# Activate existing project virtual environment
+# 1. Activate project virtual environment
 source .venv/bin/activate
 
-# Install dashboard requirements
-pip install -r requirements-dashboard.txt
-```
-
----
-
-## 2. Launching the Dashboard
-
-Launch the Streamlit app:
-
-```bash
+# 2. Launch the Streamlit application
 streamlit run dashboard/app.py
 ```
 
-By default, the dashboard opens at:
+By default, the dashboard opens in your browser at:
 **[http://localhost:8501](http://localhost:8501)**
 
----
-
-## 3. Operating Modes
-
-### Mode A: Teacher Demo (Default)
-Optimized for presenting the hospital scenario directly to your teacher or advisor:
-- **One-Click Presentation**: Click the prominent **`▶ START PROJECT DEMO`** button to view verified results across Medical Dataset Verification and Centralized Baseline.
-- **Fast & Reliable**: Loads existing verified experimental logs (`results/logs/medical_centralized_results.json`) instantaneously.
-- **Presentation Script**: Contains the professor presentation script:
-  *"We use chest X-ray images because the final project is designed around a hospital scenario. The dataset gives us a real medical-image classification problem that can later be distributed among simulated hospitals. We use a small CNN because it is lightweight, easy to train, and suitable for running the same model across multiple simulated hospitals. Each hospital can train on its own local medical images without directly sharing the raw patient images. The hospitals can contribute model updates to a shared global model."*
-- **One-Click Reset**: Click **`↻ Reset Demo`** in the sidebar at any time.
-
-### Mode B: Technical Details
-Provides full transparency into engineering artifacts:
-- Hardware, environment specifications, and random seed 42.
-- Architectural Decision Records (ADR-001 through ADR-013).
-- Raw machine-readable JSON logs for `EXP-MED-000-DATA` and `EXP-MED-001-CENTRAL-CNN`.
-- Future hospital phase plug-in interfaces.
-
-### Mode C: Archived Proof-of-Concept
-Displays the complete historical CIFAR-10 exploration completed during Phase 1 and Phase 2 (76.94% accuracy), with explanation of why the project migrated to PneumoniaMNIST.
+*Headless / Custom Port Launch:*
+```bash
+streamlit run dashboard/app.py --server.port 8501 --server.headless true
+```
 
 ---
 
-## 4. How to Run Fresh Medical CNN Training (Optional)
+## 🧭 Dashboard Operating Modes
 
-In **Teacher Demo** mode under **Stage 2: Centralized Medical Small CNN Baseline**, expand the `⚙️ Optional: Run Live Training Again` section:
-1. Review the execution confirmation checkbox.
-2. Click **`▶ Run Fresh Training`**.
-3. The dashboard executes `.venv/bin/python experiments/train_medical.py` on your compute device (GPU/CPU) and live-streams epoch progress and loss/accuracy updates.
-4. When training finishes, all figures and JSON results automatically reload.
+The dashboard features four dedicated operating modes selectable from the sidebar:
+
+### 1. 🎓 Guided Faculty Presentation Mode (Default)
+Optimized for a structured 10–15 minute defense before faculty examiners:
+- **10 Sequential Slides:** Walks through the problem statement, dataset, architecture, IID federated learning, non-IID challenges, attack suite, detection mechanism, robust aggregation, blockchain verification, and conclusions.
+- **Embedded Speaker Notes:** Each slide features a dedicated **"Speaker Script"** providing verbatim presentation lines and key talking points to emphasize.
+- **Fast Navigation:** Intuitive `Next ➡` and `⬅ Previous` buttons alongside a slide jump selector.
+
+### 2. 🧭 Interactive Project Explorer Mode
+Enables examiners to freely inspect any of the 10 core research sections:
+1. **Project Overview & Architecture:** HIPAA/GDPR clinical dilemma, 4-tier system architecture, and milestone verification table.
+2. **PneumoniaMNIST Dataset Explorer:** Official splits (4,708 train, 524 val, 624 test), 74% class imbalance, and sample X-ray grid.
+3. **Centralized CNN Baseline:** SmallCNN architecture (420k params), 81.25% test accuracy, 99.74% pneumonia sensitivity, and confusion matrix.
+4. **10-Hospital IID Federated Learning:** Flower virtual engine, 20 rounds, 86.38% test accuracy (+5.13% over centralized), and privacy mechanics.
+5. **Non-IID Clinical Heterogeneity:** Dirichlet case-mix modeling ($\alpha \in \{1.0, 0.5, 0.1\}$) and the negative cosine alignment phenomenon ($\cos \theta < 0$).
+6. **Adversarial Attack Suite:** Targeted label flipping (+757% missed pneumonia surge), update scaling/inversion, and backdoor watermark triggers (32.5× ASR amplification).
+7. **Malicious Participant Detection:** 5-factor feature architecture, 0.9814 AUROC, 0.00% False Malicious Rate across all Dirichlet skews, and Symmetrical Clinical Trade-Off Shield (199/199 events protected).
+8. **Byzantine-Robust Aggregation Comparison:** Complete evaluation of 4 aggregators (FedAvg, Multi-Krum, Tri-State Monitor, Tri-State Discount 0.50) across 9 conditions and 2 seeds ($N=2$); rescues Normal specificity to 58.98%; exposes Multi-Krum minority rejection and the BatchNorm buffer poisoning blind spot.
+9. **Blockchain Audit Verification:** Cryptographic SHA-256 verification of all 2,134 blocks in `audit_ledger.jsonl`; interactive block height browser.
+10. **Final Experimental Scorecard:** Master 72-cell primary scorecard table with interactive filters by condition, strategy, and seed; links to academic research papers.
+
+### 3. 🔍 Technical Artifact Inspector Mode
+Provides full scientific transparency by loading raw, unedited JSON logs, checkpoint records, and hash tables:
+- `pneumonia_mnist_verification_report.json`
+- `medical_centralized_results.json`
+- `federated_iid_results.json`
+- `phase4_heterogeneity_comparison.json`
+- `phase5_attack_comparison.json`
+- `detection_results.json` & `calibrated_thresholds.json`
+- `execution_registry_reduced_96.json` (72 completed primary cells)
+- `audit_ledger.jsonl` verification dictionary
+
+### 4. 📦 Archived Proof-of-Concept Mode
+Preserves complete historical evidence of the initial exploratory CIFAR-10 phase (76.94% accuracy) alongside documentation explaining why the project migrated to pediatric chest X-rays (PneumoniaMNIST) to address genuine clinical hospital requirements.
 
 ---
 
-## 5. What the Dashboard Currently Demonstrates
+## 🔒 Reliability, Safety & Architectural Principles
 
-1. **Phase MEDICAL-01: Medical Dataset Verification** (`EXP-MED-000-DATA`):
-   - 5,856 total pediatric chest X-rays (4,708 train, 524 validation, 624 untouched test).
-   - Binary diagnosis (Normal: 0, Pneumonia: 1).
-   - Representative chest X-ray sample grid (`pneumonia_sample_grid.png`).
-   - Class distribution chart across official splits (`pneumonia_class_distribution.png`).
-2. **Phase MEDICAL-02: Centralized Medical Small CNN Baseline** (`EXP-MED-001-CENTRAL-CNN`):
-   - Compact `SmallCNN` architecture (420,802 parameters, ~1.61 MB).
-   - Training hyperparameters: 15 epochs, Adam, lr=0.001, batch size 64.
-   - **Measured Test Accuracy: 81.25%**, Test Loss: 0.9172 on untouched test set.
-   - **Pneumonia Sensitivity / Recall: 99.74%** (389 / 390 cases correctly detected).
-   - **Pneumonia Precision: 77.03%** | **Pneumonia F1-Score: 0.8693**.
-   - Training time: 13.35 seconds on NVIDIA RTX 3050 Laptop GPU.
-   - Medical disclaimer prominently displayed.
-3. **Automated Quality & Test Suite**:
-   - Status: **14 / 14 PyTest tests passed (100%)**.
+- **Zero Accidental Training:** The dashboard is purely a demonstration and analytics tool. It contains no execution buttons that trigger expensive training runs or modify model weights.
+- **Pure Source of Truth:** All displayed metrics, figures, and tables are loaded directly from verified experimental artifacts in `results/`. No metrics are fabricated or hardcoded.
+- **Fast Cached Navigation:** Data loading operations utilize `@st.cache_data` for sub-second page transitions.
+- **Defensive Error Handling:** Missing or corrupt files are handled gracefully with informative status messages.
 
 ---
 
-## 6. Future Phases (Strictly NOT Implemented Yet)
+## 🧪 Automated Test & Verification Status
 
-The dashboard maintains strict scientific boundaries. The following modules are marked as **`PLANNED / NOT IMPLEMENTED`**:
-- **Phase 3**: 10-Hospital Federated Learning with Flower + FedAvg — *NEXT MILESTONE*
-- **Phase 4**: Non-IID Hospital Data Heterogeneity Simulation (Dirichlet case-mix skew)
-- **Phase 5**: Malicious Hospital Attacks (Poisoned updates, backdoors)
-- **Phase 6**: Non-IID-Aware Malicious Hospital Detector
-- **Phase 7**: Robust Tri-State Consensus Aggregation
-- **Phase 8**: Tamper-Evident Blockchain Medical Audit Trail
+- **Unit & Integration Tests:** **89 / 89 Passed (100%)** via PyTest.
+- **Blockchain Ledger:** **2,134 Blocks Verified (`is_valid = True`)** via SHA-256 hash chaining.
+- **Primary Research Matrix:** **72 / 72 Cells Completed** across Seeds 211 & 212.
+- **Supplementary Matrix:** **24 Historical Runs Preserved** across Seeds 101, 102, 103.

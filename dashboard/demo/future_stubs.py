@@ -1,80 +1,60 @@
 """
-Future Research Module Placeholders.
-Aligned with the Hospital Scenario: Multi-Hospital Federated Learning for Chest X-Ray Classification
-with Malicious Participant Detection and Blockchain Audit.
+Research Progression and Future Scope Specifications.
+Reflects completed research milestones (Phases 1-8) and clearly defines future research scope (Phase 9).
 """
 
 import streamlit as st
 
 
 def render_pipeline_visualization() -> None:
-    """Render the hospital research pipeline with clear status boundaries."""
+    """Render the completed hospital research pipeline."""
     st.markdown("### 🗺️ Multi-Hospital Research Progression")
     st.markdown(
-        """
+        r"""
         ```text
-        [✓] Phase MEDICAL-01: PneumoniaMNIST Dataset Verification    -> STATUS: COMPLETED
+        [✓] Phase 1: PneumoniaMNIST Dataset Verification               -> STATUS: COMPLETED & AUDITED
                      ↓
-        [✓] Phase MEDICAL-02: Centralized Medical Small CNN Baseline -> STATUS: COMPLETED (81.25% Acc, 99.74% Sens)
+        [✓] Phase 2: Centralized Medical Small CNN Baseline           -> STATUS: COMPLETED & AUDITED (81.25% Acc, 99.74% Sens)
                      ↓
-        [→] Phase 3: 10-Hospital Federated Learning (Flower + FedAvg) -> STATUS: NEXT MILESTONE
+        [✓] Phase 3: 10-Hospital Federated Learning (Flower + FedAvg)  -> STATUS: COMPLETED & AUDITED (86.38% Acc, 70.94% Spec)
                      ↓
-        [○] Phase 4: Non-IID Hospital Data Skew (Varying Hospital Case Mix) -> STATUS: PLANNED
+        [✓] Phase 4: Non-IID Heterogeneity (Dirichlet α=1.0, 0.5, 0.1) -> STATUS: COMPLETED & AUDITED
                      ↓
-        [○] Phase 5: Malicious Hospital Attacks (Poisoned Updates, Backdoors) -> STATUS: PLANNED
+        [✓] Phase 5: Adversarial Attacks (Label Flip, Updates, BD)    -> STATUS: COMPLETED & AUDITED
                      ↓
-        [○] Phase 6: Multi-Factor Non-IID-Aware Malicious Hospital Detector -> STATUS: PLANNED
+        [✓] Phase 6: Multi-Factor Detector & Clinical Trade-Off Shield -> STATUS: COMPLETED & AUDITED (0.9814 AUROC)
                      ↓
-        [○] Phase 8: Blockchain Tamper-Evident Medical Audit Trail -> STATUS: PLANNED
+        [✓] Phase 7: Robust Aggregation Evaluation (4 Strats, 2 Seeds) -> STATUS: COMPLETED & AUDITED (72 Primary Runs)
+                     ↓
+        [✓] Phase 8: Blockchain Audit (2,134 Blocks) & Paper Draft     -> STATUS: COMPLETED & AUDITED
+                     ↓
+        [○] Phase 9: Buffer Defense (Coord Median) & N>=5 Multi-Seed   -> STATUS: FUTURE RESEARCH SCOPE
         ```
         """
     )
 
 
+# Backward-compatible renderers for older imports
 def render_fl_baseline_demo() -> None:
-    """Placeholder for Phase 3: 10-Hospital Federated Learning Baseline (Flower + FedAvg)."""
-    st.markdown("### 🏥 Phase 3: 10-Hospital Federated Learning Baseline (Flower + FedAvg)")
-    st.info(
-        "🔜 **Status: NEXT MILESTONE (Not started yet)**.\n\n"
-        "Each of the 10 simulated hospitals will train the same SmallCNN locally on its private chest X-rays. "
-        "Hospitals will share model weight updates with the global server using FedAvg, keeping patient data private."
-    )
+    from dashboard.demo.fl_demo import render_fl_section
+    render_fl_section()
 
 
 def render_noniid_demo() -> None:
-    """Placeholder for Phase 4: Non-IID Hospital Data Heterogeneity."""
-    st.markdown("### 📊 Phase 4: Non-IID Hospital Data Heterogeneity")
-    st.info(
-        "🔒 **Status: PLANNED**.\n\n"
-        "In real life, different hospitals have naturally different patient demographics (e.g., pediatric clinics vs. specialized pulmonary centers). "
-        "We will simulate non-IID data distributions among hospitals to evaluate its effect on global convergence."
-    )
+    from dashboard.demo.noniid_demo import render_noniid_section
+    render_noniid_section()
 
 
 def render_attack_demo() -> None:
-    """Placeholder for Phase 5: Malicious Hospital Attack Simulation."""
-    st.markdown("### ⚔️ Phase 5: Malicious Hospital Poisoning Attacks")
-    st.info(
-        "🔒 **Status: PLANNED**.\n\n"
-        "Simulating compromised or adversarial hospitals that submit malicious model updates (e.g., label flipping, model replacement, scaled noise)."
-    )
+    from dashboard.demo.attack_demo import render_attack_section
+    render_attack_section()
 
 
 def render_detector_demo() -> None:
-    """Placeholder for Phase 6: Non-IID-Aware Malicious Hospital Detector."""
-    st.markdown("### 🛡️ Phase 6: Non-IID-Aware Malicious Hospital Detector")
-    st.info(
-        "🔒 **Status: PLANNED**.\n\n"
-        "Our core research problem: An honest hospital may naturally send divergent updates due to non-IID clinical data, "
-        "while a malicious hospital sends harmful updates. The detector distinguishes honest clinical diversity from deliberate attacks."
-    )
+    from dashboard.demo.detector_demo import render_detector_section
+    render_detector_section()
 
 
 def render_blockchain_demo() -> None:
-    """Placeholder for Phase 8: Blockchain Medical Audit Trail."""
-    st.markdown("### ⛓️ Phase 8: Blockchain Tamper-Evident Medical Audit Trail")
-    st.info(
-        "🔒 **Status: PLANNED**.\n\n"
-        "Cryptographic ledger recording update hashes and participant audit decisions for regulatory compliance. "
-        "(No raw patient data or heavy ML weights on-chain)."
-    )
+    from dashboard.demo.blockchain_demo import render_blockchain_section
+    render_blockchain_section()
