@@ -24,7 +24,7 @@ This project introduces a **comprehensive, research-grade, multi-hospital federa
 - A novel **Multi-Factor Non-IID-Aware Tri-State Malicious Detector** achieving **0.9814 AUROC** with **0.00% False Positive Rate** on honest non-IID hospitals.
 - A **robust tri-state consensus aggregation engine** evaluated across a balanced **72-cell primary matrix** (Seeds 211, 212) + 24 preserved supplementary simulations (96 unique simulations total; 97 physical launches).
 - Empirical proof that **Tri-State Soft Discounting ($\lambda=0.50$) rescues Normal specificity to 58.98%** under non-IID label flipping (+28.21% over FedAvg, +33.98% over Multi-Krum).
-- Empirical discovery of **Multi-Krum's geometric minority rejection failure** (collapsing specificity to 23.08% under honest $lpha=0.5$ skew) and the **BatchNorm buffer poisoning blind spot** (100% universal collapse across all classical aggregators).
+- Empirical discovery of **Multi-Krum's geometric minority rejection failure** (collapsing specificity to 23.08% under honest $\alpha=0.5$ skew) and the **BatchNorm buffer poisoning blind spot** (100% universal collapse across all classical aggregators).
 - A lightweight **tamper-evident permissioned blockchain audit layer** anchoring 2,134 blocks with cryptographic SHA-256 block hash chaining (`is_valid = True`, tip Block #2133).
 - A complete **academic research paper draft** (`docs/RESEARCH_PAPER_DRAFT.md`, ~5,500 words, 19 sections), literature review (20 verified papers), and reproducibility specifications.
 
@@ -332,15 +332,15 @@ Evaluated across a balanced 72-cell primary research matrix (4 aggregation strat
 | | Multi-Krum ($f=1$) | 84.29% | 86.54% | **85.42%** | 65.81% | 97.18% | 83.22% | **2.43%** | **Optimal Backdoor Defense (ASR 2.43%)** |
 | | Tri-State Monitor | 85.58% | 86.70% | **86.14%** | 69.44% | 96.15% | 84.31% | 8.46% | Tracks Backdoor Drift |
 | | Tri-State Discount (0.50) | 86.38% | 86.54% | **86.46%** | 69.66% | 96.54% | 84.66% | 5.00% | Attenuates ASR by 40.9% |
-| **BatchNorm Poisoning IID** | All 4 Strategies | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | **All-Normal Collapse (Buffers $pprox 10^5$)** |
+| **BatchNorm Poisoning IID** | All 4 Strategies | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | **All-Normal Collapse (Buffers $\approx 10^5$)** |
 | **BatchNorm Poisoning Non-IID** | FedAvg / Monitor | 37.50% | 37.50% | **37.50%** | 100.00% | 0.00% | 27.27% | — | **All-Normal Collapse** |
 | | Multi-Krum ($f=1$) | 62.50% | 62.50% | **62.50%** | 0.00% | 100.00% | 38.46% | — | **All-Pneumonia Collapse** |
 | | Tri-State Discount (0.50) | 62.50% | 37.50% | **50.00%** | 50.00% | 50.00% | 32.87% | — | **Divergent Degenerate Collapse** |
 
 > [!IMPORTANT]
 > **Key Empirical Insights**:
-> 1. **Tri-State Soft Discounting Excels on Non-IID Label Flipping**: Attenuating suspicious updates by $\lambda=0.50$ rescues Normal specificity to **58.98%** under $lpha=0.5$ skew (+28.21% over FedAvg; +33.98% over Multi-Krum), supported by telemetry proving 27.92%–36.00% net cumulative attenuation of the adversary.
-> 2. **Multi-Krum's Minority Rejection Failure**: Multi-Krum effectively suppresses IID backdoors (2.43% ASR), but under honest $lpha=0.5$ skew it collapses specificity to **23.08%** because telemetry proves it rejected the primary Normal-specialized client (Client 2 in Seed 211 [97.9% Normal], Client 3 in Seed 212 [98.3% Normal]) in **90%–95% of rounds**.
+> 1. **Tri-State Soft Discounting Excels on Non-IID Label Flipping**: Attenuating suspicious updates by $\lambda=0.50$ rescues Normal specificity to **58.98%** under $\alpha=0.5$ skew (+28.21% over FedAvg; +33.98% over Multi-Krum), supported by telemetry proving 27.92%–36.00% net cumulative attenuation of the adversary.
+> 2. **Multi-Krum's Minority Rejection Failure**: Multi-Krum effectively suppresses IID backdoors (2.43% ASR), but under honest $\alpha=0.5$ skew it collapses specificity to **23.08%** because telemetry proves it rejected the primary Normal-specialized client (Client 2 in Seed 211 [97.9% Normal], Client 3 in Seed 212 [98.3% Normal]) in **90%–95% of rounds**.
 > 3. **The BatchNorm Buffer Poisoning Blind Spot**: All 16 simulations collapsed completely into degenerate single-class predictors. Parameter-only anomaly detectors classified the attacker as `NORMAL` in 100% of rounds because weights were honest, while linear buffer averaging propagated $10^6$ outliers into global running statistics.
 
 ---
@@ -373,8 +373,8 @@ The complete scientific methodology, literature grounding, and empirical evidenc
 
 ```bash
 # Clone the repository
-git clone https://github.com/Suvranil3/multi-hospital-federated-learning.git
-cd multi-hospital-federated-learning
+git clone https://github.com/Suvranil3/multi-hospital-federated-learning-.git
+cd multi-hospital-federated-learning-
 
 # Create a clean virtual environment
 python3 -m venv .venv
@@ -514,7 +514,7 @@ pytest tests/ -v
 ## 📂 Repository Structure
 
 ```text
-multi-hospital-federated-learning/
+multi-hospital-federated-learning-/
 ├── README.md                           # Master project documentation, formulas & guide
 ├── PROJECT_STATUS.md                   # Real-time development roadmap & milestone audits
 ├── EXPERIMENT_LOG.md                   # Chronological ledger of empirical benchmark runs
@@ -624,6 +624,6 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
   title={Multi-Hospital Federated Learning for Chest X-Ray Classification with Malicious Participant Detection and Tamper-Evident Blockchain Audit},
   author={Ghatak, Suvranil},
   year={2026},
-  url={https://github.com/Suvranil3/multi-hospital-federated-learning}
+  url={https://github.com/Suvranil3/multi-hospital-federated-learning-}
 }
 ```
